@@ -1,0 +1,152 @@
+	{{ define "dao" }}
+  {{- $short := ( .ShortName ) -}}
+	{{- $tableName := (formatName  .Name ) -}}
+  {{- $entityName := (.Name) -}}
+  
+	package models
+	
+	import (
+		"fmt"
+
+		"github.com/ramnkl16/ez-search/datasources/productsyncmysql"
+		"github.com/ramnkl16/ez-search/logger"
+		"github.com/ramnkl16/ez-search/rest_errors"
+		"github.com/ramnkl16/ez-search/utils/mysql_utils"
+	)
+	 
+	//Auto code generated with help of mysql table schema 
+	// table : {{.Name}}
+	
+
+	// Insert the {{ .Name }} to the database.
+	func ({{ $short }} *{{ $tableName }}) Create() rest_errors.RestErr {
+		var err error
+		// sql insert query, primary key must be provided
+		const sqlstr = {{.EscapeChar}}INSERT INTO {{ .Name }} ( {{.EscapeChar}} +
+			{{.EscapeChar}} {{sqlColnames .Fields  }} {{.EscapeChar}} +
+			{{.EscapeChar}}) VALUES ({{.EscapeChar}} +
+			{{.EscapeChar}}{{ colvals .Fields }}{{.EscapeChar}}+
+			{{.EscapeChar}}){{.EscapeChar}}
+
+		stmt, err := productsyncmysql.Client.Prepare(sqlstr)
+		if err != nil {
+			logger.Error("error when trying to prepare save {{ .Name }} statement", err)
+			return rest_errors.NewInternalServerError("error when tying to save {{ .Name }} ", err)
+		}
+		defer stmt.Close()
+		_, err = stmt.Exec({{ fieldnamesmulti .Fields $short }})
+
+		if err != nil {
+			logger.Error("error when trying to save user", err)
+			return rest_errors.NewInternalServerError("error when tying to save {{ .Name }}", err)
+		}
+		return nil
+	}
+
+	// Update updates the {{ .Name }} in the database.
+	func ({{ $short }} *{{ $tableName }})Update() rest_errors.RestErr {
+		 
+		// sql query
+		const sqlstr = {{.EscapeChar}}UPDATE {{ .Name }} SET {{.EscapeChar}} +
+			{{.EscapeChar}} {{ fieldnamesforUpdate .Fields  "createdAt"}} {{.EscapeChar}} +
+			{{.EscapeChar}} WHERE id  = ? {{.EscapeChar}}
+
+		stmt, err := productsyncmysql.Client.Prepare(sqlstr)
+	if err != nil {
+		logger.Error("error when trying to prepare update {{.Name}} statement", err)
+		return rest_errors.NewInternalServerError("error when tying to update {{ .Name }} ", err)
+	}
+	defer stmt.Close()
+	_, err = stmt.Exec({{ fieldnames .Fields $short "createdAt" "id"}},{{$short}}.ID  )
+	if err != nil {
+		logger.Error("error when trying to update {{ .Name }}", err)
+		return rest_errors.NewInternalServerError("error when tying to update {{ .Name }}", err)
+	}
+	return nil
+	}
+
+	// Delete a recored ( {{ .Name }}) from the database.
+	func ({{ $short }} *{{ $tableName }}) Delete() rest_errors.RestErr {
+	
+		 const sqlstr = {{.EscapeChar}}UPDATE {{ .Name }} SET {{.EscapeChar}} +
+			{{.EscapeChar}}  updatedAt=?  {{.EscapeChar}} +
+			{{.EscapeChar}} WHERE id  = ? {{.EscapeChar}}
+		
+		stmt, err := productsyncmysql.Client.Prepare(sqlstr)
+		if err != nil {
+			logger.Error("error when trying to prepare delete {{.Name}} statement", err)
+			return rest_errors.NewInternalServerError("error when tying to delete {{ .Name }} ", err)
+		}
+		defer stmt.Close()
+		_, err = stmt.Exec({{ $short }}.UpdatedAt, {{ $short }}.ID )
+		if err != nil {
+			logger.Error("error when trying to delete {{ .Name }}", err)
+			return rest_errors.NewInternalServerError("error when tying to delete {{ .Name }}",err )
+		}
+		return nil
+	}
+
+	// search  from ( {{ .Name }}).
+	func ({{ $short }} *{{$tableName}}) Searh(start string, limit string) ([]{{$tableName}}  , rest_errors.RestErr) {
+			
+		sqlstr := {{.EscapeChar}}SELECT {{.EscapeChar}} +
+		{{.EscapeChar}} {{sqlColnames .Fields "updatedAt" "createdAt"   }} {{.EscapeChar}} +
+		{{.EscapeChar}} FROM {{ .Name }}  {{.EscapeChar}} + 
+		"LIMIT " + start + "," + limit
+
+		stmt, err := productsyncmysql.Client.Prepare(sqlstr)
+		if err != nil {
+			logger.Error("error when trying to prepare search {{.Name}}", err)
+			return nil, rest_errors.NewInternalServerError("error when tying search {{.Name}}", err)
+		}
+		defer stmt.Close()
+
+		rows, err := stmt.Query()
+		if err != nil {
+			logger.Error("error when trying to search {{$tableName}}", err)
+			return nil, rest_errors.NewInternalServerError("error when tying to search {{.Name}}", err)
+		}
+		defer rows.Close()
+		// load results
+		res := make([]{{$tableName}}, 0)
+		for rows.Next() {
+			var m{{$short}} {{$tableName}}
+			// scan
+				err = rows.Scan({{ fieldnames .Fields (print "&m" $short) "UpdatedAt" "CreatedAt" }})
+			if err != nil {
+				logger.Error("error when scan user row into {{$tableName}} struct", err)
+				return nil, rest_errors.NewInternalServerError("error when trying to search {{$tableName}}",err)
+			}
+			res = append(res, m{{$short}})
+		}
+		if len(res) == 0 {
+			return nil, rest_errors.NewNotFoundError(fmt.Sprintf("no {{$tableName}} matching limit %s - %s ", start, limit))
+		}
+		return res, nil
+	}
+
+	// Get a record  from ( {{ .Name }}) .
+	func ({{ $short }} *{{$tableName}}) Get() (  rest_errors.RestErr) {
+		const sqlstr = {{.EscapeChar}}SELECT {{.EscapeChar}} +
+		{{.EscapeChar}} {{sqlColnames .Fields  "updatedAt" "createdAt"  }} {{.EscapeChar}} +
+		{{.EscapeChar}} FROM {{ .Name }} WHERE id = ? {{.EscapeChar}} 
+		// run query
+		stmt, err := productsyncmysql.Client.Prepare(sqlstr)
+		if err != nil {
+			logger.Error("error when trying to prepare get {{$tableName}} statement", err)
+			return rest_errors.NewInternalServerError("error when tying to get {{$tableName}}", err)
+		}
+		defer stmt.Close()
+		row := stmt.QueryRow({{$short}}.ID)
+		// scan
+			err = row.Scan({{ fieldnames .Fields (print "&" $short) "updatedAt" "createdAt" }})
+		if err != nil {
+			if sqlErr := mysql_utils.ParseError(err); sqlErr != nil {
+				return sqlErr
+			}
+			logger.Error("error when scan user row into {{$tableName}} struct", err)
+			return rest_errors.NewInternalServerError("error when tying to get {{$tableName}}", err)
+		}
+	return nil
+	}
+{{end}}

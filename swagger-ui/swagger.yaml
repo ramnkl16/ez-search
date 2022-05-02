@@ -1,0 +1,896 @@
+definitions:
+  models.Brand:
+    properties:
+      code:
+        description: code
+        type: string
+      createdAt:
+        description: createdAt
+        type: string
+      id:
+        description: id
+        type: string
+      logoURI:
+        description: logoUri
+        type: string
+      name:
+        description: name
+        type: string
+      pk:
+        description: pk
+        type: integer
+      updatedAt:
+        description: updatedAt
+        type: string
+      uri:
+        description: uri
+        type: string
+    type: object
+  models.DeltaSyncJob:
+    properties:
+      createdAt:
+        description: createdAt
+        type: string
+      id:
+        description: id
+        type: string
+      masterJobID:
+        description: masterJobId
+        type: string
+      noofProducts:
+        description: noofProducts
+        type: integer
+      status:
+        description: status
+        type: string
+      syncEndDate:
+        description: syncEndDate
+        type: string
+      syncStartDate:
+        description: syncStartDate
+        type: string
+      timeTaken:
+        description: timeTaken
+        type: integer
+      updatedAt:
+        description: updatedAt
+        type: string
+    type: object
+  models.DeltaSyncJobProduct:
+    properties:
+      code:
+        description: code
+        type: string
+      createdAt:
+        description: createdAt
+        type: string
+      deltaSyncJobID:
+        description: deltaSyncJobId
+        type: string
+      id:
+        description: id
+        type: string
+      productPK:
+        description: productPK
+        type: integer
+      productURI:
+        description: productUri
+        type: string
+      rowIndex:
+        description: rowIndex
+        type: integer
+      updatedAt:
+        description: updatedAt
+        type: string
+    type: object
+  models.RequestLog:
+    properties:
+      bytesReceived:
+        description: bytesReceived
+        type: integer
+      createdAt:
+        description: createdAt
+        type: string
+      deltaSyncJobID:
+        description: deltaSyncJobId
+        type: string
+      id:
+        description: id
+        type: string
+      refID:
+        description: refId
+        type: string
+      reqBody:
+        description: reqBody
+        type: string
+      reqMethod:
+        description: reqMethod
+        type: string
+      reqURL:
+        description: reqUrl
+        type: string
+      resStatus:
+        description: resStatus
+        type: string
+      timeTaken:
+        description: timeTaken
+        type: integer
+      updatedAt:
+        description: updatedAt
+        type: string
+    type: object
+  models.ScheduledmasterJob:
+    properties:
+      brandName:
+        description: brandName
+        type: string
+      brandPk:
+        description: brandPk
+        type: string
+      catalogVersionPk:
+        description: catalogVersionPk
+        type: string
+      createdAt:
+        description: createdAt
+        type: string
+      culture:
+        description: culture
+        type: string
+      enableFetchProductInfo:
+        description: enableFetchProductInfo
+        type: boolean
+      frequencyInHour:
+        description: frequencyInHour
+        type: integer
+      id:
+        description: id
+        type: string
+      isRecurring:
+        description: isRecurring
+        type: boolean
+      nextStartAt:
+        description: nextStartAt
+        type: string
+      productDetailMaxThread:
+        description: productDetailMaxThread
+        type: integer
+      productMaxThread:
+        description: productMaxThread
+        type: integer
+      status:
+        description: status
+        type: string
+      superCatalog:
+        description: superCatalog
+        type: string
+      updatedAt:
+        description: updatedAt
+        type: string
+    type: object
+  rest_errors.RestErr:
+    type: object
+info:
+  contact: {}
+  license: {}
+paths:
+  /brand:
+    post:
+      consumes:
+      - application/json
+      description: create Brand
+      parameters:
+      - description: create Brand
+        in: body
+        name: address
+        required: true
+        schema:
+          $ref: '#/definitions/models.Brand'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Create Brand
+      tags:
+      - Brand
+    put:
+      consumes:
+      - application/json
+      description: Update by json Brand
+      parameters:
+      - description: Update Brand
+        in: body
+        name: Brand
+        required: true
+        schema:
+          $ref: '#/definitions/models.Brand'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Update Brand
+      tags:
+      - Brand
+  /brand/{id}:
+    delete:
+      description: delete Brand
+      parameters:
+      - description: Brand ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all Brand
+      tags:
+      - Brand
+    get:
+      description: Get Brand by id
+      parameters:
+      - description: Brand ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Brand'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all Brand
+      tags:
+      - Brand
+  /brands/search:
+    get:
+      description: get top 100 records Brand
+      parameters:
+      - description: starting row
+        in: query
+        name: start
+        required: true
+        type: integer
+      - description: no of row limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Brand'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all Brand
+      tags:
+      - Brand
+  /deltaSyncJob:
+    post:
+      consumes:
+      - application/json
+      description: create DeltaSyncJob
+      parameters:
+      - description: create DeltaSyncJob
+        in: body
+        name: address
+        required: true
+        schema:
+          $ref: '#/definitions/models.DeltaSyncJob'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Create DeltaSyncJob
+      tags:
+      - DeltaSyncJob
+    put:
+      consumes:
+      - application/json
+      description: Update by json DeltaSyncJob
+      parameters:
+      - description: Update DeltaSyncJob
+        in: body
+        name: DeltaSyncJob
+        required: true
+        schema:
+          $ref: '#/definitions/models.DeltaSyncJob'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Update DeltaSyncJob
+      tags:
+      - DeltaSyncJob
+  /deltaSyncJob/{id}:
+    delete:
+      description: delete DeltaSyncJob
+      parameters:
+      - description: DeltaSyncJob ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all DeltaSyncJob
+      tags:
+      - DeltaSyncJob
+    get:
+      description: Get DeltaSyncJob by id
+      parameters:
+      - description: DeltaSyncJob ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.DeltaSyncJob'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all DeltaSyncJob
+      tags:
+      - DeltaSyncJob
+  /deltaSyncJobProduct:
+    post:
+      consumes:
+      - application/json
+      description: create DeltaSyncJobProduct
+      parameters:
+      - description: create DeltaSyncJobProduct
+        in: body
+        name: address
+        required: true
+        schema:
+          $ref: '#/definitions/models.DeltaSyncJobProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Create DeltaSyncJobProduct
+      tags:
+      - DeltaSyncJobProduct
+    put:
+      consumes:
+      - application/json
+      description: Update by json DeltaSyncJobProduct
+      parameters:
+      - description: Update DeltaSyncJobProduct
+        in: body
+        name: DeltaSyncJobProduct
+        required: true
+        schema:
+          $ref: '#/definitions/models.DeltaSyncJobProduct'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Update DeltaSyncJobProduct
+      tags:
+      - DeltaSyncJobProduct
+  /deltaSyncJobProduct/{id}:
+    delete:
+      description: delete DeltaSyncJobProduct
+      parameters:
+      - description: DeltaSyncJobProduct ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all DeltaSyncJobProduct
+      tags:
+      - DeltaSyncJobProduct
+    get:
+      description: Get DeltaSyncJobProduct by id
+      parameters:
+      - description: DeltaSyncJobProduct ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.DeltaSyncJobProduct'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all DeltaSyncJobProduct
+      tags:
+      - DeltaSyncJobProduct
+  /deltaSyncJobProducts/search:
+    get:
+      description: get top 100 records DeltaSyncJobProduct
+      parameters:
+      - description: starting row
+        in: query
+        name: start
+        required: true
+        type: integer
+      - description: no of row limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.DeltaSyncJobProduct'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all DeltaSyncJobProduct
+      tags:
+      - DeltaSyncJobProduct
+  /deltaSyncJobs/search:
+    get:
+      description: get top 100 records DeltaSyncJob
+      parameters:
+      - description: starting row
+        in: query
+        name: start
+        required: true
+        type: integer
+      - description: no of row limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.DeltaSyncJob'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all DeltaSyncJob
+      tags:
+      - DeltaSyncJob
+  /requestLog:
+    post:
+      consumes:
+      - application/json
+      description: create RequestLog
+      parameters:
+      - description: create RequestLog
+        in: body
+        name: address
+        required: true
+        schema:
+          $ref: '#/definitions/models.RequestLog'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Create RequestLog
+      tags:
+      - RequestLog
+    put:
+      consumes:
+      - application/json
+      description: Update by json RequestLog
+      parameters:
+      - description: Update RequestLog
+        in: body
+        name: RequestLog
+        required: true
+        schema:
+          $ref: '#/definitions/models.RequestLog'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Update RequestLog
+      tags:
+      - RequestLog
+  /requestLog/{id}:
+    delete:
+      description: delete RequestLog
+      parameters:
+      - description: RequestLog ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all RequestLog
+      tags:
+      - RequestLog
+    get:
+      description: Get RequestLog by id
+      parameters:
+      - description: RequestLog ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.RequestLog'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all RequestLog
+      tags:
+      - RequestLog
+  /requestLogs/search:
+    get:
+      description: get top 100 records RequestLog
+      parameters:
+      - description: starting row
+        in: query
+        name: start
+        required: true
+        type: integer
+      - description: no of row limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.RequestLog'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all RequestLog
+      tags:
+      - RequestLog
+  /scheduledmasterJob:
+    post:
+      consumes:
+      - application/json
+      description: create ScheduledmasterJob
+      parameters:
+      - description: create ScheduledmasterJob
+        in: body
+        name: address
+        required: true
+        schema:
+          $ref: '#/definitions/models.ScheduledmasterJob'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Create ScheduledmasterJob
+      tags:
+      - ScheduledmasterJob
+    put:
+      consumes:
+      - application/json
+      description: Update by json ScheduledmasterJob
+      parameters:
+      - description: Update ScheduledmasterJob
+        in: body
+        name: ScheduledmasterJob
+        required: true
+        schema:
+          $ref: '#/definitions/models.ScheduledmasterJob'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Update ScheduledmasterJob
+      tags:
+      - ScheduledmasterJob
+  /scheduledmasterJob/{id}:
+    delete:
+      description: delete ScheduledmasterJob
+      parameters:
+      - description: ScheduledmasterJob ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all ScheduledmasterJob
+      tags:
+      - ScheduledmasterJob
+    get:
+      description: Get ScheduledmasterJob by id
+      parameters:
+      - description: ScheduledmasterJob ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ScheduledmasterJob'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all ScheduledmasterJob
+      tags:
+      - ScheduledmasterJob
+  /scheduledmasterJobs/search:
+    get:
+      description: get top 100 records ScheduledmasterJob
+      parameters:
+      - description: starting row
+        in: query
+        name: start
+        required: true
+        type: integer
+      - description: no of row limit
+        in: query
+        name: limit
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ScheduledmasterJob'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/rest_errors.RestErr'
+      summary: Get all ScheduledmasterJob
+      tags:
+      - ScheduledmasterJob
+swagger: "2.0"

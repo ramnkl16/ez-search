@@ -1,0 +1,17 @@
+[Unit]
+Description=Ez Search
+ConditionPathExists=/usr/local/ez-search
+After=network.target
+
+[Service]
+Type=simple
+
+WorkingDirectory=/usr/local/ez-search
+ExecStart=/usr/local/ez-search/ez-search -c config.json -wd /usr/local/ez-search/
+Restart=on-failure
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=appgoservice
+[Install]
+WantedBy=multi-user.target

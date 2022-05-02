@@ -1,0 +1,16 @@
+{{ define "schema" }}
+{{- $short := ( .ShortName ) -}}
+{{- $tableName := (formatName  .Name ) -}}
+{{- $entityName := (.Name) -}}
+{{- $escapeChar := (.EscapeChar) -}}
+ 
+
+ /*DROP TABLE IF EXISTS `{{$tableName}}`;*/
+
+CREATE TABLE IF NOT EXISTS `{{$tableName}}` (
+ {{- range .Fields }} 
+  `{{.LocalDbFieldName }}` {{ .LocalFieldType }},{{end}}
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+{{end}}

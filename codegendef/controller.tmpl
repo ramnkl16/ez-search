@@ -1,0 +1,154 @@
+{{ define "controller" }}
+{{- $short := (shortname .Name ) -}}
+
+	{{- $lowtable :=  (tolowercase .Name ) -}}
+	package controllers
+
+	import (
+		"net/http"
+		"github.com/gin-gonic/gin"
+		"github.com/ramnkl16/ez-search/models"
+		"github.com/ramnkl16/ez-search/services"
+		"github.com/ramnkl16/ez-search/rest_errors"
+	)
+	var (
+	{{.Name}}Controller {{$lowtable}}ControllerInteface = &{{$lowtable}}Controller{}
+	)
+
+	type {{$lowtable}}ControllerInteface interface {
+		Create(ctx *gin.Context)
+		Update(ctx *gin.Context)
+		Delete(ctx *gin.Context)
+		Get(ctx *gin.Context)
+		Search(ctx *gin.Context)
+		RegisterRouter(rout *gin.Engine)
+	}
+
+	type {{$lowtable}}Controller struct{}
+
+	func (ctrl *{{$lowtable}}Controller) RegisterRouter(rout *gin.Engine) {
+		rout.POST("/api/{{$lowtable}}", ctrl.Create)
+		rout.PUT("/api/{{$lowtable}}", ctrl.Update)
+		rout.DELETE("/api/{{$lowtable}}/:id", ctrl.Delete)
+		rout.GET("/api/{{$lowtable}}/:id", ctrl.Get)
+		rout.GET("/api/{{pluralize $lowtable}}/search", ctrl.Search)
+		rout.GET("/web-ui/{{pluralize $lowtable}}/search", ctrl.Search)
+	}
+
+	//Create new {{.Name}}
+
+	// Create  godoc
+	// @Summary Create {{.Name}}
+	// @Description create {{.Name}}
+	// @Tags {{.Name}}
+	// @Accept  json
+	// @Produce  json
+	// @Param  address body models.{{.Name}} true "create {{.Name}}"
+	// @Success 200 {object} string
+	// @Failure 404 {object} string
+	// @Failure 500 {object} string
+	// @Router /api/{{$lowtable}} [post]
+	func (ctrl *{{$lowtable}}Controller) Create(ctx *gin.Context) {
+
+	var {{$short}} models.{{.Name}}
+
+	if err := ctx.ShouldBindJSON(&{{$short}}); err != nil {
+		saveErr := rest_errors.NewBadRequestError("invalid json body")
+		ctx.JSON(saveErr.Status(), saveErr)
+		return
+	}
+	if err := services.{{.Name}}Service.Create({{$short}}); err != nil {
+		ctx.JSON(err.Status(), err)
+		return
+	}
+	ctx.JSON(http.StatusCreated, map[string]string{"status": "created {{.Name}} "})
+}
+	// Update  godoc
+	// @Summary Update {{ .Name}}
+	// @Description Update by json {{.Name}}
+	// @Tags {{.Name}}
+	// @Accept  json
+	// @Produce  json
+	// @Param  {{.Name}} body models.{{.Name}} true "Update {{.Name}}"
+	// @Success 200 {object} string
+	// @Failure 404 {object} string
+	// @Failure 500 {object} string
+	// @Router /api/{{$lowtable}} [put]
+	func (ctrl *{{$lowtable}}Controller) Update(ctx *gin.Context) {
+
+		var {{$short}} models.{{.Name}}
+
+		if err := ctx.ShouldBindJSON(&{{$short}}); err != nil {
+			restErr := rest_errors.NewBadRequestError("invalid json body")
+			ctx.JSON(restErr.Status(), restErr)
+			return
+		}
+		if err := services.{{.Name}}Service.Update({{$short}}); err != nil {
+			ctx.JSON(err.Status(), err)
+		}
+		ctx.JSON(http.StatusOK, map[string]string{"status": "{{.Name}} updated"})
+	}
+
+	// Search godoc
+	// @Summary Get all {{ .Name}}
+	// @Description get top 100 records {{.Name}}
+	// @Tags {{.Name}}
+	// @Produce  json
+	// @Param  start query int true "starting row" 
+	// @Param  limit query int true "no of row limit" 
+	// @Success 200 {array} models.{{.Name}}
+	// @Failure 404 {object} string
+	// @Failure 500 {object} string
+	// @Router /api/{{pluralize $lowtable}}/search [get]
+	//getting all  {{.Name}}
+	func (ctrl *{{$lowtable}}Controller) Search(ctx *gin.Context) {
+		start := ctx.Query("start")
+		limit := ctx.Query("limit")
+
+		results, err := services.{{.Name}}Service.Search(start, limit)
+		if err != nil {
+			ctx.JSON(err.Status(), err)
+		}
+		ctx.JSON(http.StatusOK, results)
+	}	
+	// Get godoc
+	// @Summary Get all {{ .Name}}
+	// @Description Get {{.Name}} by id
+	// @Tags {{.Name}}
+	// @Produce  json
+	// @Param  id path string true "{{.Name}} ID"
+	// @Success 200 {array} models.{{.Name}}
+	// @Failure 404 {object} string
+	// @Failure 500 {object} string
+	// @Router /api/{{$lowtable}}/{id} [get]
+	//getting a record  {{.Name}}
+	func (ctrl *{{$lowtable}}Controller) Get(ctx *gin.Context) {
+		id := ctx.Param("id")
+		{{$short}}, err := services.{{.Name}}Service.Get(id)
+		if err != nil {
+			ctx.JSON(err.Status(), err)
+			return
+		}
+		ctx.JSON(http.StatusOK, {{$short}})
+	}
+
+	// Delete  godoc
+	// @Summary Get all {{ .Name}}
+	// @Description delete {{.Name}}
+	// @Tags {{.Name}}
+	// @Produce  json
+	// @Param  id path string true "{{.Name}} ID"
+	// @Failure 404 {object} string
+	// @Failure 500 {object} string
+	// @Router /api/{{$lowtable}}/{id} [delete]
+	//delete  {{ .Name}} by id
+	func ({{$short}}c *{{$lowtable}}Controller) Delete(ctx *gin.Context) {
+		id := ctx.Param("id")
+		err := services.{{.Name}}Service.Delete(id)
+		if err != nil {
+			ctx.JSON(err.Status(), err)
+			return
+		}
+		ctx.JSON(http.StatusOK, map[string]string{"status": "{{.Name}} deleted"})
+	}
+ {{end}}   

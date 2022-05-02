@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity name="products" includeInPath="false" >
+  <models>
+    <model name="Brand" template="dto|dao|service|controller|schema"
+     fileName="brand.dto.go|brand.dao.go|brand.svc.go|brand.cntlr.go|brand.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="br" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="true" />
+      <field type="int32" name="Pk" localDbFieldName="pk" localFieldType="int NOT NULL" isNullable="true" />
+      <field type="string" name="Uri" localDbFieldName="uri" localFieldType="varchar(256) DEFAULT NULL"  isNullable="false" />
+      <field type="string" name="Code" localDbFieldName="code" localFieldType="varchar(128) DEFAULT NULL" isNullable="false"  />
+      <field type="string" name="LogoUri" localDbFieldName="logoUri" localFieldType="varchar(128) DEFAULT NULL" isNullable="false" />
+      <field type="string" name="Name" localDbFieldName="name" localFieldType="varchar(128) NOT NULL" isNullable="true"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+    </model>
+    <model name="DeltaSyncJob" template="dto|dao|service|controller|schema"
+     fileName="deltaSyncJob.dto.go|deltaSyncJob.dao.go|deltaSyncJob.svc.go|deltaSyncJob.cntlr.go|deltaSyncJob.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="dsj" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false" />
+      <field type="string" name="MasterJobId" localDbFieldName="masterJobId" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="SyncStartDate" localDbFieldName="syncStartDate" localFieldType="datetime DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="SyncEndDate" localDbFieldName="syncEndDate" localFieldType="datetime DEFAULT NULL" isNullable="true"  />
+      <field type="int" name="NoofProducts" localDbFieldName="noofProducts" localFieldType="int DEFAULT NULL" isNullable="true"  />
+      <field type="int" name="TimeTaken" localDbFieldName="timeTaken" localFieldType="int DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="Status" localDbFieldName="status" localFieldType="varchar(36) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="OcctaskId" localDbFieldName="occtaskId" localFieldType="mediumtext DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="OccErrorMsg" localDbFieldName="occErrorMsg" localFieldType="varchar(4000) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="true"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="true" />
+       <field type="string" name="ErrorMsg" localDbFieldName="errorMsg" localFieldType="mediumtext DEFAULT NULL" isNullable="true"  />
+    </model>
+
+  
+    <model name="RequestLog" template="dto|dao|service|controller|schema"
+     fileName="RequestLog.dto.go|RequestLog.dao.go|RequestLog.svc.go|RequestLog.cntlr.go|RequestLog.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="rl" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false" />
+      <field type="string" name="DeltaSyncJobId" localDbFieldName="deltaSyncJobId" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="RefId" localDbFieldName="refId" localFieldType="char(256) NOT NULL" isNullable="false"  />
+      <field type="string" name="ReqUrl" localDbFieldName="reqUrl" localFieldType="varchar(2000) NOT NULL" isNullable="false"  />
+      <field type="string" name="ReqMethod" localDbFieldName="reqMethod" localFieldType="varchar(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="ReqBody" localDbFieldName="reqBody" localFieldType="varchar(8000) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="ResStatus" localDbFieldName="resStatus" localFieldType="varchar(36) NOT NULL" isNullable="false"  />
+      <field type="int" name="BytesReceived" localDbFieldName="bytesReceived" localFieldType="int DEFAULT NULL" isNullable="true"  />
+      <field type="int" name="TimeTaken" localDbFieldName="timeTaken" localFieldType="int DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="true"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="true" />
+    </model>
+    <model name="ScheduledmasterJob" template="dto|dao|service|controller|schema"
+     fileName="ScheduledmasterJob.dto.go|ScheduledmasterJob.dao.go|ScheduledmasterJob.svc.go|ScheduledmasterJob.cntlr.go|ScheduledmasterJob.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="sj" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false" />
+      <field type="string" name="SuperCatalog" localDbFieldName="superCatalog" localFieldType="varchar(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="BrandPk" localDbFieldName="brandPk" localFieldType="varchar(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="CatalogVersionPk" localDbFieldName="catalogVersionPk" localFieldType="varchar(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="Culture" localDbFieldName="culture" localFieldType="varchar(64) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="CatalogName" localDbFieldName="catalogName" localFieldType="varchar(64) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="OccContainerName" localDbFieldName="occContainerName" localFieldType="varchar(128) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="OccApiUrlPath" localDbFieldName="occApiUrlPath" localFieldType="varchar(36) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="HybrisLang" localDbFieldName="hybrisLang" localFieldType="varchar(10) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="BrandName" localDbFieldName="brandName" localFieldType="varchar(64) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="LanguageCode" localDbFieldName="languageCode" localFieldType="varchar(64) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="DomainBaseUrl" localDbFieldName="domainBaseUrl" localFieldType="varchar(256) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="OccCatalogId" localDbFieldName="OccCatalogId" localFieldType="varchar(64) DEFAULT NULL" isNullable="true"  />
+      <field type="int" name="Status" localDbFieldName="status" localFieldType="tinyint NOT NULL" isNullable="false"  /> 
+      <field type="string" name="CatalogType" localDbFieldName="catalogType" localFieldType="varchar(36) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="CategoryPrefix" localDbFieldName="categoryPrefix" localFieldType="varchar(36) DEFAULT NULL" isNullable="true"  />
+      <field type="int" name="ProductMaxThread" localDbFieldName="productMaxThread" localFieldType="int NOT NULL" isNullable="false"  />
+      <field type="int" name="ProductDetailMaxThread" localDbFieldName="productDetailMaxThread" localFieldType="int NOT NULL" isNullable="false"  />
+      <field type="bool" name="EnableFetchProductInfo" localDbFieldName="enableFetchProductInfo" localFieldType="tinyint NOT NULL" isNullable="false"  />
+      <field type="bool" name="IsRecurring" localDbFieldName="isRecurring" localFieldType="tinyint NOT NULL" isNullable="false"  />
+      <field type="string" name="HybrisJobStartAt" localDbFieldName="hybrisJobStartAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="SitecoreMasterLastSyncAt" localDbFieldName="sitecoreMasterLastSyncAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="SitecoreLiveLastSyncAt" localDbFieldName="sitecoreLiveLastSyncAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="OccLastSyncAt" localDbFieldName="occLastSyncAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="int" name="FrequencyInHour" localDbFieldName="frequencyInHour" localFieldType="int NOT NULL" isNullable="false"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+      <field type="string" name="ErrorMsg" localDbFieldName="errorMsg" localFieldType="mediumtext DEFAULT NULL" isNullable="true"  />
+      
+    </model>
+
+    <model name="DeltaSyncJobProduct" template="dto|dao|service|controller|schema"
+     fileName="deltaSyncJobProducts.dto.go|deltaSyncJobProducts.dao.go|deltaSyncJobProducts.svc.go|deltaSyncJobProducts.cntlr.go|deltaSyncJobProducts.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="dsjp" escapeChar="`">
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="DeltaSyncJobId" localDbFieldName="deltaSyncJobId" localFieldType="char(36) NOT NULL" isNullable="false" />
+      <field type="string" name="ProductPK"localDbFieldName="productPK" localFieldType="varchar(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+    <model name="Product" template="dto|dao|service|controller|schema"
+     fileName="Product.dto.go|Product.dao.go|Product.svc.go|Product.cntlr.go|Product.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="dsjp" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="Code" localDbFieldName="code" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="Status" localDbFieldName="status" localFieldType="varchar(1028) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="DisplayName" localDbFieldName="displayName" localFieldType="varchar(1028) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="CheckSum"localDbFieldName="checkSum" localFieldType="varchar(1028) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="ProductUniqueKey"localDbFieldName="productUniqueKey" localFieldType="varchar(1028) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="LanguageCode"localDbFieldName="languageCode" localFieldType="varchar(36) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="ProductUrl"localDbFieldName="productUrl" localFieldType="varchar(256) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+
+    <model name="ExtenralInt" template="dto|dao|service|controller|schema"
+     fileName="ExtenralInt.dto.go|ExtenralInt.dao.go|ExtenralInt.svc.go|ExtenralInt.cntlr.go|ExtenralInt.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="ei" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="Name" localDbFieldName="name" localFieldType="varchar(64) NOT NULL" isNullable="true"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+
+    <model name="ProductExtenralInt" template="dto|dao|service|controller|schema"
+     fileName="ProductExtenralInt.dto.go|ProductExtenralInt.dao.go|ProductExtenralInt.svc.go|ProductExtenralInt.cntlr.go|ProductExtenralInt.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="pei" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="ProductId" localDbFieldName="productId" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="ProductSku" localDbFieldName="productSku" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="LanguageCode" localDbFieldName="languageCode" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="ExternalIntId" localDbFieldName="externalIntId" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="ExternlRefId" localDbFieldName="externlRefId" localFieldType="varchar(512) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="CreatedDate" localDbFieldName="createdDate" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="ModifiedDate" localDbFieldName="modifiedDate" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="IntStatus" localDbFieldName="intStatus" localFieldType="varchar(64) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="Message" localDbFieldName="message" localFieldType="mediumtext DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="CheckSum" localDbFieldName="checkSum" localFieldType="varchar(1028) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+
+    <model name="WidgetMeta" template="dto|dao|service|controller|schema"
+     fileName="WidgetMeta.dto.go|WidgetMeta.dao.go|WidgetMeta.svc.go|WidgetMeta.cntlr.go|WidgetMeta.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="wm" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="WidgetName" localDbFieldName="WidgetName" localFieldType="varchar(64) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="PageName" localDbFieldName="pageName" localFieldType="varchar(64) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="Datasource" localDbFieldName="datasource" localFieldType="varchar(7999) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="DatasourceType" localDbFieldName="datasourceType" localFieldType="varchar(64) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="InputJson" localDbFieldName="inputJson" localFieldType="varchar(7999) DEFAULT NULL" isNullable="true"  />
+      <field type="bool" name="IsActive" localDbFieldName="isActive" localFieldType="tinyint NOT NULL" isNullable="false"  />
+      <field type="bool" name="ShowOnLandingPage" localDbFieldName="showOnLandingPage" localFieldType="tinyint NOT NULL" isNullable="false"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+
+     <model name="ProductClassMap" template="dto|dao|service|controller|schema"
+     fileName="ProductClassMap.dto.go|ProductClassMap.dao.go|ProductClassMap.svc.go|ProductClassMap.cntlr.go|ProductClassMap.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="pcl" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="ProductPk" localDbFieldName="productPk" localFieldType="varchar(36) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="ClassCode" localDbFieldName="classCode" localFieldType="varchar(36) DEFAULT NULL" isNullable="true"  />
+      <field type="bool" name="IsActive" localDbFieldName="isActive" localFieldType="tinyint NOT NULL" isNullable="false"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+
+     <model name="ProductCategoryMap" template="dto|dao|service|controller|schema"
+     fileName="ProductCategoryMap.dto.go|ProductCategoryMap.dao.go|ProductCategoryMap.svc.go|ProductCategoryMap.cntlr.go|ProductCategoryMap.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="pcat" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="ProductPk" localDbFieldName="productPk" localFieldType="varchar(36) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="CategoryCode" localDbFieldName="CategoryCode" localFieldType="varchar(36) DEFAULT NULL" isNullable="true"  />
+      <field type="bool" name="IsActive" localDbFieldName="isActive" localFieldType="tinyint NOT NULL" isNullable="false"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+
+
+    <model name="EventType" template="dto|dao|service|controller|schema"
+     fileName="EventType.dto.go|EventType.dao.go|EventType.svc.go|EventType.cntlr.go|EventType.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="et" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="Name" localDbFieldName="name" localFieldType="varchar(128) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="Hint" localDbFieldName="Hint" localFieldType="varchar(1028) DEFAULT NULL" isNullable="true"  />
+      <field type="bool" name="IsActive" localDbFieldName="isActive" localFieldType="tinyint NOT NULL" isNullable="false"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+    <model name="EventQueue" template="dto|dao|service|controller|schema"
+     fileName="EventQueue.dto.go|EventQueue.dao.go|EventQueue.svc.go|EventQueue.cntlr.go|EventQueue.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="eq" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="EventTypeId" localDbFieldName="eventTypeId" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="EventData" localDbFieldName="eventData" localFieldType="mediumtext NOT NULL" isNullable="false"  />
+      <field type="int" name="Status" localDbFieldName="status" localFieldType="tinyint NOT NULL" isNullable="false"  /> 
+      <field type="string" name="StartAt" localDbFieldName="startAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="int" name="RetryCount" localDbFieldName="retryCount" localFieldType="tinyint NOT NULL" isNullable="false"  /> 
+      <field type="string" name="Message" localDbFieldName="Message" localFieldType="mediumtext" isNullable="false"  /> 
+       <field type="bool" name="IsActive" localDbFieldName="isActive" localFieldType="tinyint NOT NULL" isNullable="false"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+
+<model name="EventQueueHistory" template="dto|dao|service|controller|schema"
+     fileName="EventQueueHistory.dto.go|EventQueueHistory.dao.go|EventQueueHistory.svc.go|EventQueueHistory.cntlr.go|EventQueueHistory.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="eq" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="EventQueueId" localDbFieldName="eventQueueId" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="EventTypeId" localDbFieldName="eventTypeId" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="EventData" localDbFieldName="eventData" localFieldType="mediumtext NOT NULL" isNullable="false"  />
+      <field type="int" name="Status" localDbFieldName="status" localFieldType="tinyint NOT NULL" isNullable="false"  /> 
+      <field type="int" name="RetryCount" localDbFieldName="retryCount" localFieldType="tinyint NOT NULL" isNullable="false"  /> 
+      <field type="string" name="Message" localDbFieldName="Message" localFieldType="mediumtext" isNullable="false"  /> 
+       <field type="bool" name="IsActive" localDbFieldName="isActive" localFieldType="tinyint NOT NULL" isNullable="false"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+
+
+<model name="OccErrorLog" template="dto|dao|service|controller|schema"
+     fileName="OccErrorLog.dto.go|OccErrorLog.dao.go|OccErrorLog.svc.go|OccErrorLog.cntlr.go|OccErrorLog.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="oel" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="DeltaSyncJobId"localDbFieldName="deltaSyncJobId" localFieldType="char(36) NOT NULL" isNullable="false" />
+      <field type="string" name="ErrorMsg" localDbFieldName="errorMsg" localFieldType="mediumtext NOT NULL" isNullable="false"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+   <!-- <model name="AppLog" template="dto|dao|service|controller|schema"
+     fileName="AppLog.dto.go|AppLog.dao.go|AppLog.svc.go|AppLog.cntlr.go|AppLog.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="al" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false" />
+      <field type="string" name="Ref1"localDbFieldName="ref1" localFieldType="varchar(36) DEFAULT NULL" isNullable="false"  />
+      <field type="string" name="Ref2"localDbFieldName="ref2" localFieldType="varchar(128) DEFAULT NULL" isNullable="false"  />
+      <field type="string" name="Level"localDbFieldName="level" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="Message" localDbFieldName="message" localFieldType="mediumtext  DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="true"  />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="true" />
+    </model>  -->
+
+
+     <!-- <model name="OccMetaData" template="dto|dao|service|controller|schema"
+     fileName="OccMetaData1.dto.go|OccMetaData1.dao.go|OccMetaData1.svc.go|OccMetaData1.cntlr.go|OccMetaData1.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="dsjp" escapeChar="`"  >
+      <field type="string" name="ApplicationName" localDbFieldName="applicationName" localFieldType="char(64) NOT NULL" isNullable="false"  />
+      <field type="string" name="InterfaceName" localDbFieldName="interfaceName" localFieldType="char(64) NOT NULL" isNullable="false"  />
+      <field type="string" name="TargetKey"localDbFieldName="targetKey" localFieldType="varchar(1028) NOT NULL" isNullable="false" />
+      <field type="string" name="TargetValue"localDbFieldName="targetValue" localFieldType="varchar(1028) NOT NULL" isNullable="false" />
+    </model>
+
+     <model name="Occclassificationmetadata" template="dto|dao|service|controller|schema"
+     fileName="occclassificationmetadata.dto.go|occclassificationmetadata.dao.go|occclassificationmetadata.svc.go|occclassificationmetadata.cntlr.go|occclassificationmetadata.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="ccc" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(64) NOT NULL" isNullable="false"  />
+      <field type="string" name="Attributes" localDbFieldName="Attributes" localFieldType="TEXT NOT NULL" isNullable="false"  />
+      <field type="string" name="EntityType"localDbFieldName="entityType" localFieldType="varchar(1028) NOT NULL" isNullable="false" />
+    </model> 
+-->
+
+    <!-- <model name="FeatureLookup" template="dto|dao|service|controller|schema"
+     fileName="FeatureLookup.dto.go|FeatureLookup.dao.go|FeatureLookup.svc.go|FeatureLookup.cntlr.go|FeatureLookup.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="fl" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false" />
+      <field type="string" name="Code" localDbFieldName="code" localFieldType="varchar(128) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="Name" localDbFieldName="name" localFieldType="varchar(128) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="Qualifier" localDbFieldName="qualifier" localFieldType="varchar(128) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="Unit" localDbFieldName="unit" localFieldType="varchar(32) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="Value"localDbFieldName="value" localFieldType="varchar(128) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+    <model name="ProductFeatureLookupMap" template="dto|dao|service|controller|schema"
+     fileName="ProductFeatureLookupMap.dto.go|ProductFeatureLookupMap.dao.go|ProductFeatureLookupMap.svc.go|ProductFeatureLookupMap.cntlr.go|ProductFeatureLookupMap.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="pflm" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="ProductId" localDbFieldName="productId" localFieldType="char(36) NOT NULL" isNullable="false"  />
+      <field type="string" name="FeatureLookupId" localDbFieldName="featureLookupId" localFieldType="char(36) NOT NULL" isNullable="false" />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model>
+    <model name="ProductGalleryImage" template="dto|dao|service|controller|schema"
+     fileName="ProductGalleryImage.dto.go|ProductGalleryImage.dao.go|ProductGalleryImage.svc.go|ProductGalleryImage.cntlr.go|ProductGalleryImage.sql" 
+     layerFolder="models|models|services|controllers|sqls" shortName="pgi" escapeChar="`"  >
+      <field type="string" name="Id" localDbFieldName="id" localFieldType="char(36) NOT NULL" isNullable="false" />
+      <field type="string" name="ProductId" localDbFieldName="productId" localFieldType="char(36) NOT NULL" isNullable="false" />
+      <field type="string" name="Qualifier" localDbFieldName="qualifier" localFieldType="varchar(128) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="Name" localDbFieldName="name" localFieldType="varchar(128) DEFAULT NULL" isNullable="true" />
+      <field type="string" name="Unit" localDbFieldName="unit" localFieldType="varchar(32) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="Value"localDbFieldName="value" localFieldType="varchar(128) DEFAULT NULL" isNullable="true"  />
+      <field type="string" name="CreatedAt" localDbFieldName="createdAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+      <field type="string" name="UpdatedAt" localDbFieldName="updatedAt" localFieldType="datetime NOT NULL DEFAULT CURRENT_TIMESTAMP" isNullable="false" />
+    </model> -->
+    
+</models>
+ </entity> 

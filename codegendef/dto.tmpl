@@ -1,0 +1,21 @@
+{{ define "dto" }}
+{{- $short := ( .ShortName ) -}}
+{{- $tableName := (formatName  .Name ) -}}
+{{- $entityName := (.Name) -}}
+{{- $escapeChar := (.EscapeChar) -}}
+ 
+package models
+	
+
+	 
+	//collection
+type  {{pluralize $tableName}} []{{$tableName}}
+
+	//Auto code generated with help of xml schema 
+	// table : {{$tableName}}
+	
+type {{$tableName}} struct {
+		{{- range .Fields }} 
+		{{formatName .Name }} {{ .Type }} {{$escapeChar}}json:"{{.LocalDbFieldName}}"{{$escapeChar}} // {{ .LocalDbFieldName }}{{end}}	
+}
+{{end}}

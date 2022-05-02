@@ -1,0 +1,851 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/api/addorupdate": {
+            "post": {
+                "description": "AddorUpdate index",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bleve indexes"
+                ],
+                "summary": "Add or Update Index Document",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the index you can also provide pattern like indexName{2006-01-02}--\u003eindexName{yyyy-MM-dd}",
+                        "name": "indexName",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "document id",
+                        "name": "docId",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "index name determind using this date when index name pattern date format must be {yyyy-MM-dd}",
+                        "name": "indexTranDate",
+                        "in": "query"
+                    },
+                    {
+                        "description": "document to be index",
+                        "name": "reqModel",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/createschema": {
+            "post": {
+                "description": "create schema possible values for type[bool|text|date|numeric|geopoint]\ngolang follows date pattern like indexname{2006-01-02} indexname{2006-01-02} which is equal to {yyyy-MM-dd}\nindexname{2006-01-02}--\u003ecreates a index every day\nindexname{2006-01}--\u003ecreates a index every month\nindexname{2006}--\u003ecreates a index every year",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bleve indexes"
+                ],
+                "summary": "create schema",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the index, you can also provide index date pattern like indexname{2006-01-02}",
+                        "name": "indexName",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "description": "field definition",
+                        "name": "fieldDef",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ezsearch.BleveFieldDef"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/eventqueue": {
+            "put": {
+                "description": "Update by json EventQueue",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "EventQueue"
+                ],
+                "summary": "Update EventQueue",
+                "parameters": [
+                    {
+                        "description": "Update EventQueue",
+                        "name": "EventQueue",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.EventQueue"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create EventQueue",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "EventQueue"
+                ],
+                "summary": "Create EventQueue",
+                "parameters": [
+                    {
+                        "description": "create EventQueue",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.EventQueue"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/eventqueue/{id}": {
+            "get": {
+                "description": "Get EventQueue by id",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "EventQueue"
+                ],
+                "summary": "Get all EventQueue",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "EventQueue ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.EventQueue"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete EventQueue",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "EventQueue"
+                ],
+                "summary": "Get all EventQueue",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "EventQueue ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/eventqueues/search": {
+            "get": {
+                "description": "get top 100 records EventQueue",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "EventQueue"
+                ],
+                "summary": "Get all EventQueue",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Starting row 0--\u003efirst record",
+                        "name": "start",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Row limit",
+                        "name": "limit",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.EventQueue"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getfields": {
+            "get": {
+                "description": "Get index fields",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bleve indexes"
+                ],
+                "summary": "GetFields",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the index",
+                        "name": "indexName",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/getindexes": {
+            "get": {
+                "description": "Get all indexes",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bleve indexes"
+                ],
+                "summary": "Get All indexes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/search": {
+            "post": {
+                "description": "get search result sample query [select id,name,age from indexName where name:ram,age:\u003e40,+age:\u003c=50,startDt\u003e\"2022-01-01T01:01:00Z\" facets name limit 1, 10]\nfetch record first 10 records with matching codition and shows sepecified fields",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bleve indexes"
+                ],
+                "summary": "get search result",
+                "parameters": [
+                    {
+                        "description": "look search",
+                        "name": "query",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ezsearch.SearchRequestQuery"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete index",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "bleve indexes"
+                ],
+                "summary": "Delete index document",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "name of the index",
+                        "name": "indexName",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "document id",
+                        "name": "docId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/widgetmeta": {
+            "put": {
+                "description": "Update by json WidgetMeta",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "WidgetMeta"
+                ],
+                "summary": "Update WidgetMeta",
+                "parameters": [
+                    {
+                        "description": "Update WidgetMeta",
+                        "name": "WidgetMeta",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.WidgetMeta"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "create WidgetMeta",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "WidgetMeta"
+                ],
+                "summary": "Create WidgetMeta",
+                "parameters": [
+                    {
+                        "description": "create WidgetMeta",
+                        "name": "address",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.WidgetMeta"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/widgetmeta/{id}": {
+            "get": {
+                "description": "Get WidgetMeta by id",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "WidgetMeta"
+                ],
+                "summary": "Get all WidgetMeta",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "WidgetMeta ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.WidgetMeta"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "delete WidgetMeta",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "WidgetMeta"
+                ],
+                "summary": "Get all WidgetMeta",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "WidgetMeta ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/widgetmetas/search": {
+            "get": {
+                "description": "get top 100 records WidgetMeta",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "WidgetMeta"
+                ],
+                "summary": "Get all WidgetMeta",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "starting row",
+                        "name": "start",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "no of row limit",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.WidgetMeta"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ezsearch.BleveFieldDef": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "description": "possible values [bool|text|date|numeric|geopoint]",
+                    "type": "string"
+                }
+            }
+        },
+        "ezsearch.SearchRequestQuery": {
+            "type": "object",
+            "properties": {
+                "q": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.EventQueue": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "description": "createdAt",
+                    "type": "string"
+                },
+                "eventData": {
+                    "description": "eventData",
+                    "type": "string"
+                },
+                "eventTypeId": {
+                    "description": "eventTypeId",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "id",
+                    "type": "string"
+                },
+                "isActive": {
+                    "description": "isActive",
+                    "type": "boolean"
+                },
+                "message": {
+                    "description": "Message",
+                    "type": "string"
+                },
+                "retryCount": {
+                    "description": "retryCount",
+                    "type": "integer"
+                },
+                "startAt": {
+                    "description": "startAt",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "status",
+                    "type": "integer"
+                },
+                "updatedAt": {
+                    "description": "updatedAt",
+                    "type": "string"
+                }
+            }
+        },
+        "models.WidgetMeta": {
+            "type": "object",
+            "properties": {
+                "createdAt": {
+                    "description": "createdAt",
+                    "type": "string"
+                },
+                "data": {
+                    "description": "inputJson",
+                    "type": "string"
+                },
+                "division": {
+                    "description": "pageName",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "WidgetName",
+                    "type": "string"
+                },
+                "isActive": {
+                    "description": "isActive",
+                    "type": "boolean"
+                },
+                "module": {
+                    "description": "datasource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "WidgetName",
+                    "type": "string"
+                },
+                "page": {
+                    "description": "datasourceType",
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "description": "updatedAt",
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

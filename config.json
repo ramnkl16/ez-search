@@ -1,0 +1,22 @@
+{ 
+    "boltdbSettings": {
+        "coredb": "core.db",
+        "buketName": "catalog"
+    },
+    "searchSettings": {
+        "indexBasePath":"indexes",
+        "indexTablesPath":"tables",
+        "indexBatchSize": 1000,
+        "maxResultsInaPage": 50
+    },
+    "loggerSettings":{
+        "applogIndexPath":"indexes/applogs-{2006-01-02}",
+        "enableConsoleLog":true, 
+        "enableTextIndexLog":true,
+        "logOutput":"logs/logs.txt", 
+        "logLevel":"debug"
+    },
+    "port": ":8015",
+    "hostName": "localhost",
+    "workingDir":"C:\\go-prj\\gost\\Product-int-logs\\src"
+  }

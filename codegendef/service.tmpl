@@ -1,0 +1,89 @@
+	{{ define "service" }}
+    {{- $short := (.ShortName ) -}}
+	{{- $tableName := (.Name ) -}}
+	{{- $lowercaseTableName := (tolowercamel .Name ) -}}
+	{{- $updatedAt := (getField  .Fields "updatedAt" ) -}}
+	{{- $createdAt := (getField  .Fields "createdAt" ) -}}
+	{{- $isActive := (getField  .Fields "isActive" ) -}}
+	{{- $id := (getField  .Fields "id" ) -}}
+	package services
+	
+	import (
+		"github.com/ramnkl16/ez-search/models"
+		"github.com/ramnkl16/ez-search/rest_errors"
+		"github.com/ramnkl16/ez-search/utils/date_utils"
+	)
+	 
+
+	//Auto code generated with help of mysql table schema 
+	// table : {{.Name}}
+	
+	//{{$tableName}} service as variable 
+	var (
+		{{$tableName}}Service {{$lowercaseTableName}}ServiceInterface = &{{$lowercaseTableName}}Service{}
+	)
+
+type {{$lowercaseTableName}}Service struct{}
+
+type {{$lowercaseTableName}}ServiceInterface interface {
+	Create(models.{{$tableName}}) rest_errors.RestErr
+	Update(models.{{$tableName}}) rest_errors.RestErr
+	Get(string) (*models.{{$tableName}}, rest_errors.RestErr)
+	Delete(string) rest_errors.RestErr
+	Search(string, string) (models.{{pluralize $tableName}}, rest_errors.RestErr)
+	//WebuiSearch(string, string) (models.{{pluralize $tableName}}, rest_errors.RestErr)
+}
+
+
+func (srv *{{$lowercaseTableName}}Service) Create({{$short}} models.{{$tableName}}) rest_errors.RestErr {
+	
+	{{if $isActive}}{{$short}}.IsActive = true {{end}}
+	{{if $createdAt}}{{if eq $createdAt.IsNullable "YES"}}{{$short}}.CreatedAt.String = date_utils.GetNowSearchFormat()
+	{{$short}}.CreatedAt.Valid=true{{else}}{{$short}}.CreatedAt = date_utils.GetNowSearchFormat(){{end}}{{end}}
+	{{if $updatedAt}}{{if eq $updatedAt.IsNullable "YES"}}{{$short}}.UpdatedAt.String = date_utils.GetNowSearchFormat()
+	{{$short}}.UpdatedAt.Valid=true{{else}}{{$short}}.UpdatedAt = date_utils.GetNowSearchFormat(){{end}}{{end}}
+	if err := {{$short}}.Create(); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (srv *{{$lowercaseTableName}}Service) Update({{$short}} models.{{$tableName}}) rest_errors.RestErr {
+	{{if $updatedAt}}{{if eq $updatedAt.IsNullable "YES"}}{{$short}}.UpdatedAt.String = date_utils.GetNowSearchFormat()
+	{{$short}}.UpdatedAt.Valid=true{{else}}{{$short}}.UpdatedAt = date_utils.GetNowSearchFormat(){{end}}{{end}}
+	if err := {{$short}}.Update(); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (srv *{{$lowercaseTableName}}Service) Get(id string) (*models.{{$tableName}}, rest_errors.RestErr) {
+	{{if $id}}dao := &models.{{$tableName}}{ {{if eq $id.IsNullable "YES"}} ID.String: id {{else}} ID : id {{end}} }
+	if err := dao.Get(); err != nil {
+		return nil, err
+	}
+	return dao, nil
+	{{else}}return nil, rest_errors.NewMissingPrimayKey("When tying to get tenant")	{{end}}
+}
+
+func (srv *{{$lowercaseTableName}}Service) Delete(id string) rest_errors.RestErr {
+	dao := &models.{{$tableName}}{ID: id}
+	{{if $updatedAt}}{{if eq $updatedAt.IsNullable "YES"}}dao.UpdatedAt.String = date_utils.GetNowSearchFormat()
+	dao.UpdatedAt.Valid=true{{else}}dao.UpdatedAt = date_utils.GetNowSearchFormat(){{end}}{{end}}
+
+	if err := dao.Delete(); err != nil {
+		return err
+	}
+	return nil
+}
+func (srv *{{$lowercaseTableName}}Service) Search(start string, limit string) (models.{{pluralize $tableName}}, rest_errors.RestErr) {
+	dao := &models.{{$tableName}}{}
+	if start == "" {
+		start = "0"
+	}
+	if limit == "" {
+		limit = "50"
+	}
+	return dao.Searh(start, limit)
+}
+ {{end}}
