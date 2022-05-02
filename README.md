@@ -1,12 +1,13 @@
-# ez-search
+# Ez-search
+Ez search is build based on go [bleve](http://blevesearch.com/docs/Home/) text index. 
 
-#Cswagger json generator
+swagger json generator
  swagger document generation new path [swag.exe init .]
     and copy the json file into swagger-ui folder [copy .\docs\swagger.json .\swagger-ui\]
 
 
 - code generation from xml document table schema and including dto,dao,service and controllers along with swagger tags
-    [.\codege.exe] make sure that folders require xml defintion files are available under codedef folder. code generator always looking for codedef folder 
+    [`.\codege.exe`] make sure that folders require xml defintion files are available under codedef folder. code generator always looking for codedef folder 
 
 build command for any os after change the env variable like for windows "GOOS=windows" and run go build that would generate executable file ez-search.exe for window
 local rest api setup run the command console terminal [go run .\main.go -c config.json -wd c:\go-prj\ez-search] you can provide any port number
