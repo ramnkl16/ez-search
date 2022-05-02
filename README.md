@@ -2,10 +2,8 @@
 Ez search is build based on go [bleve](http://blevesearch.com/docs/Home/) text index. 
 
 swagger json generator
- swagger document generation new path `swag.exe init .`
-    and copy the json file into swagger-ui folder copy `.\docs\swagger.json .\swagger-ui\`
-
-
+swagger document generation new path `swag.exe init .`
+and copy the json file into swagger-ui folder copy `.\docs\swagger.json .\swagger-ui\`
 - code generation from xml document table schema and including dto,dao,service and controllers along with swagger tags
     [`.\codege.exe`] make sure that folders require xml defintion files are available under codedef folder. code generator always looking for codedef folder 
 
