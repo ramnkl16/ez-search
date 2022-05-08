@@ -121,7 +121,7 @@ func CreateTables() {
 	if !isExist {
 		BuildIndexSchema(NamespaceTable, nsSchema, true)
 		var m1 interface{}
-		json.Unmarshal([]byte(`{"id":"platform", "name":"PLATFORM","code":"PLATFORM", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		json.Unmarshal([]byte(`{"id":"platform", "name":"platform","code":"platform", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, NamespaceTable, "platform")
 	}
 	isExist = tables[UserMenuTable]

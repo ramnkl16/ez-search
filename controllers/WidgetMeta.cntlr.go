@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/ramnkl16/ez-search/auth"
 	"github.com/ramnkl16/ez-search/models"
 	"github.com/ramnkl16/ez-search/rest_errors"
 	"github.com/ramnkl16/ez-search/services"
@@ -109,6 +110,17 @@ func (ctrl *widgetmetaController) Search(ctx *gin.Context) {
 	results, err := services.WidgetMetaService.Search(start, limit)
 	if err != nil {
 		ctx.JSON(err.Status(), err)
+		return
+	}
+	ns := auth.GetNamespace(ctx.Request)
+	filteredList := make([]models.WidgetMeta, 0)
+	if ns != "platform" {
+		for _, item := range results {
+			if item.Division == ns {
+				filteredList = append(filteredList, item)
+			}
+		}
+		ctx.JSON(http.StatusOK, filteredList) //	return filteredList, nil
 		return
 	}
 	ctx.JSON(http.StatusOK, results)

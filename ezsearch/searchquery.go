@@ -41,7 +41,9 @@ func GetFields(indexName string) []string {
 		logger.Warn("Index is missing ", zapcore.Field{String: indexName, Key: "p1", Type: zapcore.StringType})
 		return nil
 	}
+
 	fields, _ := i.Fields()
+	//fmt.Println("controllers|getfields", indexName, fields)
 	return fields
 }
 func GetValues(indexName string, fieldName string) []interface{} {
@@ -798,7 +800,7 @@ func getParsedQueryByKeyword(q string) map[string]string {
 	curKey := ""
 	maxLen := len(q)
 	for _, r := range indexs {
-		fmt.Println("curidex", r)
+		//fmt.Println("curidex", r)
 		if curIdx > 0 {
 			kw[strings.ToLower(curKey[0:3])] = strings.Trim(q[curIdx:r[0]], " ")
 		}
@@ -807,12 +809,12 @@ func getParsedQueryByKeyword(q string) map[string]string {
 
 	}
 	if curIdx < maxLen {
-		fmt.Println("curidex", curIdx, maxLen)
+		//fmt.Println("curidex", curIdx, maxLen)
 		r := indexs[len(indexs)-1]
 
 		curKey = q[r[0]:r[1]]
 		kw[strings.ToLower(curKey[0:3])] = strings.Trim(q[r[1]:], " ")
 	}
-	fmt.Println("query parser", kw)
+	//fmt.Println("query parser", kw)
 	return kw
 }

@@ -1,6 +1,8 @@
 package services
 
 import (
+	"fmt"
+
 	"github.com/ramnkl16/ez-search/abstractimpl"
 	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
@@ -102,7 +104,7 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 	us.ID = uid_utils.GetUid("ur", false)
 
 	u := models.User{
-		NamespaceID:       na.ID,
+		NamespaceID:       m.Code,
 		UserGroupID:       ug.ID,
 		UserName:          m.Email,
 		Token:             hashPwd,
@@ -122,16 +124,20 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 	u.ID = uid_utils.GetUid("ur", false)
 	q := models.WidgetMeta{
 		ID:        "q1",
-		Name:      "User List",
-		Division:  "div",
+		Name:      fmt.Sprintf("User List %s", m.Code),
+		Division:  m.Code,
 		Module:    "search",
 		Page:      "user",
-		Data:      "select * from tables/tables.user",
+		Data:      fmt.Sprintf("select * from tables/tables.user"),
 		IsActive:  "true",
 		CreatedAt: date_utils.GetNowSearchFormat(),
 		UpdatedAt: date_utils.GetNowSearchFormat(),
 	}
-	r := models.WidgetMeta{ID: uid_utils.GetUid("rp", true), Name: "applogs", Division: "report", Module: "mod", Page: "report", Data: "select * from indexes/applogs-{2006-01-02} since t:30 seconds ago sort -t facets l", IsActive: "true", CreatedAt: date_utils.GetNowSearchFormat(), UpdatedAt: date_utils.GetNowSearchFormat()}
+	if m.Code != "platform" {
+		q.Data = fmt.Sprintf("select * from tables/tables.user where namespaceID:%s", m.Code)
+	}
+
+	r := models.WidgetMeta{ID: uid_utils.GetUid("rp", true), Name: "applogs", Division: m.Code, Module: "mod", Page: "report", Data: "select * from indexes/applogs-{2006-01-02} since t:30 seconds ago sort -t facets l", IsActive: "true", CreatedAt: date_utils.GetNowSearchFormat(), UpdatedAt: date_utils.GetNowSearchFormat()}
 
 	abstractimpl.CreateOrUpdate(na, abstractimpl.NamespaceTable, na.ID)
 	abstractimpl.CreateOrUpdate(us, abstractimpl.UserTable, us.ID)

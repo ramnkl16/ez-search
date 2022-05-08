@@ -79,7 +79,8 @@ func (srv *widgetMetaService) Search(start string, limit string) (models.WidgetM
 	if limit == "" {
 		limit = "50"
 	}
-	q := fmt.Sprintf("select * from %s limit %s,%s", abstractimpl.QueryMetaTable, start, limit)
-	return dao.GetAll(q)
 
+	q := fmt.Sprintf("select * from %s limit %s,%s", abstractimpl.QueryMetaTable, start, limit)
+	list, err := dao.GetAll(q)
+	return list, err
 }

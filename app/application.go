@@ -72,7 +72,7 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 func AuthTokenValidation() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authToken := auth.GetXauthToken(c.Request)
-		println("auth token", authToken)
+		println("auth token", authToken, auth.GetNamespace(c.Request))
 		//fmt.Println(authToken)
 		// for a := range cache_utils.Cache.GetKeys() {
 		// 	fmt.Println("Avaialbl Keys: ")
@@ -98,7 +98,7 @@ func AuthTokenValidation() gin.HandlerFunc {
 			logger.Debug(fmt.Sprintf("AuthTokenValidation|credential cache value %s not authorized %v", value, exists))
 			//has token then try login decode base64 user credential as it is cached
 			if len(authToken) > 0 {
-				fmt.Println("authtoken", authToken)
+				//fmt.Println("authtoken", authToken)
 				uEnc, err := b64.StdEncoding.DecodeString(authToken)
 				if err != nil {
 					c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"errCode": rest_errors.InvalidAuthToken, "status": http.StatusUnauthorized, "errorDesc": "Invalid auth token while parse from base 64", "datetime": date_utils.GetNowSearchFormat()})
@@ -123,7 +123,7 @@ func AuthTokenValidation() gin.HandlerFunc {
 			}
 			//return
 		} else {
-			logger.Debug(fmt.Sprintf("AuthTokenValidation|authorized %s", value))
+			logger.Debug(fmt.Sprintf("AuthTokenValidation|authorized %s url=%s", value, c.Request.URL))
 			c.Next()
 		}
 	}

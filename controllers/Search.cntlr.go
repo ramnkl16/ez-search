@@ -3,11 +3,13 @@ package controllers
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap/zapcore"
 
 	"github.com/ramnkl16/ez-search/abstractimpl"
+	"github.com/ramnkl16/ez-search/auth"
 	"github.com/ramnkl16/ez-search/common"
 	"github.com/ramnkl16/ez-search/ezsearch"
 	"github.com/ramnkl16/ez-search/global"
@@ -51,7 +53,7 @@ func (ctrl *searchController) RegisterRouter(rout *gin.Engine) {
 // @Failure 500 {object} string
 // @Router /api/search [post]
 func (ctrl *searchController) Search(ctx *gin.Context) {
-	fmt.Println("reached controlser|search")
+	//fmt.Println("reached controlser|search")
 	var m ezsearch.SearchRequestQuery
 
 	if err := ctx.ShouldBindJSON(&m); err != nil {
@@ -208,8 +210,17 @@ func (ctrl *searchController) DeleteIndex(ctx *gin.Context) {
 // @Router /api/getindexes [get]
 func (ctrl *searchController) GetAllIndexes(ctx *gin.Context) {
 	list := make([]string, 0)
-	for k, _ := range common.GetAllIndexes() {
-		list = append(list, k)
+	ns := auth.GetNamespace(ctx.Request)
+	isPlatform := false
+	if ns == "platform" {
+		isPlatform = true
+	}
+	for k := range common.GetAllIndexes() {
+		if isPlatform {
+			list = append(list, k) //if users from platform should see all indexes otherwise only specific folder.
+		} else if strings.HasPrefix(k, ns) {
+			list = append(list, k)
+		}
 	}
 	ctx.JSON(http.StatusCreated, list)
 }
@@ -227,6 +238,7 @@ func (ctrl *searchController) GetAllIndexes(ctx *gin.Context) {
 // @Router /api/getfields [get]
 func (ctrl *searchController) GetFields(ctx *gin.Context) {
 	indexName := ctx.Query("indexName")
+	//fmt.Println("controllers|getfields", indexName)
 	ctx.JSON(http.StatusCreated, ezsearch.GetFields(indexName))
 }
 

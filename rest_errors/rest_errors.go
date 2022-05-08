@@ -84,8 +84,13 @@ func NewInternalServerError(message string, err error) RestErr {
 		ErrMessage: message,
 		ErrStatus:  http.StatusInternalServerError,
 		ErrError:   "internal_server_error",
+		//ErrCauses: &make([]interface{}, 0),
 	}
 	if err != nil {
+		if *&result.ErrCauses == nil {
+			var c []interface{}
+			result.ErrCauses = &c
+		}
 		*result.ErrCauses = append(*result.ErrCauses, err.Error())
 	}
 	return result

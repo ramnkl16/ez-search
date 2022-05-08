@@ -1,6 +1,9 @@
 package global
 
-import "regexp"
+import (
+	"fmt"
+	"regexp"
+)
 
 const (
 	Email          = `^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`
@@ -17,13 +20,15 @@ var (
 )
 
 func IsValidEmail(email string) bool {
+	fmt.Println("IsValidEmail", email)
 	re := regexp.MustCompile(Email)
 	return re.MatchString(email)
 }
 
 func IsValidPhoneNumber(phone string) bool {
-	re := regexp.MustCompile(Mobile)
-	return re.MatchString(phone)
+	fmt.Println("IsValidPhoneNumber", phone)
+	//re := regexp.MustCompile(Mobile)
+	return true //re.MatchString(phone)
 }
 
 func IsValidSlotID(id string) bool {

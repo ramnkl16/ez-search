@@ -15,4 +15,7 @@
 # vendor/
 indexes
 tables
+duplo
+logs
 docs
+*.db

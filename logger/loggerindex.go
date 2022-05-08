@@ -82,7 +82,7 @@ func BuildAppIndexSchema() rest_errors.RestErr {
 	//fmt.Println("afterGetIndex(indexName)")
 	if err != nil || index == nil {
 
-		fmt.Println("logger|BuildIndexSchema|Creating  new index ... ", lIndexName)
+		//fmt.Println("logger|BuildIndexSchema|Creating  new index ... ", lIndexName)
 		// create a mapping
 
 		index, err := bleve.New(lIndexName, indexMapping)

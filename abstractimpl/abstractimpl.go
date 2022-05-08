@@ -106,8 +106,8 @@ func GetAll[T any](query string) ([]T, rest_errors.RestErr) {
 
 	logger.Info(fmt.Sprintf("abstractimpl|GetAll|query| %s", query))
 	result, err := ezsearch.PostSearchResult(query)
-	s, _ := json.Marshal(result)
-	fmt.Println("abstractimpl|getall|", string(s))
+	//s, _ := json.Marshal(result)
+	//fmt.Println("abstractimpl|getall|", string(s))
 	if err != nil {
 		return nil, err
 	}
