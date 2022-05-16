@@ -1,5 +1,5 @@
 # Ez-search
-Ez search is build based on go [bleve](http://blevesearch.com/docs/Home/) text index. 
+Ez search is built based on go [bleve](http://blevesearch.com/docs/Home/) text index. 
 
 swagger json generator
 swagger document generation new path `swag.exe init .`
