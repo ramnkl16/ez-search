@@ -1,8 +1,9 @@
 # Ez-search
 Ez search is powered by [bleve](http://blevesearch.com/docs/Home/) text index. Explose as Rest api to ingest data from any external system. Sql Parse engine helps to explore indexed data using SQL query  Select * from indexes/indexName 
 
-You can use the go build command to distribute to any os after change the env variable like for windows "GOOS=windows" and run go build that would generate executable file ez-search.exe for windows
-##Local dev env 
+You can use the go build command to distribute to any os after change the go env variable. for example if you want to deploy on windows machine then set "GOOS=windows" and run go build that would generate executable file ez-search.exe
+
+## Local dev env 
 after check out run the app from your local machine using the below command.
 local rest api setup  [go run .\main.go -c config.json -wd c:\go-prj\ez-search] you can provide any port number
 for in the config.json should be available under root folder.
