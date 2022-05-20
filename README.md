@@ -1,16 +1,13 @@
 # Ez-search
-Ez search is built based on go [bleve](http://blevesearch.com/docs/Home/) text index. 
+Ez search is powered by [bleve](http://blevesearch.com/docs/Home/) text index. Explose as Rest api to ingest data from any external system. Sql Parse engine helps to explore indexed data using SQL query  Select * from indexes/indexName 
 
-swagger json generator
-swagger document generation new path `swag.exe init .`
-and copy the json file into swagger-ui folder copy `.\docs\swagger.json .\swagger-ui\`
-- code generation from xml document table schema and including dto,dao,service and controllers along with swagger tags
-    [`.\codege.exe`] make sure that folders require xml defintion files are available under codedef folder. code generator always looking for codedef folder 
-
-build command for any os after change the env variable like for windows "GOOS=windows" and run go build that would generate executable file ez-search.exe for window
-local rest api setup run the command console terminal [go run .\main.go -c config.json -wd c:\go-prj\ez-search] you can provide any port number
+You can use the go build command to distribute to any os after change the env variable like for windows "GOOS=windows" and run go build that would generate executable file ez-search.exe for windows
+##Local dev env 
+after check out run the app from your local machine using the below command.
+local rest api setup  [go run .\main.go -c config.json -wd c:\go-prj\ez-search] you can provide any port number
 for in the config.json should be available under root folder.
-export product data along with status
+
+Post man collections is available in the root folder. 
 [post] http://localhost:8015/api/search
 
 schema field type [bool|text|date|numeric|geopoint]
@@ -63,3 +60,9 @@ Log settings
         "logOutput":"logs.txt", --> set as empty file log would be disabled otherwise logs writes on specified  file name under root of  logs folder
         "logLevel":"debug"
     },
+
+swagger json generator help to build rest
+swagger document generation new path `swag.exe init .`
+and copy the json file into swagger-ui folder copy `.\docs\swagger.json .\swagger-ui\`
+- code generation from xml document table schema and including dto,dao,service and controllers along with swagger tags
+    [`.\codege.exe`] make sure that folders require xml defintion files are available under codedef folder. code generator always looking for codedef folder 
