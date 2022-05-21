@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"path"
 
-	"github.com/boltdb/bolt"
+	bolt "go.etcd.io/bbolt"
 	"go.uber.org/zap/zapcore"
 
 	"github.com/ramnkl16/ez-search/global"

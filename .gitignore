@@ -21,3 +21,4 @@ docs
 *.db
 logs
 *.txt
+logs/logs.txt

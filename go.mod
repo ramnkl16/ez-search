@@ -60,7 +60,7 @@ require (
 	github.com/tinylib/msgp v1.1.0 // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect
 	github.com/willf/bitset v1.1.10 // indirect
-	go.etcd.io/bbolt v1.3.5 // indirect
+	go.etcd.io/bbolt v1.3.6 // indirect
 	go.uber.org/atomic v1.6.0 // indirect
 	go.uber.org/multierr v1.5.0 // indirect
 	golang.org/x/net v0.0.0-20210917221730-978cfadd31cf // indirect

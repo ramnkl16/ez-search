@@ -18,5 +18,5 @@
     },
     "port": ":8015",
     "hostName": "localhost",
-    "workingDir":"C:\\go-prj\\gost\\Product-int-logs\\src"
+    "workingDir":"C:\\go-prj\\src"
   }

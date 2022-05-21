@@ -59,8 +59,10 @@ func (p *program) run() {
 		global.WorkingDir = c.WorkingDir
 	}
 	if len(workingDir) > 0 {
+
 		global.WorkingDir = workingDir
 		c.WorkingDir = workingDir
+		fmt.Println("env workdir", workingDir, c.WorkingDir)
 
 	}
 	//config.HybrisSettings.Force = flagForce

@@ -134,7 +134,7 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 		UpdatedAt: date_utils.GetNowSearchFormat(),
 	}
 	if m.Code != "platform" {
-		q.Data = fmt.Sprintf("select * from tables/tables.user where namespaceID:%s", m.Code)
+		q.Data = fmt.Sprintf("select * from tables/tables.user where namespaceId:%s", m.Code)
 	}
 
 	r := models.WidgetMeta{ID: uid_utils.GetUid("rp", true), Name: "applogs", Division: m.Code, Module: "mod", Page: "report", Data: "select * from indexes/applogs-{2006-01-02} since t:30 seconds ago sort -t facets l", IsActive: "true", CreatedAt: date_utils.GetNowSearchFormat(), UpdatedAt: date_utils.GetNowSearchFormat()}
