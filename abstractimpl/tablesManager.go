@@ -47,19 +47,19 @@ func CreateTables() {
 	//fmt.Println("createtable", tables)
 	isExist = tables[EventQueueTable]
 	if !isExist {
-		BuildIndexSchema(EventQueueTable, eqSchema, true)
+		BuildIndexSchema(EventQueueTable, eqSchema, "tables")
 	}
 	isExist = tables[EventQueueHisTable]
 	if !isExist {
-		BuildIndexSchema(EventQueueHisTable, eqSchema, true)
+		BuildIndexSchema(EventQueueHisTable, eqSchema, "tables")
 	}
 	isExist = tables[QueryMetaTable]
 	if !isExist {
-		BuildIndexSchema(QueryMetaTable, queryMetaSchema, true)
+		BuildIndexSchema(QueryMetaTable, queryMetaSchema, "tables")
 	}
 	isExist = tables[UserTable]
 	if !isExist {
-		BuildIndexSchema(UserTable, usrSchema, true)
+		BuildIndexSchema(UserTable, usrSchema, "tables")
 		var m interface{}
 		id := uid_utils.GetUid("us", true)
 		json.Unmarshal([]byte(fmt.Sprintf(`{	"username": "admin",
@@ -80,7 +80,7 @@ func CreateTables() {
 	}
 	isExist = tables[MenuTable]
 	if !isExist {
-		BuildIndexSchema(MenuTable, menuSchema, true)
+		BuildIndexSchema(MenuTable, menuSchema, "tables")
 		var m1 interface{}
 		json.Unmarshal([]byte(`{"id":"root", "name":"Root","parentId":"", "link":"/", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, MenuTable, "root")
@@ -104,7 +104,7 @@ func CreateTables() {
 	}
 	isExist = tables[UserGroupTable]
 	if !isExist {
-		BuildIndexSchema(UserGroupTable, grpSchema, true)
+		BuildIndexSchema(UserGroupTable, grpSchema, "tables")
 		var m interface{}
 		json.Unmarshal([]byte(`{	
 			"id":"grp1",
@@ -119,21 +119,21 @@ func CreateTables() {
 	}
 	isExist = tables[NamespaceTable]
 	if !isExist {
-		BuildIndexSchema(NamespaceTable, nsSchema, true)
+		BuildIndexSchema(NamespaceTable, nsSchema, "tables")
 		var m1 interface{}
 		json.Unmarshal([]byte(`{"id":"platform", "name":"platform","code":"platform", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, NamespaceTable, "platform")
 	}
 	isExist = tables[UserMenuTable]
 	if !isExist {
-		BuildIndexSchema(UserMenuTable, usrMenuSchema, true)
+		BuildIndexSchema(UserMenuTable, usrMenuSchema, "tables")
 		var m1 interface{}
 		json.Unmarshal([]byte(`{"id":"platform", "nsId":"platform","menuId":"root", "cd":"customdata", "refId":"admin", "refType":"NS", "privilege":31, "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, UserMenuTable, "platform")
 	}
 }
 
-func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, isTable bool) rest_errors.RestErr {
+func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, indexFolderName string) rest_errors.RestErr {
 	// a generic reusable mapping for english text
 	englishTextFieldMapping := bleve.NewTextFieldMapping()
 	englishTextFieldMapping.Analyzer = en.AnalyzerName
@@ -158,11 +158,11 @@ func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, isTable b
 	}
 	indexPath := indexName
 	if !strings.Contains(indexName, "/") {
-		if !isTable {
-			indexPath = fmt.Sprintf("%s%c%s", IndexBasePath, '/', indexName)
-		} else {
-			indexPath = fmt.Sprintf("%s%c%s", IndexTablesPath, '/', indexName)
-		}
+		//if !isTable {
+		indexPath = fmt.Sprintf("%s%c%s", indexFolderName, '/', indexName)
+		// } else {
+		// 	indexPath = fmt.Sprintf("%s%c%s", IndexTablesPath, '/', indexName)
+		// }
 	}
 	patternIndexName := indexName
 

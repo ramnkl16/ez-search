@@ -101,9 +101,15 @@ func (ctrl *searchController) AddOrUpdateIndex(ctx *gin.Context) {
 
 	indexName := ctx.Query("indexName")
 	pindexName := indexName
+	//abstractimpl.IndexBasePath = ns
 	docId := ctx.Query("docId")
 	if len(docId) == 0 {
 		docId = uid_utils.GetUid("uk", true)
+	}
+	ns := auth.GetNamespace(ctx.Request)
+	if !strings.Contains(indexName, "/") {
+
+		indexName = fmt.Sprintf("%s%c%s", ns, '/', indexName)
 	}
 
 	//fmt.Println("addorupdate", indexName, docId)
@@ -130,7 +136,7 @@ func (ctrl *searchController) AddOrUpdateIndex(ctx *gin.Context) {
 		if fdefs == nil || len(fdefs) == 0 {
 			fdefs = append(fdefs, common.BleveFieldDef{Name: "timestamp", Type: "date"})
 		}
-		err = abstractimpl.BuildIndexSchema(indexName, fdefs, false)
+		err = abstractimpl.BuildIndexSchema(indexName, fdefs, ns)
 		i, err = ezsearch.GetIndex(indexName)
 		if err != nil {
 			saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("index [%s] is not created. Please try after the index first", indexName))
@@ -175,6 +181,12 @@ func (ctrl *searchController) AddOrUpdateIndex(ctx *gin.Context) {
 // @Router /api/search [delete]
 func (ctrl *searchController) DeleteIndex(ctx *gin.Context) {
 	indexName := ctx.Query("indexName")
+	ns := auth.GetNamespace(ctx.Request)
+	if !strings.Contains(indexName, "/") {
+
+		indexName = fmt.Sprintf("%s%c%s", ns, '/', indexName)
+	}
+
 	docId := ctx.Query("docId")
 	var err error
 	i, err := ezsearch.GetIndex(indexName)
@@ -270,8 +282,9 @@ func (ctrl *searchController) createIndexSchema(ctx *gin.Context) {
 		ctx.JSON(saveErr.Status(), saveErr)
 		return
 	}
+	ns := auth.GetNamespace(ctx.Request)
 	logger.Debug("json", zapcore.Field{String: fmt.Sprintf("%v", m), Key: "p1", Type: zapcore.StringType})
-	err := abstractimpl.BuildIndexSchema(indexName, m, false)
+	err := abstractimpl.BuildIndexSchema(indexName, m, ns)
 	if err == nil {
 		ctx.JSON(http.StatusCreated, "Success")
 	} else {
