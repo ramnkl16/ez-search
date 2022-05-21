@@ -9,13 +9,23 @@ local rest api setup  [go run .\main.go -c config.json -wd c:\go-prj\ez-search] 
 for in the config.json should be available under root folder.
 
 Post man collections is available in the root folder. 
+to ingest index data use the below rest api 
+    
+   {{baseUrl}}/api/addorupdate?indexName=indexes/winevent-{2006-01-02}&indexTranDate=2022-05-10
+
+It supports date based index pattern. in case want to create daily separate index then you should IndexName{2006-01-02}, in case yearly then IndexName{2006}
+
+get the indexed data use the below api call.
 [post] http://localhost:8015/api/search
+
+## Schema build
+By default schema creates automatically when calls the ingest api. Recommend to create schema first which helps to query date time types using since clause on sql query. 
 
 schema field type [bool|text|date|numeric|geopoint]
 sample schema defintion sample json [{"name":"name", "type":"text"},{"name":"startDt", "type":"date"}, {"name":"age", "type":"numeric"}]
 last 10 years date range against launched date field  [10*360*24*60]
 
-bleve index search query 
+## bleve index search query  
 Field Scoping 
 You can qualify the field for these searches by prefixing them with the name of the field separated by a colon.
 [name:ram] parsing field logic is upto [:] "name" field name and "ram" should match in the index document. Would apply as match query
