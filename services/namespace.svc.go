@@ -47,7 +47,7 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 	na.UpdatedAt = date_utils.GetNowSearchFormat()
 	na.CreatedAt = date_utils.GetNowSearchFormat()
 	//na.UpdatedBy = ai.UserId
-	na.IsActive = true
+	na.IsActive = "t"
 
 	if !global.IsValidEmail(m.Email) {
 		err := rest_errors.NewBadRequestError("Invalid Email")
@@ -63,7 +63,7 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 	ug := models.UserGroup{Name: "admin", Description: "default admin", NamespaceID: na.ID}
 	ug.UpdatedAt = date_utils.GetNowSearchFormat()
 	//ug.UpdatedBy = ai.UserId
-	ug.IsActive = true
+	ug.IsActive = "t"
 	ug.ID = uid_utils.GetUid("ug", false)
 
 	//User menu initialization
@@ -78,7 +78,7 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 		CreatedAt:         date_utils.GetNowSearchFormat(),
 		UpdatedAt:         date_utils.GetNowSearchFormat(),
 	}
-	um.IsActive = true
+	um.IsActive = "t"
 	hashPwd := crypto_utils.GetMd5(global.DefaultUserPassword)
 	um.UpdatedAt = date_utils.GetNowSearchFormat()
 	um.ID = uid_utils.GetUid("um", false)
@@ -98,7 +98,7 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 		CreatedAt:         date_utils.GetNowSearchFormat(),
 		UpdatedAt:         date_utils.GetNowSearchFormat(),
 	}
-	us.IsActive = "true"
+	us.IsActive = "t"
 	us.UpdatedAt = date_utils.GetNowSearchFormat()
 	us.CreatedAt = us.UpdatedAt
 	us.ID = uid_utils.GetUid("ur", false)
@@ -118,7 +118,7 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 		CreatedAt:         date_utils.GetNowSearchFormat(),
 		UpdatedAt:         date_utils.GetNowSearchFormat(),
 	}
-	u.IsActive = "true"
+	u.IsActive = "t"
 	u.UpdatedAt = date_utils.GetNowSearchFormat()
 	u.CreatedAt = us.UpdatedAt
 	u.ID = uid_utils.GetUid("ur", false)
@@ -129,7 +129,7 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 		Module:    "search",
 		Page:      "user",
 		Data:      fmt.Sprintf("select * from tables/tables.user"),
-		IsActive:  "true",
+		IsActive:  "t",
 		CreatedAt: date_utils.GetNowSearchFormat(),
 		UpdatedAt: date_utils.GetNowSearchFormat(),
 	}
@@ -137,7 +137,7 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 		q.Data = fmt.Sprintf("select * from tables/tables.user where namespaceId:%s", m.Code)
 	}
 
-	r := models.WidgetMeta{ID: uid_utils.GetUid("rp", true), Name: "applogs", Division: m.Code, Module: "mod", Page: "report", Data: "select * from indexes/applogs-{2006-01-02} since t:30 seconds ago sort -t facets l", IsActive: "true", CreatedAt: date_utils.GetNowSearchFormat(), UpdatedAt: date_utils.GetNowSearchFormat()}
+	r := models.WidgetMeta{ID: uid_utils.GetUid("rp", true), Name: "applogs", Division: m.Code, Module: "mod", Page: "report", Data: "select * from indexes/applogs-{2006-01-02} since t:30 seconds ago sort -t facets l", IsActive: "t", CreatedAt: date_utils.GetNowSearchFormat(), UpdatedAt: date_utils.GetNowSearchFormat()}
 
 	abstractimpl.CreateOrUpdate(na, abstractimpl.NamespaceTable, na.ID)
 	abstractimpl.CreateOrUpdate(us, abstractimpl.UserTable, us.ID)
@@ -153,7 +153,7 @@ func (srv *namespaceService) Save(m models.Namespace) rest_errors.RestErr {
 	m.UpdatedAt = date_utils.GetNowSearchFormat()
 	if len(m.ID) == 0 { //consider insert
 		m.ID = uid_utils.GetUid("ns", false)
-		m.IsActive = true
+		m.IsActive = "t"
 	}
 	if err := m.CreateOrUpdate(); err != nil {
 		return err
@@ -175,7 +175,7 @@ func (srv *namespaceService) Delete(id string) rest_errors.RestErr {
 	var m *models.Namespace
 	m, _ = m.Get(id)
 	m.UpdatedAt = date_utils.GetNowSearchFormat()
-	m.IsActive = false
+	m.IsActive = "f"
 	if err := m.CreateOrUpdate(); err != nil {
 		return err
 	}

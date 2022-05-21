@@ -27,7 +27,7 @@ type Group struct {
 	ID        string `json:"id"`   // WidgetName
 	Name      string `json:"name"` // WidgetName
 	Desc      string `json:"desc"`
-	IsActive  bool   `json:"isActive"`  // isActive
+	IsActive  string `json:"isActive"`  // isActive
 	CreatedAt string `json:"createdAt"` // createdAt
 	UpdatedAt string `json:"updatedAt"` // updatedAt
 }
@@ -37,7 +37,7 @@ type Menu struct {
 	Name      string `json:"name"` // WidgetName
 	Link      string `json:"link"`
 	ParentId  string `json:"parentId"`
-	IsActive  bool   `json:"isActive"`  // isActive
+	IsActive  string `json:"isActive"`  // isActive
 	CreatedAt string `json:"createdAt"` // createdAt
 	UpdatedAt string `json:"updatedAt"` // updatedAt
 }

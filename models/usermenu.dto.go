@@ -18,7 +18,7 @@ type UserMenu struct {
 	CustomData        string               `json:"cd"`                // custom data
 	PermissionPlus    int8                 `json:"permissionPlus"`    // permission_plus
 	MenuExceptionFlag int8                 `json:"menuExceptionFlag"` // menu_exception_flag
-	IsActive          bool                 `json:"isActive"`          // active_flag
+	IsActive          string               `json:"isActive"`          // active_flag
 	UpdatedBy         string               `json:"updatedBy"`         // updated_by
 	UpdatedAt         string               `json:"updatedAt"`         // updated_at
 	CreatedAt         string               `json:"createdAt"`

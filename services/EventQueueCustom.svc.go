@@ -28,7 +28,7 @@ type eventQueueCustomServiceInterface interface {
 }
 
 func (srv *eventQueueCustomService) CreateWithIndex(eq models.EventQueue) rest_errors.RestErr {
-	eq.IsActive = true
+	eq.IsActive = "t"
 	eq.CreatedAt = date_utils.GetNowSearchFormat()
 	eq.UpdatedAt = date_utils.GetNowSearchFormat()
 	if len(eq.StartAt) == 0 {

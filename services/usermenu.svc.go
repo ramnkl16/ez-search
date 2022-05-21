@@ -29,7 +29,7 @@ func (srv *userMenuService) Save(m models.UserMenu) rest_errors.RestErr {
 	m.UpdatedAt = date_utils.GetNowSearchFormat()
 	if len(m.ID) == 0 { //consider insert
 		m.ID = uid_utils.GetUid("um", false)
-		m.IsActive = true
+		m.IsActive = "t"
 	}
 	if err := m.CreateOrUpdate(); err != nil {
 		return err
@@ -51,7 +51,7 @@ func (srv *userMenuService) Delete(id string) rest_errors.RestErr {
 	var m *models.UserMenu
 	m, _ = m.Get(id)
 	m.UpdatedAt = date_utils.GetNowSearchFormat()
-	m.IsActive = false
+	m.IsActive = "f"
 	if err := m.CreateOrUpdate(); err != nil {
 		return err
 	}

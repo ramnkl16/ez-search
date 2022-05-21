@@ -14,7 +14,7 @@ type EventQueue struct {
 	StartAt     string `json:"startAt"`     // startAt
 	RetryCount  int    `json:"retryCount"`  // retryCount
 	Message     string `json:"message"`     // Message
-	IsActive    bool   `json:"isActive"`    // isActive
+	IsActive    string `json:"isActive"`    // isActive
 	CreatedAt   string `json:"createdAt"`   // createdAt
 	UpdatedAt   string `json:"updatedAt"`   // updatedAt
 }

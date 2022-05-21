@@ -17,7 +17,7 @@ const (
 
 type Base struct {
 	ID        string `json:"id"`        // code
-	IsActive  bool   `json:"isActive"`  // isActive
+	IsActive  string `json:"isActive"`  // isActive
 	UpdatedBy string `json:"updatedBy"` // updated_by
 	UpdatedAt string `json:"updatedAt"` // updated_at
 	CreatedAt string `json:"createdAt"` // createdAt

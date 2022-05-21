@@ -6,7 +6,7 @@ type Namespace struct {
 	CustomJson   string `json:"customJson"`   // eventData
 	Code         string `json:"code"`         // Message
 	ContextToken string `json:"contextToken"` // Message
-	IsActive     bool   `json:"isActive"`     // isActive
+	IsActive     string `json:"isActive"`     // isActive
 	CreatedAt    string `json:"createdAt"`    // createdAt
 	UpdatedAt    string `json:"updatedAt"`    // updatedAt
 }

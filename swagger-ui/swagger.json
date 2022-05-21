@@ -782,7 +782,7 @@
                 },
                 "isActive": {
                     "description": "isActive",
-                    "type": "boolean"
+                    "type": "text"
                 },
                 "message": {
                     "description": "Message",
@@ -827,7 +827,7 @@
                 },
                 "isActive": {
                     "description": "isActive",
-                    "type": "boolean"
+                    "type": "text"
                 },
                 "module": {
                     "description": "datasource",

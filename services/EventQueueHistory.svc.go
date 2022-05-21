@@ -27,7 +27,7 @@ type eventQueueHistoryServiceInterface interface {
 
 func (srv *eventQueueHistoryService) Create(eq models.EventQueueHistory) rest_errors.RestErr {
 
-	eq.IsActive = true
+	eq.IsActive = "t"
 	eq.CreatedAt = date_utils.GetNowSearchFormat()
 	eq.UpdatedAt = date_utils.GetNowSearchFormat()
 	// if err := eq.Create(); err != nil {

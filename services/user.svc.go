@@ -137,9 +137,9 @@ func (srv *userService) Login(emailOrMobile string, password string, nsCode stri
 	// ns := nslsit[0].Code
 	// nsId := nslsit[0].ID
 	us := models.User{}
-	sqlstr := fmt.Sprintf("SELECT * FROM  %s  WHERE isActive:true,namespaceId:%s,email:%s ", abstractimpl.UserTable, nsCode, email)
+	sqlstr := fmt.Sprintf("SELECT * FROM  %s  WHERE +isActive:t,+namespaceId:%s,+email:%s ", abstractimpl.UserTable, nsCode, email)
 	if len(mobile) > 0 && len(email) == 0 {
-		sqlstr = fmt.Sprintf("SELECT * FROM  %s  WHERE isActive:true,namespaceId:%s,mobile:%s ", abstractimpl.UserTable, nsCode, mobile)
+		sqlstr = fmt.Sprintf("SELECT * FROM  %s  WHERE +isActive:t,+namespaceId:%s,+mobile:%s ", abstractimpl.UserTable, nsCode, mobile)
 	}
 	//TODO never reach this scenario
 	// else if len(mobile) > 0 && len(email) > 0 {
@@ -165,7 +165,8 @@ func (srv *userService) Login(emailOrMobile string, password string, nsCode stri
 	}
 	enToken := b64.StdEncoding.EncodeToString(buStr)
 	u.Token = enToken
-	// fmt.Println(string(sEnc))
+
+	fmt.Println("u", u)
 	cache_utils.AddOrUpdateCredentialCache(enToken, auth.AuthUserInfo{UserId: u.ID, UserName: emailOrMobile, NamespaceId: u.NamespaceID})
 	return &u, nil
 }
@@ -222,7 +223,7 @@ func (srv *userService) Delete(id string, h auth.Header) rest_errors.RestErr {
 	if err != nil {
 		return err
 	}
-	u.IsActive = "false"
+	u.IsActive = "f"
 	_, err = srv.Save(*u)
 	if err != nil {
 		return err

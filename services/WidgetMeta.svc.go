@@ -26,13 +26,13 @@ type widgetMetaServiceInterface interface {
 	Update(models.WidgetMeta) rest_errors.RestErr
 	Get(string) (*models.WidgetMeta, rest_errors.RestErr)
 	Delete(string) rest_errors.RestErr
-	Search(string, string) (models.WidgetMetas, rest_errors.RestErr)
+	Search(string, string, string) (models.WidgetMetas, rest_errors.RestErr)
 	//WebuiSearch(string, string) (models.WidgetMetas, rest_errors.RestErr)
 }
 
 func (srv *widgetMetaService) Create(wm models.WidgetMeta) rest_errors.RestErr {
 
-	wm.IsActive = "true"
+	wm.IsActive = "t"
 	wm.CreatedAt = date_utils.GetNowSearchFormat()
 	wm.UpdatedAt = date_utils.GetNowSearchFormat()
 	if len(wm.ID) == 0 {
@@ -71,7 +71,7 @@ func (srv *widgetMetaService) Delete(id string) rest_errors.RestErr {
 	}
 	return nil
 }
-func (srv *widgetMetaService) Search(start string, limit string) (models.WidgetMetas, rest_errors.RestErr) {
+func (srv *widgetMetaService) Search(start string, limit string, namespaceId string) (models.WidgetMetas, rest_errors.RestErr) {
 	dao := &models.WidgetMeta{}
 	if start == "" {
 		start = "0"
@@ -80,7 +80,10 @@ func (srv *widgetMetaService) Search(start string, limit string) (models.WidgetM
 		limit = "50"
 	}
 
-	q := fmt.Sprintf("select * from %s limit %s,%s", abstractimpl.QueryMetaTable, start, limit)
+	q := fmt.Sprintf("select * from %s where +isActive:t,+division:%s limit %s,%s", abstractimpl.QueryMetaTable, namespaceId, start, limit)
+	if namespaceId == "platform" || len(namespaceId) == 0 {
+		q = fmt.Sprintf("select * from %s where +isActive:t limit %s,%s", abstractimpl.QueryMetaTable, start, limit)
+	}
 	list, err := dao.GetAll(q)
 	return list, err
 }

@@ -106,23 +106,23 @@ func (ctrl *widgetmetaController) Update(ctx *gin.Context) {
 func (ctrl *widgetmetaController) Search(ctx *gin.Context) {
 	start := ctx.Query("start")
 	limit := ctx.Query("limit")
-
-	results, err := services.WidgetMetaService.Search(start, limit)
+	ns := auth.GetNamespace(ctx.Request)
+	results, err := services.WidgetMetaService.Search(start, limit, ns)
 	if err != nil {
 		ctx.JSON(err.Status(), err)
 		return
 	}
-	ns := auth.GetNamespace(ctx.Request)
-	filteredList := make([]models.WidgetMeta, 0)
-	if ns != "platform" {
-		for _, item := range results {
-			if item.Division == ns {
-				filteredList = append(filteredList, item)
-			}
-		}
-		ctx.JSON(http.StatusOK, filteredList) //	return filteredList, nil
-		return
-	}
+
+	// filteredList := make([]models.WidgetMeta, 0)
+	// if ns != "platform" {
+	// 	for _, item := range results {
+	// 		if item.Division == ns {
+	// 			filteredList = append(filteredList, item)
+	// 		}
+	// 	}
+	// ctx.JSON(http.StatusOK, results) //	return filteredList, nil
+	// return
+	//}
 	ctx.JSON(http.StatusOK, results)
 }
 

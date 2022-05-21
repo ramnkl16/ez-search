@@ -72,7 +72,7 @@ func CreateTables() {
 			"firstName": "Admin",
 			"lastName": "",
 			"userRoleId": "role1",
-			"isActive": "true",
+			"isActive": "t",
 			"emailVerified": "2022-03-28T01:24:27Z",
 			"passwordUpdatedAt": "2022-03-28T01:24:27Z"
 		}`, id, crypto_utils.GetMd5("welcome@123"))), &m)
@@ -82,23 +82,23 @@ func CreateTables() {
 	if !isExist {
 		BuildIndexSchema(MenuTable, menuSchema, true)
 		var m1 interface{}
-		json.Unmarshal([]byte(`{"id":"root", "name":"Root","parentId":"", "link":"/", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		json.Unmarshal([]byte(`{"id":"root", "name":"Root","parentId":"", "link":"/", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, MenuTable, "root")
-		json.Unmarshal([]byte(`{"id":"user", "name":"User","parentId":"root","link":"user", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		json.Unmarshal([]byte(`{"id":"user", "name":"User","parentId":"root","link":"user", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, MenuTable, "user")
-		// json.Unmarshal([]byte(`{"id":"usrGrp", "name":"User Group","parentId":"root","link":"usergroup", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		// json.Unmarshal([]byte(`{"id":"usrGrp", "name":"User Group","parentId":"root","link":"usergroup", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		// CreateOrUpdate(m1, MenuTable, "usrGrp")
-		// json.Unmarshal([]byte(`{"id":"usrmnu", "name":"User menu","parentId":"root", "link":"usermenu", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		// json.Unmarshal([]byte(`{"id":"usrmnu", "name":"User menu","parentId":"root", "link":"usermenu", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		// CreateOrUpdate(m1, MenuTable, "usrmnu")
-		// json.Unmarshal([]byte(`{"id":"ns", "name":"Namespace","parentId":"root", "link":"namespace", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		// json.Unmarshal([]byte(`{"id":"ns", "name":"Namespace","parentId":"root", "link":"namespace", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		// CreateOrUpdate(m1, MenuTable, "ns")
-		// json.Unmarshal([]byte(`{"id":"menu", "name":"Menu","parentId":"root", "link":"menu", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		// json.Unmarshal([]byte(`{"id":"menu", "name":"Menu","parentId":"root", "link":"menu", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		// CreateOrUpdate(m1, MenuTable, "menu")
-		json.Unmarshal([]byte(`{"id":"qryDef", "name":"Query Defintion","parentId":"root", "link":"querydef", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		json.Unmarshal([]byte(`{"id":"qryDef", "name":"Query Defintion","parentId":"root", "link":"querydef", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, MenuTable, "querydef")
-		json.Unmarshal([]byte(`{"id":"indexList", "name":"Show all indexes","parentId":"root", "link":"indexlist", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		json.Unmarshal([]byte(`{"id":"indexList", "name":"Show all indexes","parentId":"root", "link":"indexlist", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, MenuTable, "indexlist")
-		json.Unmarshal([]byte(`{"id":"indexFields", "name":"Show Fields","parentId":"root", "link":"indexlist", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		json.Unmarshal([]byte(`{"id":"indexFields", "name":"Show Fields","parentId":"root", "link":"indexlist", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, MenuTable, "indexFields")
 
 	}
@@ -111,7 +111,7 @@ func CreateTables() {
 			"namespaceId": "platform",
 			"desc": "Main group for platform",
 			"name": "main group",
-			"isActive": "true",
+			"isActive": "t",
 			"createdAt": "2022-03-28T01:24:27Z",
 			"updatedAt": "2022-03-28T01:24:27Z"
 		}`), &m)
@@ -121,14 +121,14 @@ func CreateTables() {
 	if !isExist {
 		BuildIndexSchema(NamespaceTable, nsSchema, true)
 		var m1 interface{}
-		json.Unmarshal([]byte(`{"id":"platform", "name":"platform","code":"platform", "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		json.Unmarshal([]byte(`{"id":"platform", "name":"platform","code":"platform", "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, NamespaceTable, "platform")
 	}
 	isExist = tables[UserMenuTable]
 	if !isExist {
 		BuildIndexSchema(UserMenuTable, usrMenuSchema, true)
 		var m1 interface{}
-		json.Unmarshal([]byte(`{"id":"platform", "nsId":"platform","menuId":"root", "cd":"customdata", "refId":"admin", "refType":"NS", "privilege":31, "isActive":true,"updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
+		json.Unmarshal([]byte(`{"id":"platform", "nsId":"platform","menuId":"root", "cd":"customdata", "refId":"admin", "refType":"NS", "privilege":31, "isActive":"t","updatedAt":"2022-03-27T00:00:00Z", "createdAt":"2022-03-27T00:00:00Z" }`), &m1)
 		CreateOrUpdate(m1, UserMenuTable, "platform")
 	}
 }
@@ -260,12 +260,12 @@ var (
 		{Name: "status", Type: "numeric"},
 		{Name: "retryCount", Type: "numeric"},
 		{Name: "startAt", Type: "date"},
-		{Name: "isActive", Type: "bool"},
+		{Name: "isActive", Type: "text"},
 		{Name: "createdAt", Type: "date"},
 		{Name: "updatedAt", Type: "date"},
 	}
 	eqData = `{"eventType":"product", "eventData":"{customjsondata}","status":1, "retryCount":0, 
-	"startAt":"2022-01-22T02:04:00z", "isActive":true, "createdAt":"2022-01-22T02:04:00z", "updatedAt":"2022-01-22T02:04:00z"}`
+	"startAt":"2022-01-22T02:04:00z", "isActive":"t", "createdAt":"2022-01-22T02:04:00z", "updatedAt":"2022-01-22T02:04:00z"}`
 	eqHisSchema = []common.BleveFieldDef{
 		{Name: "id", Type: "text"},
 		{Name: "eventQueueId", Type: "text"},
@@ -278,7 +278,7 @@ var (
 		{Name: "createdAt", Type: "date"},
 		{Name: "updatedAt", Type: "date"}}
 	eqHisData = `{"eventQueueId":"id1", "eventType":"product", "eventData":"{customjsondata}","status":1, "retryCount":0, 
-	"startAt":"2022-01-22T02:04:00z", "isActive":true, "createdAt":"2022-01-22T02:04:00z", "updatedAt":"2022-01-22T02:04:00z"}`
+	"startAt":"2022-01-22T02:04:00z", "isActive":'t', "createdAt":"2022-01-22T02:04:00z", "updatedAt":"2022-01-22T02:04:00z"}`
 	queryMetaSchema = []common.BleveFieldDef{
 		{Name: "id", Type: "text"},
 		{Name: "name", Type: "text"},
@@ -286,7 +286,7 @@ var (
 		{Name: "module", Type: "text"},
 		{Name: "page", Type: "text"},
 		{Name: "cd", Type: "text"},
-		{Name: "isActive", Type: "bool"},
+		{Name: "isActive", Type: "text"},
 		{Name: "createdAt", Type: "date"},
 		{Name: "updatedAt", Type: "date"}}
 
@@ -313,7 +313,7 @@ var (
 		{Name: "name", Type: "text"},
 		{Name: "namespaceId", Type: "text"},
 		{Name: "desc", Type: "text"},
-		{Name: "isActive", Type: "bool"},
+		{Name: "isActive", Type: "text"},
 		{Name: "createdAt", Type: "date"},
 		{Name: "updatedAt", Type: "date"},
 	}
@@ -333,7 +333,7 @@ var (
 		{Name: "code", Type: "text"},
 		{Name: "customJson", Type: "text"},
 		{Name: "cotextToken", Type: "text"},
-		{Name: "isActive", Type: "bool"},
+		{Name: "isActive", Type: "text"},
 		{Name: "createdAt", Type: "date"},
 		{Name: "updatedAt", Type: "date"},
 	}
@@ -345,7 +345,7 @@ var (
 		{Name: "cd", Type: "text"}, //custom data
 		{Name: "refType", Type: "text"},
 		{Name: "privilege", Type: "numeric"},
-		{Name: "isActive", Type: "bool"},
+		{Name: "isActive", Type: "text"},
 		{Name: "createdAt", Type: "date"},
 		{Name: "updatedAt", Type: "date"},
 	}
