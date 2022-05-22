@@ -54,9 +54,13 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	logger.Info("testing by startup ram1")
 	router.GET("/ping", ping.Ping)
 	mapUrls(router)
-	fmt.Printf(path.Join(global.WorkingDir, "/swagger-ui"))
-	router.StaticFS("/swagger-ui", http.Dir("swagger-ui"))
-	//router.StaticFS("/", http.Dir("web-ui"))
+	//fmt.Printf())
+	fullPath := path.Join(global.WorkingDir, "/swagger-ui")
+	logger.Info(fmt.Sprintf("staticFS fullpath %s", fullPath))
+	router.StaticFS("/swagger-ui", http.Dir(fullPath))
+	fullwebUi := path.Join(global.WorkingDir, "/web-ui")
+	router.StaticFS("/web-ui", http.Dir(fullwebUi))
+
 	router.Run(config.Port)
 	// // if len(language) > 0 {
 	// // 	hybris.UpdateSchedulerJobStatusAndTime(language)
@@ -91,8 +95,9 @@ func AuthTokenValidation() gin.HandlerFunc {
 			// c.Request.URL.Path != "/api/getindexes" &&
 			// c.Request.URL.Path != "/api/getfields" &&
 			// c.Request.URL.Path != "/api/createschema" &&
+			!strings.Contains(c.Request.URL.Path, "/web-ui/") &&
 			!strings.Contains(c.Request.URL.Path, "/swagger-ui/") {
-			// fmt.Printf("Got value: %v\n", value)
+			//fmt.Printf("Got value: %v\n", value)
 			// fmt.Println("not authorized")
 			// fmt.Println(exists)
 			logger.Debug(fmt.Sprintf("AuthTokenValidation|credential cache value %s not authorized %v", value, exists))
