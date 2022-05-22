@@ -44,7 +44,7 @@ const (
 func CreateTables() {
 	tables := common.GetIndexes(true)
 	var isExist bool
-	//fmt.Println("createtable", tables)
+	//logger.Info(fmt.Sprintf("createtable %v", tables))
 	isExist = tables[EventQueueTable]
 	if !isExist {
 		BuildIndexSchema(EventQueueTable, eqSchema, "tables")
@@ -191,7 +191,8 @@ func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, indexFold
 		//fmt.Println("index base path", IndexBasePath)
 
 		//fmt.Println("index path", indexPath)
-		index, err := bleve.New(indexPath, indexMapping)
+		fullPath := path.Join(global.WorkingDir, indexPath)
+		index, err := bleve.New(fullPath, indexMapping)
 		if err != nil {
 			//fmt.Println("BuildIndexSchema|Failed schemabuild mapping", err)
 			logger.Info("BuildIndexSchema|Failed schemabuild mapping", zapcore.Field{Type: zapcore.StringType, String: err.Error(), Key: "msg"})

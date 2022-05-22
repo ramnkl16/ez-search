@@ -139,5 +139,6 @@ func main() {
 func serverHeader(c *gin.Context) {
 	c.Header("Access-Control-Allow-Origin", "*") //TODO refactor later.
 	c.Header("Access-Control-Allow-Headers", "Access-Control-Allow-Origin, Accept, x-auth, x-ns, Content-Type, Authorization")
+	c.Header("Access-Control-Allow-Private-Network", "true")
 	c.Header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, HEAD, DELETE")
 }

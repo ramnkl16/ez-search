@@ -79,7 +79,7 @@ func BuildAppIndexSchema() rest_errors.RestErr {
 
 	}
 	index, err := bleve.Open(path.Join(global.WorkingDir, lIndexName))
-	//fmt.Println("afterGetIndex(indexName)")
+	//Info(fmt.Sprintf("afterGetIndex(%s)", lIndexName))
 	if err != nil || index == nil {
 
 		//fmt.Println("logger|BuildIndexSchema|Creating  new index ... ", lIndexName)

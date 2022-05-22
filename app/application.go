@@ -33,6 +33,7 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	cache_utils.Cache.SetCheckExpirationCallback(ezsearch.CheckExpirationCallback)
 	logger.SetConfig(config.LoggerSettings)
 	//logger.Initialize()
+	os.Chdir(config.WorkingDir)
 	logger.InitLogger()
 	logger.BuildAppIndexSchema()
 
@@ -50,8 +51,8 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 		s := gocron.NewScheduler()
 		s.Start()
 	}
-	os.Chdir(config.WorkingDir)
-	logger.Info("testing by startup ram1")
+
+	logger.Info(fmt.Sprintf("started logging %s %s", config.WorkingDir, config.Port))
 	router.GET("/ping", ping.Ping)
 	mapUrls(router)
 	//fmt.Printf())
