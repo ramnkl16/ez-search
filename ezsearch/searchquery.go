@@ -211,8 +211,9 @@ func constructQueries(qList *[]*whereClause, q *query.BooleanQuery) string {
 				gq.SetField(fd.Field)
 			}
 			genQry = gq
-		} else if len(fd.Field) == 0 { //consider term queries
-			gq := query.NewTermQuery(fd.Min)
+		} else if len(fd.Field) == 0 { //consider pharse
+			gq := query.NewPrefixQuery(fd.Min)
+			fd.ReqOptExc = 1
 			genQry = gq
 		} else {
 			switch fd.BleveQueryType {
