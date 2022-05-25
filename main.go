@@ -29,7 +29,7 @@ var (
 	fullSync         bool //enable full sync
 	flagPort         string
 	flagForce        bool //avoid check sum validation
-	flagRestApi      bool //run only rest api
+	flagRunSchedule  bool //run only rest api
 	flagLocalStorage bool
 )
 
@@ -55,19 +55,25 @@ func (p *program) run() {
 	}
 
 	config = c
-	if len(c.WorkingDir) > 0 {
-		global.WorkingDir = c.WorkingDir
-	}
+	// if len(c.WorkingDir) > 0 {
+	// 	syn.WorkingDir = c.WorkingDir
+	// }
 	if len(workingDir) > 0 {
 
 		global.WorkingDir = workingDir
 		c.WorkingDir = workingDir
 		fmt.Println("env workdir", workingDir, c.WorkingDir)
+		//	coredb.Initialize(workingDir)
 
 	}
+	global.CsvFileExt = c.CSVFileExtension
+	global.CsvWatcherPath = c.CSVFileWatcherpath
+	global.MaxIndexbatchSize = c.EzsearchSettings.IndexBatchSize
+
+	syncconfig.Gconfig = c
 	//config.HybrisSettings.Force = flagForce
 
-	config.Restapi = flagRestApi
+	config.RunScheduler = flagRunSchedule
 	//	logger.Info(fmt.Sprintf("hybris setting: %v", config.HybrisSettings.CatalogName))
 	router = gin.Default()
 	router.Use(serverHeader)
@@ -90,7 +96,7 @@ func main() {
 	// flag.StringVar(&log_level, "ll", "stdout", "log standard output")
 	flag.BoolVar(&fullSync, `fullsync`, false, ``)
 	flag.BoolVar(&flagForce, `force`, false, ``)
-	flag.BoolVar(&flagRestApi, `restapi`, false, ``)
+	flag.BoolVar(&flagRunSchedule, `rs`, false, ``)
 	flag.BoolVar(&flagLocalStorage, `localstorage`, false, ``)
 	flag.Parse()
 	if configFile == `` {

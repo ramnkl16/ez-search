@@ -7,9 +7,11 @@ import (
 	"strconv"
 
 	"github.com/ramnkl16/ez-search/ezsearch"
+	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
 	"github.com/ramnkl16/ez-search/rest_errors"
 	"github.com/ramnkl16/ez-search/utils/uid_utils"
+
 	"go.uber.org/zap/zapcore"
 )
 
@@ -97,6 +99,38 @@ func Delete(tableName string, id string) rest_errors.RestErr {
 	err1 := t.Delete(id)
 	if err1 != nil {
 		return rest_errors.NewInternalServerError("abstractimpl|Failed while delete eventqueue", err1)
+	}
+	return nil
+}
+
+func BatchCreateOrUpdate(indexName string, data map[string]interface{}) rest_errors.RestErr {
+	i, err := GetTable(indexName)
+	if err != nil {
+		return err
+	}
+	batchCount := 0
+	batch := i.NewBatch()
+	count := 0
+	for k, v := range data {
+		batch.Index(k, v)
+		batchCount = batchCount + 1
+		count = count + 1
+		if batchCount >= global.MaxIndexbatchSize {
+			logger.Info("batch executed", zapcore.Field{Key: "executed", Type: zapcore.Int32Type, Integer: int64(count)})
+			err := i.Batch(batch)
+			if err != nil {
+				logger.Error("Failed in the batch index", err)
+				return rest_errors.NewInternalServerError("Failed in the batch index", err)
+			}
+			batchCount = 0
+		}
+	}
+	if batchCount > 0 {
+		err := i.Batch(batch)
+		if err != nil {
+			logger.Error("Failed while last batch ", err)
+			return rest_errors.NewInternalServerError("Failed while last batch", err)
+		}
 	}
 	return nil
 }

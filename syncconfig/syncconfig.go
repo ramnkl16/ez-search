@@ -17,14 +17,16 @@ var (
 
 type (
 	Config struct {
-		BoltDBSettings   catalogboltdb.Config `json:"boltdbSettings"`
-		EzsearchSettings ezsearch.Config      `json:"searchSettings"`
-		LoggerSettings   logger.Config        `json:"loggerSettings"`
-		DbName           string               `json:"dbName"`
-		Port             string               `json:"port"`
-		HostName         string               `json:"hostName"`
-		WorkingDir       string               `json:"workingDir"`
-		Restapi          bool
+		BoltDBSettings     catalogboltdb.Config `json:"boltdbSettings"`
+		EzsearchSettings   ezsearch.Config      `json:"searchSettings"`
+		LoggerSettings     logger.Config        `json:"loggerSettings"`
+		CSVFileWatcherpath string               `json:"csvWatcher"`
+		CSVFileExtension   string               `json:"csvFileExt"`
+		DbName             string               `json:"dbName"`
+		Port               string               `json:"port"`
+		HostName           string               `json:"hostName"`
+		WorkingDir         string               `json:"workingDir"`
+		RunScheduler       bool
 	}
 )
 

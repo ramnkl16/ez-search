@@ -18,5 +18,7 @@
     },
     "port": ":8015",
     "hostName": "localhost",
-    "workingDir":"C:\\go-prj\\src"
+    "workingDir":"C:\\go-prj\\src",
+    "csvWatcher":"\\csvwatcher",
+    "csvFileExt":".csv"
   }

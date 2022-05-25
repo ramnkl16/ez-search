@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/jasonlvhit/gocron"
 	"github.com/ramnkl16/ez-search/abstractimpl"
 	"github.com/ramnkl16/ez-search/api/ping"
 	"github.com/ramnkl16/ez-search/auth"
@@ -46,11 +45,14 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	router.Use(gin.Recovery())
 	router.Use(AuthTokenValidation())
 	//ezsearch.TriggerIndex()
+	//fswatcher.WatchCSVFiles(config.CSVFileWatcherpath)
+	// if config.RunScheduler {
+	// 	s := gocron.NewScheduler()
+	// 	s.Every(10).Minute().Do(ezeventqueue.ProcessEventqueue)
+	// 	s.Start()
+	// }
 
-	if !config.Restapi {
-		s := gocron.NewScheduler()
-		s.Start()
-	}
+	//return
 
 	logger.Info(fmt.Sprintf("started logging %s %s", config.WorkingDir, config.Port))
 	router.GET("/ping", ping.Ping)
@@ -61,7 +63,7 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	router.StaticFS("/swagger-ui", http.Dir(fullPath))
 	fullwebUi := path.Join(global.WorkingDir, "/web-ui")
 	router.StaticFS("/web-ui", http.Dir(fullwebUi))
-
+	//ezeventqueue.ProcessEventqueue()
 	router.Run(config.Port)
 	// // if len(language) > 0 {
 	// // 	hybris.UpdateSchedulerJobStatusAndTime(language)

@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/ramnkl16/ez-search/abstractimpl"
+	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/rest_errors"
 	"github.com/ramnkl16/ez-search/utils/date_utils"
 )
@@ -69,8 +70,8 @@ func (eq *EventQueue) HardDeleteFromIndex() rest_errors.RestErr {
 // search  from ( EventQueue).
 func (eq *EventQueue) GetActiveEventQueuesFromIndex() (EventQueues, rest_errors.RestErr) {
 
-	currDt := date_utils.GetNowString()
-	query := fmt.Sprintf("select * from %s where startAt:>=%s limit 0, 1000", abstractimpl.EventQueueTable, currDt)
+	currDt := date_utils.GetNowSearchFormat()
+	query := fmt.Sprintf("select * from %s where status:%d, startAt:>=%s limit 0, 10000", abstractimpl.EventQueueTable, global.STATUS_ACTIVE, currDt)
 	return eq.GetAll(query)
 	//fmt.Println("GetActiveEventQueues currDt", currDt)
 
