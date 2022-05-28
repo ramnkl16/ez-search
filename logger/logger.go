@@ -136,9 +136,10 @@ func getLogWriter() zapcore.WriteSyncer {
 // }
 
 func getLevel() zapcore.Level {
-	//fmt.Println("log level", Conf.LogLevel)
+	fmt.Println("log level", Conf.LogLevel)
 	switch strings.ToLower(Conf.LogLevel) {
 	case "debug":
+		fmt.Println("log level", Conf.LogLevel)
 		return zap.DebugLevel
 	case "info":
 		return zap.InfoLevel

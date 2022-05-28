@@ -6,30 +6,27 @@ import (
 )
 
 var (
-	WorkingDir string
+	WorkingDir        string
+	CsvWatcherPath    string
+	CsvFileExt        string
+	MaxIndexbatchSize int
 )
 
 func init() {
 	WorkingDir, _ = os.Getwd()
+	CsvWatcherPath = "\\csvwatcher"
+	CsvFileExt = ".csv"
 }
 
 type StatusEnum int
 
 const (
-	EVENT_TYPE_HYBRIS_PRODUCT           = "HybrisProduct"
-	EVENT_TYPE_HYBRIS_PRODUCT_SUMMARY   = "HybrisProductSummary"
-	EVENT_TYPE_OCC_IMPORT               = "OccImport"
-	EVENT_TYPE_OCC_IMPORT_STATUS_UPDATE = "OccImportStatusUpdate"
-	EVENT_TYPE_OCC_IMPORT_LOGS_UPDATE   = "OccImportLogsUpdate"
-	EVENT_TYPE_SC_SYNC                  = "scsync"
-	EVENT_TYPE_OCC_SYNC                 = "occsync"
-	EVENT_TYPE_DETETE_LOG               = "dellogs"
-
-	INT_HYBRIS     = "hybris"
-	INT_OCC        = "occ"
-	INT_SC_MASTER  = "scm"
-	INT_SC_WEB     = "scw"
-	INT_SC_LIVEWEB = "sclw"
+	EVENT_TYPE_INDEXFROMCSV        = "indexfromcsv"
+	EVENT_TYPE_MYSQL_SYNC          = "mysqlsync"
+	EVENT_TYPE_MSSQL_SYNC          = "mssqlsync"
+	EVENT_TYPE_AS400_SYNC          = "as400sync"
+	EVENT_TYPE_WINEVENTVIEWER_SYNC = "wevsync"
+	EVENT_TYPE_DETETE_LOG          = "dellogs"
 
 	STATUS_INACTIVE   StatusEnum = 0
 	STATUS_ACTIVE     StatusEnum = 1

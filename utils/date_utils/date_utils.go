@@ -36,24 +36,24 @@ func GetNowSearchFormat() string {
 }
 
 //add or substract hours, if hour is passed as 0 then no change, -1 would substract 1 hour from given date
-func GetHybrisDateFormat(d string, hours time.Duration) string {
+// func GetHybrisDateFormat(d string, hours time.Duration) string {
 
-	t, _ := time.Parse(ApiDbLayout, d)
-	if hours != 0 {
-		t = t.Add(time.Hour * hours)
-	}
-	return t.Format(hybrisDateLayout)
-}
+// 	t, _ := time.Parse(ApiDbLayout, d)
+// 	if hours != 0 {
+// 		t = t.Add(time.Hour * hours)
+// 	}
+// 	return t.Format(hybrisDateLayout)
+// }
 
 //add or substract hours, if hour is passed as 0 then no change, -1 would substract 1 hour from given date
-func GetDBDateFormat(d string, hours time.Duration) string {
+// func GetDBDateFormat(d string, hours time.Duration) string {
 
-	t, _ := time.Parse(ApiDbLayout, d)
-	if hours != 0 {
-		t = t.Add(time.Hour * hours)
-	}
-	return t.Format(UTCDateLayout)
-}
+// 	t, _ := time.Parse(ApiDbLayout, d)
+// 	if hours != 0 {
+// 		t = t.Add(time.Hour * hours)
+// 	}
+// 	return t.Format(UTCDateLayout)
+// }
 
 func GetCurrentDateWithSameTime(dt string) string {
 	t, _ := time.Parse(ApiDbLayout, dt)
@@ -86,6 +86,6 @@ func GetNextScheduleDateByMins(d string, minutes time.Duration) string {
 	return t.Format(ApiDbLayout)
 }
 
-func GeApiDBLayoutDateFormat(t time.Time) string {
-	return t.Format(ApiDbLayout)
-}
+// func GeApiDBLayoutDateFormat(t time.Time) string {
+// 	return t.Format(ApiDbLayout)
+// }

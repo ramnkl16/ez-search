@@ -107,6 +107,7 @@ func PostSearchResult(queryStr string) (*SearchResponseModel, rest_errors.RestEr
 	}
 
 	str, _ := json.Marshal(req)
+	fmt.Println("qery")
 
 	logger.Debug("PostSearchResult|req model", zapcore.Field{String: string(str), Key: "p1", Type: zapcore.StringType})
 
@@ -213,7 +214,7 @@ func constructQueries(qList *[]*whereClause, q *query.BooleanQuery) string {
 			genQry = gq
 		} else if len(fd.Field) == 0 { //consider pharse
 			gq := query.NewPrefixQuery(fd.Min)
-			fd.ReqOptExc = 1
+			fd.MustMustNotShould = 1
 			genQry = gq
 		} else {
 			switch fd.BleveQueryType {
@@ -343,9 +344,9 @@ func constructQueries(qList *[]*whereClause, q *query.BooleanQuery) string {
 			}
 		}
 		//fmt.Println("fd.ReqOptExc", genQry)
-		if fd.ReqOptExc == 1 {
+		if fd.MustMustNotShould == 1 {
 			q.AddMust(genQry)
-		} else if fd.ReqOptExc == 2 {
+		} else if fd.MustMustNotShould == 2 {
 			q.AddMustNot(genQry)
 		} else {
 			q.AddShould(genQry)
@@ -361,13 +362,14 @@ type queryDef struct {
 	whereCondtions []whereClause
 }
 type whereClause struct {
-	Field          string
-	Min            string
-	Max            string
-	IsMinInclusive bool
-	IsMaxInclusive bool
-	ReqOptExc      int8 //"+" MUST-->1 "-" MUST NOT-->2 without these SHOULD-->0 clause
-	BleveQueryType queryType
+	Field             string
+	Min               string
+	Max               string
+	IsMinInclusive    bool
+	IsMaxInclusive    bool
+	hasRangeOperator  bool
+	MustMustNotShould int8 //"+" MUST-->1 "-" MUST NOT-->2 without these SHOULD-->0 clause
+	BleveQueryType    queryType
 }
 type queryType int8
 
@@ -589,9 +591,12 @@ func parseQuery(parseVal string) (*bleve.SearchRequest, []string, error) {
 
 func findWhereField(fieldName string, list *[]*whereClause) (*whereClause, bool) {
 	var item *whereClause
+	fieldName = strings.ReplaceAll(fieldName, "+", "")
+	fieldName = strings.ReplaceAll(fieldName, "-", "")
 	for _, item = range *list {
-		//fmt.Println("findWhereField|for", fieldName, item)
+		// fmt.Println("findWhereField|for", fieldName, item)
 		if item.Field == fieldName {
+			// fmt.Println("findWhereField|for|return", fieldName, item)
 			return item, true
 		}
 	}
@@ -648,7 +653,7 @@ func parseSinceField(sinceClause []string) (*whereClause, error) {
 	wc.Max = sDt.Format(date_utils.UTCDateLayout)
 	wc.Min = eDt.Format(date_utils.UTCDateLayout)
 	wc.BleveQueryType = DateRangeInclusiveQuery
-	wc.ReqOptExc = 1
+	wc.MustMustNotShould = 1
 	//fmt.Println("since field def", wc)
 	return &wc, nil
 
@@ -668,8 +673,9 @@ func parseQueryField(fieldVal string, list *[]*whereClause, schemaDefs []common.
 	var exist bool = false
 
 	if strings.Contains(fieldVal, "<") || strings.Contains(fieldVal, ">") { //construct range fields min and max
-		//fmt.Println("strings.Contains(fieldVal, <)", split[0])
+		fmt.Println("strings.Contains(fieldVal, <)", fieldVal, len(*list))
 		rf, exist = findWhereField(field, list)
+
 	}
 	if !exist {
 		//fmt.Println("new|else!esit", fieldVal)
@@ -677,26 +683,26 @@ func parseQueryField(fieldVal string, list *[]*whereClause, schemaDefs []common.
 	}
 	if len(val) > 0 {
 		//set field eliminte - symbol
-		rf.Field, rf.ReqOptExc = getReqOptInc(field)
+		rf.Field, rf.MustMustNotShould = getReqOptInc(field)
 	}
-	//fmt.Println("inside where clause if!eixt", rf)
+
 	setRangeField(rf, val)
 	setQueryType(rf, schemaDefs)
-
 	if !exist {
-		//	fmt.Println("inside if!esit", rf)
+		//fmt.Println("inside if!esit", rf)
 		*list = append(*list, rf)
 	}
 	// } else {
 
 	// 	fmt.Println("else!esit", rf)
 	// }
-
+	//fmt.Println("parsequeryField|before return|", len(*list))
 	return
 }
 
 func setQueryType(rf *whereClause, list []common.BleveFieldDef) {
 	sfd := findFieldFromSchema(rf.Field, list)
+	//logger.Debug(fmt.Sprintf("setQueryType|min:%s max:%s", rf.Min, rf.Max))
 	if len(strings.Split(rf.Min, " ")) > 1 {
 		rf.BleveQueryType = MatchPhraseQuery
 	} else {
@@ -707,21 +713,45 @@ func setQueryType(rf *whereClause, list []common.BleveFieldDef) {
 		case "date":
 			if rf.IsMaxInclusive || rf.IsMinInclusive {
 				rf.BleveQueryType = DateRangeInclusiveQuery
-			} else {
+			} else if rf.hasRangeOperator {
 				rf.BleveQueryType = DateRangeQuery
+			} else {
+				rf.BleveQueryType = DateRangeInclusiveQuery
+				if len(rf.Min) == 0 {
+					rf.Min = rf.Max
+				}
+				if len(rf.Max) == 0 {
+					rf.Max = rf.Min
+				}
+				rf.IsMinInclusive = true
+				rf.IsMaxInclusive = true
+				//fmt.Println("case|date|else", rf)
 			}
+
 		case "numeric":
 			if rf.IsMaxInclusive || rf.IsMinInclusive {
 				rf.BleveQueryType = NumericRangeInclusiveQuery
-			} else {
+			} else if rf.hasRangeOperator {
 				rf.BleveQueryType = NumericRangeQuery
+				//logger.Debug(fmt.Sprintf("numberic  %s %s, %s %v", rf.Field, rf.Min, rf.Max, rf))
+			} else {
+				rf.BleveQueryType = NumericRangeInclusiveQuery
+				if len(rf.Min) == 0 {
+					rf.Min = rf.Max
+				}
+				if len(rf.Max) == 0 {
+					rf.Max = rf.Min
+				}
+				rf.IsMinInclusive = true
+				rf.IsMaxInclusive = true
 			}
+
 		case "bool":
 			rf.BleveQueryType = BooleanQuery
 		case "geo":
 			rf.BleveQueryType = GeoPointQuery
-
 		}
+
 	} else if len(rf.Field) > 0 && len(rf.Min) > 0 && len(rf.Max) > 0 {
 		rf.BleveQueryType = TermRangeQuery
 	}
@@ -761,15 +791,19 @@ func setRangeField(rf *whereClause, fieldVal string) {
 	// rf.IsMinInclusive = false
 	switch op {
 	case ">":
+		rf.hasRangeOperator = true
 		rf.Max = fieldVal
 		rf.IsMaxInclusive = false
 	case ">=":
+		rf.hasRangeOperator = true
 		rf.Max = fieldVal
 		rf.IsMaxInclusive = true
 	case "<":
+		rf.hasRangeOperator = true
 		rf.Min = fieldVal
 		rf.IsMaxInclusive = false
 	case "<=":
+		rf.hasRangeOperator = true
 		rf.Min = fieldVal
 		rf.IsMinInclusive = true
 	default:

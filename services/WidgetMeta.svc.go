@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/ramnkl16/ez-search/abstractimpl"
-
 	"github.com/ramnkl16/ez-search/models"
 	"github.com/ramnkl16/ez-search/rest_errors"
 	"github.com/ramnkl16/ez-search/utils/date_utils"

@@ -7,7 +7,6 @@ import (
 	bolt "go.etcd.io/bbolt"
 	"go.uber.org/zap/zapcore"
 
-	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/utils/cache_utils"
 )
 
@@ -15,8 +14,16 @@ const (
 	coreDbName string = "core.db"
 )
 
+var (
+	workingDir string
+)
+
+func Initialize(wd string) {
+	workingDir = wd
+}
+
 func setupDB() (*bolt.DB, error) {
-	d, err := bolt.Open(path.Join(global.WorkingDir, coreDbName), 0600, nil)
+	d, err := bolt.Open(path.Join(workingDir, coreDbName), 0600, nil)
 
 	if err != nil {
 		//logger.Error("could not open db", err)

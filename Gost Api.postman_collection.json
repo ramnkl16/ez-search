@@ -1,0 +1,5325 @@
+{
+	"info": {
+		"_postman_id": "fcc50266-4f8c-4a8c-a1d2-24782bed1a38",
+		"name": "Gost Api",
+		"description": "Gost uses bleve search like solr or elastic search, create index documents and search \n\nContact Support:\n Email: ram.duraisamy@sbdinc.com",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "change password",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"value\": \"reference #/components/schemas/controllers.changePasswordParam not found in the OpenAPI spec\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/auth/changepassword",
+								"description": "Save  User"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/controllers.changePasswordParam not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/changepassword"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/controllers.changePasswordParam not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/changepassword"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/controllers.changePasswordParam not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/changepassword"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						},
+						{
+							"name": "authenticate user",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"value\": \"reference #/components/schemas/controllers.LoginParam not found in the OpenAPI spec\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/auth/login",
+								"description": "Save  User"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/controllers.LoginParam not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/login"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/controllers.LoginParam not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/login"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/controllers.LoginParam not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/auth/login"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						},
+						{
+							"name": "Logout User",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": "{{baseUrl}}/api/auth/logout",
+								"description": "Logging out the specified user"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{baseUrl}}/api/auth/logout"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.User not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.User not found in the OpenAPI spec\"\n  }\n]"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{baseUrl}}/api/auth/logout"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{baseUrl}}/api/auth/logout"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "menu",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get all models.Menu",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/menu/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"menu",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) Menu ID"
+												}
+											]
+										},
+										"description": "Get models.Menu by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/menu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"menu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Menu ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.Menu not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.Menu not found in the OpenAPI spec\"\n  }\n]"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/menu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"menu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Menu ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/menu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"menu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Menu ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								},
+								{
+									"name": "Delete Menu Data",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/menu/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"menu",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) Menu ID"
+												}
+											]
+										},
+										"description": "Delete Menu data matched by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/menu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"menu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Menu ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/menu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"menu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Menu ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/menu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"menu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Menu ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create/update/delete Menu",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"value\": \"reference #/components/schemas/models.Menu not found in the OpenAPI spec\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/menu",
+								"description": "Save  Menu"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.Menu not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/menu"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.Menu not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/menu"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.Menu not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/menu"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "namespace",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get all models.Namespace",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/namespace/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"namespace",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) Namespace ID"
+												}
+											]
+										},
+										"description": "Get models.Namespace by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/namespace/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"namespace",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Namespace ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.Namespace not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.Namespace not found in the OpenAPI spec\"\n  }\n]"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/namespace/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"namespace",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Namespace ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/namespace/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"namespace",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Namespace ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								},
+								{
+									"name": "Delete Namespace Data",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/namespace/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"namespace",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) Namespace ID"
+												}
+											]
+										},
+										"description": "Delete Namespace data matched by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/namespace/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"namespace",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Namespace ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/namespace/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"namespace",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Namespace ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/namespace/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"namespace",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) Namespace ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create/update/delete Namespace",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\":\"duplo1@gost.com\",\"mobile\":\"\",\"code\":\"duplo1\", \"userName\":\"duplo1\", \"name\":\"duplo1\",\"id\":\"duplo1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/namespace",
+								"description": "Save  Namespace"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.NamespaceParam not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/namespace"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.NamespaceParam not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/namespace"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.NamespaceParam not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/namespace"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						},
+						{
+							"name": "Createnewnamespace",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\":\"duplo2@gost.com\",\"mobile\":\"123456789\",\"code\":\"duplo2\", \"userName\":\"duplo2\", \"name\":\"duplo1\",\"id\":\"duplo2\"\r\n}"
+								},
+								"url": "{{baseUrl}}/api/namespacenew"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get all models.User",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/user/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) User ID"
+												}
+											]
+										},
+										"description": "Get models.User by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/user/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) User ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.User not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.User not found in the OpenAPI spec\"\n  }\n]"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/user/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) User ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/user/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) User ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								},
+								{
+									"name": "Delete User Data",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/user/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"user",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) User ID"
+												}
+											]
+										},
+										"description": "Delete User data matched by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/user/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) User ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/user/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) User ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/user/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"user",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) User ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create/update/delete User",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  {\n    \"username\": \"Testuse2r4\",\n    \"namespaceId\": \"PLATFORM\",\n    \"userGroupId\": \"grp1\",\n    \"organizationId\": \"org1\",\n    \"email\": \"testuser42@gmail.com\",\n    \"token\": \"password1\",\n    \"mobile\": \"12345627890\",\n    \"firstName\": \"Test\",\n    \"lastName\": \"lastName\",\n    \"userRoleId\": \"role1\",\n    \"activeFlag\": 1,\n    \"emailVerified\": \"2021-06-03 01:24:27\",\n    \"passwordUpdatedAt\": \"2021-06-03 01:24:27\"\n}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/user",
+								"description": "Save  User"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.User not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/user"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.User not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/user"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.User not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/user"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "user Group",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get all models.UserGroup",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/userGroup/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"userGroup",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) UserGroup ID"
+												}
+											]
+										},
+										"description": "Get models.UserGroup by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userGroup/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userGroup",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserGroup ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.UserGroup not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.UserGroup not found in the OpenAPI spec\"\n  }\n]"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userGroup/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userGroup",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserGroup ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userGroup/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userGroup",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserGroup ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								},
+								{
+									"name": "Delete UserGroup Data",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/userGroup/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"userGroup",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) UserGroup ID"
+												}
+											]
+										},
+										"description": "Delete UserGroup data matched by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userGroup/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userGroup",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserGroup ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userGroup/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userGroup",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserGroup ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userGroup/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userGroup",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserGroup ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create/update/delete UserGroup",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"value\": \"reference #/components/schemas/models.UserGroup not found in the OpenAPI spec\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/userGroup",
+								"description": "Save  UserGroup"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.UserGroup not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/userGroup"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.UserGroup not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/userGroup"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.UserGroup not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/userGroup"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "user Menu",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get all models.UserMenu",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/userMenu/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"userMenu",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) UserMenu ID"
+												}
+											]
+										},
+										"description": "Get models.UserMenu by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userMenu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userMenu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserMenu ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.UserMenu not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.UserMenu not found in the OpenAPI spec\"\n  }\n]"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userMenu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userMenu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserMenu ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userMenu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userMenu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserMenu ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								},
+								{
+									"name": "Delete UserMenu Data",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/userMenu/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"userMenu",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) UserMenu ID"
+												}
+											]
+										},
+										"description": "Delete UserMenu data matched by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userMenu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userMenu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserMenu ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userMenu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userMenu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserMenu ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/userMenu/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"userMenu",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) UserMenu ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create/update/delete UserMenu",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"value\": \"reference #/components/schemas/models.UserMenu not found in the OpenAPI spec\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/userMenu",
+								"description": "Save  UserMenu"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.UserMenu not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/userMenu"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.UserMenu not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/userMenu"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"value\": \"reference #/components/schemas/models.UserMenu not found in the OpenAPI spec\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/userMenu"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "eventqueue",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get all EventQueue",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/eventqueue/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"eventqueue",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) EventQueue ID"
+												}
+											]
+										},
+										"description": "Get EventQueue by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/eventqueue/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"eventqueue",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) EventQueue ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"createdAt\": \"cupidatat labore\",\n    \"eventData\": \"pariatur sunt et\",\n    \"eventTypeId\": \"Lorem dolor nulla\",\n    \"id\": \"elit magna enim tempor\",\n    \"isActive\": true,\n    \"message\": \"non Lorem Excepteur occaecat\",\n    \"retryCount\": 21631011,\n    \"startAt\": \"Ut cupidatat aliquip Excepteur\",\n    \"status\": 61407884,\n    \"updatedAt\": \"officia id laboris\"\n  },\n  {\n    \"createdAt\": \"ut consectetur \",\n    \"eventData\": \"commodo pariatur laborum nostrud ullamco\",\n    \"eventTypeId\": \"cillum mollit\",\n    \"id\": \"esse aute Duis sunt\",\n    \"isActive\": false,\n    \"message\": \"cillum eiusmod veniam volupta\",\n    \"retryCount\": 76214447,\n    \"startAt\": \"pariatur\",\n    \"status\": 22306569,\n    \"updatedAt\": \"nostrud commodo veniam esse\"\n  }\n]"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/eventqueue/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"eventqueue",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) EventQueue ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/eventqueue/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"eventqueue",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) EventQueue ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								},
+								{
+									"name": "Get all EventQueue",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/eventqueue/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"eventqueue",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) EventQueue ID"
+												}
+											]
+										},
+										"description": "delete EventQueue"
+									},
+									"response": [
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/eventqueue/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"eventqueue",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) EventQueue ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/eventqueue/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"eventqueue",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) EventQueue ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Update EventQueue",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"createdAt\": \"enim\",\n  \"eventData\": \"Excepteur ut deserunt\",\n  \"eventTypeId\": \"cillum incididunt aliqua ullamco et\",\n  \"id\": \"ullamco in commodo\",\n  \"isActive\": true,\n  \"message\": \"ipsum laboris dolore ad\",\n  \"retryCount\": -40343746,\n  \"startAt\": \"veniam deserunt occaecat dolor\",\n  \"status\": -184803,\n  \"updatedAt\": \"ipsum n\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/eventqueue",
+								"description": "Update by json EventQueue"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"enim\",\n  \"eventData\": \"Excepteur ut deserunt\",\n  \"eventTypeId\": \"cillum incididunt aliqua ullamco et\",\n  \"id\": \"ullamco in commodo\",\n  \"isActive\": true,\n  \"message\": \"ipsum laboris dolore ad\",\n  \"retryCount\": -40343746,\n  \"startAt\": \"veniam deserunt occaecat dolor\",\n  \"status\": -184803,\n  \"updatedAt\": \"ipsum n\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/eventqueue"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"enim\",\n  \"eventData\": \"Excepteur ut deserunt\",\n  \"eventTypeId\": \"cillum incididunt aliqua ullamco et\",\n  \"id\": \"ullamco in commodo\",\n  \"isActive\": true,\n  \"message\": \"ipsum laboris dolore ad\",\n  \"retryCount\": -40343746,\n  \"startAt\": \"veniam deserunt occaecat dolor\",\n  \"status\": -184803,\n  \"updatedAt\": \"ipsum n\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/eventqueue"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"enim\",\n  \"eventData\": \"Excepteur ut deserunt\",\n  \"eventTypeId\": \"cillum incididunt aliqua ullamco et\",\n  \"id\": \"ullamco in commodo\",\n  \"isActive\": true,\n  \"message\": \"ipsum laboris dolore ad\",\n  \"retryCount\": -40343746,\n  \"startAt\": \"veniam deserunt occaecat dolor\",\n  \"status\": -184803,\n  \"updatedAt\": \"ipsum n\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/eventqueue"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						},
+						{
+							"name": "Create EventQueue",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"createdAt\": \"2022-05-24T21:04:03Z\",\n  \"eventData\": \"{\\\"fileName\\\":\\\"C:\\\\\\\\go-prj\\\\\\\\ez-search\\\\\\\\uploads\\\\\\\\Userinformation.csv\\\",\\\"ignoreEmpty\\\":true,\\\"indexName\\\":\\\"macindex/new/customer\\\",\\\"uniqueIndexColIndex\\\":1}\",\n  \"eventType\": \"indexfromcsv\",\n  \"id\": \"newid\",\n  \"isActive\": \"t\",\n  \"message\": \"\",\n  \"retryCount\":0,\n  \"startAt\": \"2022-05-24T21:04:03Z\",\n  \"status\":1,\n  \"updatedAt\": \"2022-05-24T21:04:03Z\",\n  \"RecurringInSeconds\":0\n\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/eventqueue",
+								"description": "create EventQueue"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"enim\",\n  \"eventData\": \"Excepteur ut deserunt\",\n  \"eventTypeId\": \"cillum incididunt aliqua ullamco et\",\n  \"id\": \"ullamco in commodo\",\n  \"isActive\": true,\n  \"message\": \"ipsum laboris dolore ad\",\n  \"retryCount\": -40343746,\n  \"startAt\": \"veniam deserunt occaecat dolor\",\n  \"status\": -184803,\n  \"updatedAt\": \"ipsum n\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/eventqueue"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"enim\",\n  \"eventData\": \"Excepteur ut deserunt\",\n  \"eventTypeId\": \"cillum incididunt aliqua ullamco et\",\n  \"id\": \"ullamco in commodo\",\n  \"isActive\": true,\n  \"message\": \"ipsum laboris dolore ad\",\n  \"retryCount\": -40343746,\n  \"startAt\": \"veniam deserunt occaecat dolor\",\n  \"status\": -184803,\n  \"updatedAt\": \"ipsum n\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/eventqueue"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"enim\",\n  \"eventData\": \"Excepteur ut deserunt\",\n  \"eventTypeId\": \"cillum incididunt aliqua ullamco et\",\n  \"id\": \"ullamco in commodo\",\n  \"isActive\": true,\n  \"message\": \"ipsum laboris dolore ad\",\n  \"retryCount\": -40343746,\n  \"startAt\": \"veniam deserunt occaecat dolor\",\n  \"status\": -184803,\n  \"updatedAt\": \"ipsum n\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/eventqueue"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "search",
+					"item": [
+						{
+							"name": "get search result",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"q\": \"SELECT * FROM  tables/tables.user  WHERE isActive:true,email:admin@gost.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/search",
+								"description": "get search result sample query [select id,name,age from indexName where name:ram,age:>40,+age:<=50,startDt>\"2022-01-01T01:01:00Z\" facets name limit 1, 10]\nfetch record first 10 records with matching codition and shows sepecified fields"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"q\": \"dolor sunt\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/search"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"q\": \"dolor sunt\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/search"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"q\": \"dolor sunt\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/search"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						},
+						{
+							"name": "Delete index document",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/search?indexName=quis Ut&docId=quis Ut",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"search"
+									],
+									"query": [
+										{
+											"key": "indexName",
+											"value": "quis Ut",
+											"description": "(Required) name of the index"
+										},
+										{
+											"key": "docId",
+											"value": "quis Ut",
+											"description": "(Required) document id"
+										}
+									]
+								},
+								"description": "Delete index"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/search?indexName=quis Ut&docId=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"search"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												},
+												{
+													"key": "docId",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/search?indexName=quis Ut&docId=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"search"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												},
+												{
+													"key": "docId",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/search?indexName=quis Ut&docId=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"search"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												},
+												{
+													"key": "docId",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "widgetmeta",
+					"item": [
+						{
+							"name": "{id}",
+							"item": [
+								{
+									"name": "Get all WidgetMeta",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/widgetmeta/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"widgetmeta",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) WidgetMeta ID"
+												}
+											]
+										},
+										"description": "Get WidgetMeta by id"
+									},
+									"response": [
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/widgetmeta/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"widgetmeta",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) WidgetMeta ID"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"createdAt\": \"incididunt Ut quis\",\n    \"data\": \"do esse exercitation sit\",\n    \"division\": \"reprehenderit cupidatat\",\n    \"id\": \"Ut esse elit\",\n    \"isActive\": false,\n    \"module\": \"laborum enim mini\",\n    \"name\": \"non in elit\",\n    \"page\": \"exercitation officia Duis\",\n    \"updatedAt\": \"magna culpa fugia\"\n  },\n  {\n    \"createdAt\": \"magna deserunt ex\",\n    \"data\": \"ut laboris\",\n    \"division\": \"commodo incididunt fugiat\",\n    \"id\": \"magna et in in culpa\",\n    \"isActive\": true,\n    \"module\": \"ea ut sint\",\n    \"name\": \"ea veniam minim\",\n    \"page\": \"dolore officia id laboris\",\n    \"updatedAt\": \"ad laboris consequat\"\n  }\n]"
+										},
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/widgetmeta/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"widgetmeta",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) WidgetMeta ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/widgetmeta/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"widgetmeta",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) WidgetMeta ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								},
+								{
+									"name": "Get all WidgetMeta",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/api/widgetmeta/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"widgetmeta",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "quis Ut",
+													"description": "(Required) WidgetMeta ID"
+												}
+											]
+										},
+										"description": "delete WidgetMeta"
+									},
+									"response": [
+										{
+											"name": "Not Found",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/widgetmeta/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"widgetmeta",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) WidgetMeta ID"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										},
+										{
+											"name": "Internal Server Error",
+											"originalRequest": {
+												"method": "DELETE",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/api/widgetmeta/:id",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"api",
+														"widgetmeta",
+														":id"
+													],
+													"variable": [
+														{
+															"key": "id",
+															"value": "quis Ut",
+															"description": "(Required) WidgetMeta ID"
+														}
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "\"quis Ut\""
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Update WidgetMeta",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"createdAt\": \"voluptate Lorem \",\n  \"data\": \"id magna culpa\",\n  \"division\": \"amet irure incididunt cillum\",\n  \"id\": \"dolor tempor\",\n  \"isActive\": true,\n  \"module\": \"fugiat\",\n  \"name\": \"non consequat labore deserunt\",\n  \"page\": \"esse pariatur\",\n  \"updatedAt\": \"consequat enim nulla adipisicing\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/widgetmeta",
+								"description": "Update by json WidgetMeta"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"voluptate Lorem \",\n  \"data\": \"id magna culpa\",\n  \"division\": \"amet irure incididunt cillum\",\n  \"id\": \"dolor tempor\",\n  \"isActive\": true,\n  \"module\": \"fugiat\",\n  \"name\": \"non consequat labore deserunt\",\n  \"page\": \"esse pariatur\",\n  \"updatedAt\": \"consequat enim nulla adipisicing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/widgetmeta"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"voluptate Lorem \",\n  \"data\": \"id magna culpa\",\n  \"division\": \"amet irure incididunt cillum\",\n  \"id\": \"dolor tempor\",\n  \"isActive\": true,\n  \"module\": \"fugiat\",\n  \"name\": \"non consequat labore deserunt\",\n  \"page\": \"esse pariatur\",\n  \"updatedAt\": \"consequat enim nulla adipisicing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/widgetmeta"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"voluptate Lorem \",\n  \"data\": \"id magna culpa\",\n  \"division\": \"amet irure incididunt cillum\",\n  \"id\": \"dolor tempor\",\n  \"isActive\": true,\n  \"module\": \"fugiat\",\n  \"name\": \"non consequat labore deserunt\",\n  \"page\": \"esse pariatur\",\n  \"updatedAt\": \"consequat enim nulla adipisicing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/widgetmeta"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						},
+						{
+							"name": "Create WidgetMeta",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"createdAt\": \"2022-04-09T01:01:01Z\",\n  \"cd\": \"select * from tables/tables.user\",\n  \"division\": \"div\",\n  \"id\": \"q1\",\n  \"isActive\": true,\n  \"module\": \"mod\",\n  \"name\": \"Get all users\",\n  \"page\": \"User\",\n  \"updatedAt\": \"2022-04-09T01:01:01Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/widgetmeta",
+								"description": "create WidgetMeta"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"voluptate Lorem \",\n  \"data\": \"id magna culpa\",\n  \"division\": \"amet irure incididunt cillum\",\n  \"id\": \"dolor tempor\",\n  \"isActive\": true,\n  \"module\": \"fugiat\",\n  \"name\": \"non consequat labore deserunt\",\n  \"page\": \"esse pariatur\",\n  \"updatedAt\": \"consequat enim nulla adipisicing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/widgetmeta"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"voluptate Lorem \",\n  \"data\": \"id magna culpa\",\n  \"division\": \"amet irure incididunt cillum\",\n  \"id\": \"dolor tempor\",\n  \"isActive\": true,\n  \"module\": \"fugiat\",\n  \"name\": \"non consequat labore deserunt\",\n  \"page\": \"esse pariatur\",\n  \"updatedAt\": \"consequat enim nulla adipisicing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/widgetmeta"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"createdAt\": \"voluptate Lorem \",\n  \"data\": \"id magna culpa\",\n  \"division\": \"amet irure incididunt cillum\",\n  \"id\": \"dolor tempor\",\n  \"isActive\": true,\n  \"module\": \"fugiat\",\n  \"name\": \"non consequat labore deserunt\",\n  \"page\": \"esse pariatur\",\n  \"updatedAt\": \"consequat enim nulla adipisicing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{baseUrl}}/api/widgetmeta"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "index",
+					"item": [
+						{
+							"name": "GetFields",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/getfields?indexName=quis Ut",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"getfields"
+									],
+									"query": [
+										{
+											"key": "indexName",
+											"value": "quis Ut",
+											"description": "(Required) name of the index"
+										}
+									]
+								},
+								"description": "Get index fields"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/getfields?indexName=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"getfields"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  \"reprehenderit culpa\",\n  \"ad do\"\n]"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/getfields?indexName=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"getfields"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/api/getfields?indexName=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"getfields"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						},
+						{
+							"name": "Get All indexes",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": "{{baseUrl}}/api/getindexes",
+								"description": "Get all indexes"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{baseUrl}}/api/getindexes"
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  \"reprehenderit culpa\",\n  \"ad do\"\n]"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{baseUrl}}/api/getindexes"
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": "{{baseUrl}}/api/getindexes"
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						},
+						{
+							"name": "create schema",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[{\"name\":\"ui\",\"type\":\"text\",\"dn\":\"User Id\"},\n{\"name\":\"at\",\"type\":\"text\",\"dn\":\"Account Type\"},\n{\"name\":\"a\",\"type\":\"text\",\"dn\":\"Alias\"},\n{\"name\":\"c\",\"type\":\"text\",\"dn\":\"Company\"},\n{\"name\":\"dc\",\"type\":\"text\",\"dn\":\"Default Coun\"},\n{\"name\":\"e\",\"type\":\"text\",\"dn\":\"Email\"},\n{\"name\":\"e1\",\"type\":\"text\",\"dn\":\"Enabled\"},\n{\"name\":\"na\",\"type\":\"text\",\"dn\":\"Network Domain\"},\n{\"name\":\"ui\",\"type\":\"text\",\"dn\":\"User Info Lan\"},\n{\"name\":\"un\",\"type\":\"text\",\"dn\":\"User Name\"},\n{\"name\":\"hl\",\"type\":\"text\",\"dn\":\"Help Lanugage\"}\n]\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/createschema?indexName=macindex/new/customer",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"createschema"
+									],
+									"query": [
+										{
+											"key": "indexName",
+											"value": "macindex/new/customer",
+											"description": "(Required) name of the index, you can also provide index date pattern like indexname{2006-01-02}"
+										}
+									]
+								},
+								"description": "create schema possible values for type[bool|text|date|numeric|geopoint]\ngolang follows date pattern like indexname{2006-01-02} indexname{2006-01-02} which is equal to {yyyy-MM-dd}\nindexname{2006-01-02}-->creates a index every day\nindexname{2006-01}-->creates a index every month\nindexname{2006}-->creates a index every year"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"name\": \"mi\",\n    \"type\": \"minim\"\n  },\n  {\n    \"name\": \"ullamco exercitation qui commodo\",\n    \"type\": \"dolor sed in deserunt qui\"\n  }\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/createschema?indexName=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"createschema"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  \"reprehenderit culpa\",\n  \"ad do\"\n]"
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"name\": \"mi\",\n    \"type\": \"minim\"\n  },\n  {\n    \"name\": \"ullamco exercitation qui commodo\",\n    \"type\": \"dolor sed in deserunt qui\"\n  }\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/createschema?indexName=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"createschema"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n  {\n    \"name\": \"mi\",\n    \"type\": \"minim\"\n  },\n  {\n    \"name\": \"ullamco exercitation qui commodo\",\n    \"type\": \"dolor sed in deserunt qui\"\n  }\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/createschema?indexName=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"createschema"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						},
+						{
+							"name": "create or Update Index Document",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/addorupdate?indexName=quis Ut&docId=quis Ut&indexTranDate=quis Ut",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"addorupdate"
+									],
+									"query": [
+										{
+											"key": "indexName",
+											"value": "quis Ut",
+											"description": "(Required) name of the index you can also provide pattern like indexName{2006-01-02}-->indexName{yyyy-MM-dd}"
+										},
+										{
+											"key": "docId",
+											"value": "quis Ut",
+											"description": "document id"
+										},
+										{
+											"key": "indexTranDate",
+											"value": "quis Ut",
+											"description": "index name determind using this date when index name pattern date format must be {yyyy-MM-dd}"
+										}
+									]
+								},
+								"description": "AddorUpdate index"
+							},
+							"response": [
+								{
+									"name": "OK",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/addorupdate?indexName=quis Ut&docId=quis Ut&indexTranDate=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"addorupdate"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												},
+												{
+													"key": "docId",
+													"value": "quis Ut"
+												},
+												{
+													"key": "indexTranDate",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Not Found",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/addorupdate?indexName=quis Ut&docId=quis Ut&indexTranDate=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"addorupdate"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												},
+												{
+													"key": "docId",
+													"value": "quis Ut"
+												},
+												{
+													"key": "indexTranDate",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/api/addorupdate?indexName=quis Ut&docId=quis Ut&indexTranDate=quis Ut",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"api",
+												"addorupdate"
+											],
+											"query": [
+												{
+													"key": "indexName",
+													"value": "quis Ut"
+												},
+												{
+													"key": "docId",
+													"value": "quis Ut"
+												},
+												{
+													"key": "indexTranDate",
+													"value": "quis Ut"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "\"quis Ut\""
+								}
+							]
+						},
+						{
+							"name": "getschema detail",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						},
+						{
+							"name": "generate schema defintion",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"columns\":\"DistNum,TID,YearNum,WeekNum,ReportNum,StartDate,EndDate,StartDisbNum,EndDisbNum,StartAcctTransNum,EndAcctTransNum,StartTransNum,EndTransNum,CountSales,CountTransactions,ApMacStartBalance,ApMacEndBalance,ApMacInvoice,ApMacMACredit,ApMacNationalAccountCredit,ApMacOther\",\r\n \"isShortName\":true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/generateSchema"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get all models.Menu",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/menus/search?start=-24397986&limit=-24397986",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"menus",
+								"search"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "-24397986",
+									"description": "(Required) starting row"
+								},
+								{
+									"key": "limit",
+									"value": "-24397986",
+									"description": "(Required) no of row limit"
+								}
+							]
+						},
+						"description": "get top 100 records models.Menu"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/menus/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"menus",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.Menu not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.Menu not found in the OpenAPI spec\"\n  }\n]"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/menus/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"menus",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/menus/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"menus",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						}
+					]
+				},
+				{
+					"name": "Get all models.Namespace",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/namespaces/search?start=-24397986&limit=-24397986",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"namespaces",
+								"search"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "-24397986",
+									"description": "(Required) starting row"
+								},
+								{
+									"key": "limit",
+									"value": "-24397986",
+									"description": "(Required) no of row limit"
+								}
+							]
+						},
+						"description": "get top 100 records models.Namespace"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/namespaces/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"namespaces",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.Namespace not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.Namespace not found in the OpenAPI spec\"\n  }\n]"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/namespaces/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"namespaces",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/namespaces/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"namespaces",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						}
+					]
+				},
+				{
+					"name": "Get all models.UserMenu",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/userMenus/search?start=-24397986&limit=-24397986",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"userMenus",
+								"search"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "-24397986",
+									"description": "(Required) starting row"
+								},
+								{
+									"key": "limit",
+									"value": "-24397986",
+									"description": "(Required) no of row limit"
+								}
+							]
+						},
+						"description": "get top 100 records models.UserMenu"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/userMenus/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"userMenus",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.UserMenu not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.UserMenu not found in the OpenAPI spec\"\n  }\n]"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/userMenus/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"userMenus",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/userMenus/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"userMenus",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						}
+					]
+				},
+				{
+					"name": "Get all models.User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users/search?start=-24397986&limit=-24397986",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"search"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "-24397986",
+									"description": "(Required) starting row"
+								},
+								{
+									"key": "limit",
+									"value": "-24397986",
+									"description": "(Required) no of row limit"
+								}
+							]
+						},
+						"description": "get top 100 records models.User"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.User not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.User not found in the OpenAPI spec\"\n  }\n]"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/users/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						}
+					]
+				},
+				{
+					"name": "Get all models.UserGroup",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/userGroups/search?start=-24397986&limit=-24397986",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"userGroups",
+								"search"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "-24397986",
+									"description": "(Required) starting row"
+								},
+								{
+									"key": "limit",
+									"value": "-24397986",
+									"description": "(Required) no of row limit"
+								}
+							]
+						},
+						"description": "get top 100 records models.UserGroup"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/userGroups/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"userGroups",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"value\": \"reference #/components/schemas/models.UserGroup not found in the OpenAPI spec\"\n  },\n  {\n    \"value\": \"reference #/components/schemas/models.UserGroup not found in the OpenAPI spec\"\n  }\n]"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/userGroups/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"userGroups",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/userGroups/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"userGroups",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						}
+					]
+				},
+				{
+					"name": "Get all EventQueue",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/eventqueues/search?start=-24397986&limit=-24397986",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"eventqueues",
+								"search"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "-24397986",
+									"description": "Starting row 0-->first record"
+								},
+								{
+									"key": "limit",
+									"value": "-24397986",
+									"description": "Row limit"
+								}
+							]
+						},
+						"description": "get top 100 records EventQueue"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/eventqueues/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"eventqueues",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"createdAt\": \"cupidatat labore\",\n    \"eventData\": \"pariatur sunt et\",\n    \"eventTypeId\": \"Lorem dolor nulla\",\n    \"id\": \"elit magna enim tempor\",\n    \"isActive\": true,\n    \"message\": \"non Lorem Excepteur occaecat\",\n    \"retryCount\": 21631011,\n    \"startAt\": \"Ut cupidatat aliquip Excepteur\",\n    \"status\": 61407884,\n    \"updatedAt\": \"officia id laboris\"\n  },\n  {\n    \"createdAt\": \"ut consectetur \",\n    \"eventData\": \"commodo pariatur laborum nostrud ullamco\",\n    \"eventTypeId\": \"cillum mollit\",\n    \"id\": \"esse aute Duis sunt\",\n    \"isActive\": false,\n    \"message\": \"cillum eiusmod veniam volupta\",\n    \"retryCount\": 76214447,\n    \"startAt\": \"pariatur\",\n    \"status\": 22306569,\n    \"updatedAt\": \"nostrud commodo veniam esse\"\n  }\n]"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/eventqueues/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"eventqueues",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/eventqueues/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"eventqueues",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						}
+					]
+				},
+				{
+					"name": "Get all WidgetMeta",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/widgetmetas/search",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"widgetmetas",
+								"search"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "-24397986",
+									"description": "(Required) starting row",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "-24397986",
+									"description": "(Required) no of row limit",
+									"disabled": true
+								}
+							]
+						},
+						"description": "get top 100 records WidgetMeta"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/widgetmetas/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"widgetmetas",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"createdAt\": \"incididunt Ut quis\",\n    \"data\": \"do esse exercitation sit\",\n    \"division\": \"reprehenderit cupidatat\",\n    \"id\": \"Ut esse elit\",\n    \"isActive\": false,\n    \"module\": \"laborum enim mini\",\n    \"name\": \"non in elit\",\n    \"page\": \"exercitation officia Duis\",\n    \"updatedAt\": \"magna culpa fugia\"\n  },\n  {\n    \"createdAt\": \"magna deserunt ex\",\n    \"data\": \"ut laboris\",\n    \"division\": \"commodo incididunt fugiat\",\n    \"id\": \"magna et in in culpa\",\n    \"isActive\": true,\n    \"module\": \"ea ut sint\",\n    \"name\": \"ea veniam minim\",\n    \"page\": \"dolore officia id laboris\",\n    \"updatedAt\": \"ad laboris consequat\"\n  }\n]"
+						},
+						{
+							"name": "Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/widgetmetas/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"widgetmetas",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/widgetmetas/search?start=-24397986&limit=-24397986",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"widgetmetas",
+										"search"
+									],
+									"query": [
+										{
+											"key": "start",
+											"value": "-24397986"
+										},
+										{
+											"key": "limit",
+											"value": "-24397986"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "\"quis Ut\""
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.request.headers.add({key:'x-auth',value:'eyJ1IjoiYWRtaW5AZ29zdC5jb20iLCJwIjoid2VsY29tZUAxMjMiLCJuIjoicGxhdGZvcm0ifQ=='})",
+					"pm.request.headers.add({key:'x-ns',value:'platform'})"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8015",
+			"type": "string"
+		}
+	]
+}

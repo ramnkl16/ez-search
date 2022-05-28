@@ -6,10 +6,14 @@ import (
 	"reflect"
 	"strconv"
 
+	"github.com/blevesearch/bleve/v2"
+	"github.com/ramnkl16/ez-search/common"
 	"github.com/ramnkl16/ez-search/ezsearch"
+	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
 	"github.com/ramnkl16/ez-search/rest_errors"
 	"github.com/ramnkl16/ez-search/utils/uid_utils"
+
 	"go.uber.org/zap/zapcore"
 )
 
@@ -101,6 +105,40 @@ func Delete(tableName string, id string) rest_errors.RestErr {
 	return nil
 }
 
+func BatchCreateOrUpdate(indexName string, data map[string]interface{}) rest_errors.RestErr {
+	i, err := GetTable(indexName)
+	if err != nil {
+		logger.Warn("Schema is missing. build schema using {{baseUrl}}/api/createschema?indexName=macindex/new/customer api")
+		return rest_errors.NewInternalServerError("Failed missing index schema", err)
+		//i, err = BuilddynamicSchema(indexName)
+	}
+	batchCount := 0
+	batch := i.NewBatch()
+	count := 0
+	for k, v := range data {
+		batch.Index(k, v)
+		batchCount = batchCount + 1
+		count = count + 1
+		if batchCount >= global.MaxIndexbatchSize {
+			logger.Info("batch executed", zapcore.Field{Key: "executed", Type: zapcore.Int32Type, Integer: int64(count)})
+			err := i.Batch(batch)
+			if err != nil {
+				logger.Error("Failed in the batch index", err)
+				return rest_errors.NewInternalServerError("Failed in the batch index", err)
+			}
+			batchCount = 0
+		}
+	}
+	if batchCount > 0 {
+		err := i.Batch(batch)
+		if err != nil {
+			logger.Error("Failed while last batch ", err)
+			return rest_errors.NewInternalServerError("Failed while last batch", err)
+		}
+	}
+	return nil
+}
+
 // search  from ( EventQueue).
 func GetAll[T any](query string) ([]T, rest_errors.RestErr) {
 
@@ -153,4 +191,24 @@ func Get[T any](query string) (T, rest_errors.RestErr) {
 	}
 	res := getResultObjs[T](result.ResultRow)
 	return res[0], nil
+}
+
+func BuilddynamicSchema(pindexName string) (bleve.Index, rest_errors.RestErr) {
+	fdefs, err := ezsearch.GetBleveTableschema(pindexName)
+	if err != nil {
+		saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("index [%s] schema was not created", pindexName))
+		logger.Error(fmt.Sprintf("Failed|BuilddynamicSchema %s", pindexName), saveErr)
+	}
+	if fdefs == nil || len(fdefs) == 0 {
+		fdefs = append(fdefs, common.BleveFieldDef{Name: "timestamp", Type: "date"})
+	}
+	err = BuildIndexSchema(pindexName, fdefs, pindexName)
+	i, err := ezsearch.GetIndex(pindexName)
+	if err != nil {
+		saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("index [%s] is not created. Please try after the index first", pindexName))
+		logger.Error(fmt.Sprintf("Failed|AddOrUpdateIndex  %s", pindexName), saveErr)
+		return nil, saveErr
+
+	}
+	return i, nil
 }

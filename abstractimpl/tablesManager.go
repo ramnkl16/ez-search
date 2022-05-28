@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"os"
 	"path"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -51,7 +53,7 @@ func CreateTables() {
 	}
 	isExist = tables[EventQueueHisTable]
 	if !isExist {
-		BuildIndexSchema(EventQueueHisTable, eqSchema, "tables")
+		BuildIndexSchema(EventQueueHisTable, eqHisSchema, "tables")
 	}
 	isExist = tables[QueryMetaTable]
 	if !isExist {
@@ -139,7 +141,18 @@ func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, indexFold
 	englishTextFieldMapping.Analyzer = en.AnalyzerName
 	keywordFieldMapping := bleve.NewTextFieldMapping()
 	keywordFieldMapping.Analyzer = keyword.Name
-
+	fd := filepath.Join(global.WorkingDir, indexFolderName)
+	if _, err := os.Stat(fd); os.IsNotExist(err) {
+		os.MkdirAll(fd, os.ModeDir)
+		// TODO: handle error
+	}
+	split := strings.Split(indexName, "/")
+	folder := filepath.Join(split[0 : len(split)-1]...)
+	fd = filepath.Join(global.WorkingDir, folder)
+	if _, err := os.Stat(fd); os.IsNotExist(err) {
+		os.MkdirAll(fd, os.ModeDir)
+		// TODO: handle error
+	}
 	indexmapping := bleve.NewDocumentMapping()
 	for _, f := range fields {
 		switch strings.ToLower(f.Type) {
