@@ -3,6 +3,7 @@ package controllers
 import (
 	"fmt"
 	"net/http"
+	"net/url"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -11,6 +12,8 @@ import (
 	"github.com/ramnkl16/ez-search/abstractimpl"
 	"github.com/ramnkl16/ez-search/auth"
 	"github.com/ramnkl16/ez-search/common"
+	"github.com/ramnkl16/ez-search/coredb"
+	"github.com/ramnkl16/ez-search/ezcsv"
 	"github.com/ramnkl16/ez-search/ezsearch"
 	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
@@ -36,6 +39,8 @@ func (ctrl *searchController) RegisterRouter(rout *gin.Engine) {
 	rout.GET("/api/getindexes", ctrl.GetAllIndexes)
 	rout.GET("/api/getfields", ctrl.GetFields)
 	rout.POST("/api/createschema", ctrl.createIndexSchema)
+	rout.GET("/api/getschema", ctrl.getIndexSchema)
+	rout.POST("/api/generateSchema", ctrl.GenerateIndexSchema)
 
 }
 
@@ -128,23 +133,11 @@ func (ctrl *searchController) AddOrUpdateIndex(ctx *gin.Context) {
 	if i == nil || err != nil {
 		//try to create new index
 
-		fdefs, err := ezsearch.GetBleveTableschema(pindexName)
-		if err != nil {
-			saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("index [%s] schema was not created", indexName))
-			logger.Error(fmt.Sprintf("Failed|AddOrUpdateIndex id=%s, [%s]", indexName, docId), saveErr)
-		}
-		if fdefs == nil || len(fdefs) == 0 {
-			fdefs = append(fdefs, common.BleveFieldDef{Name: "timestamp", Type: "date"})
-		}
-		err = abstractimpl.BuildIndexSchema(indexName, fdefs, ns)
-		i, err = ezsearch.GetIndex(indexName)
-		if err != nil {
-			saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("index [%s] is not created. Please try after the index first", indexName))
-			logger.Error(fmt.Sprintf("Failed|AddOrUpdateIndex id=%s, [%s]", indexName, docId), saveErr)
-			//fmt.Println("Failed while update index|AddOrUpdateIndex", indexName, docId, saveErr)
-		}
+		//fmt.Println("Failed while update index|AddOrUpdateIndex", indexName, docId, saveErr)
+		i, err = abstractimpl.BuilddynamicSchema(pindexName)
+		ctx.JSON(http.StatusInternalServerError, err)
+		return
 
-		//return
 	}
 
 	if len(docId) == 0 {
@@ -290,6 +283,93 @@ func (ctrl *searchController) createIndexSchema(ctx *gin.Context) {
 	} else {
 		logger.Error("", err, zapcore.Field{Integer: int64(err.Status()), Key: "p1", Type: zapcore.StringType})
 		ctx.JSON(err.Status(), err.Message())
+
 	}
+
+}
+
+// GetFields  godoc
+// @Summary get schema
+// @Description get schema possible values for type[bool|text|date|numeric|geopoint]
+// @Description golang follows date pattern like indexname{2006-01-02} indexname{2006-01-02} which is equal to {yyyy-MM-dd}
+// @Description indexname{2006-01-02}-->gets a index every day
+// @Description indexname{2006-01}-->gets a index every month
+// @Description indexname{2006}-->gets a index every year
+// @Tags bleve indexes
+// @Accept  json
+// @Produce  json
+// @Param  indexName query string true "name of the index, you can also provide index date pattern like indexname{2006-01-02}"
+// @Param  fieldDef body []ezsearch.BleveFieldDef true "field definition"
+// @Success 200 {object} []string
+// @Failure 404 {object} string
+// @Failure 500 {object} string
+// @Router /api/getschema [get]
+func (ctrl *searchController) getIndexSchema(ctx *gin.Context) {
+	indexName := ctx.Query("indexName")
+	str, _ := url.QueryUnescape(indexName)
+	fmt.Println("url decode", str)
+	logger.Debug("getIndexSchema|controller", zapcore.Field{String: indexName, Key: "p1", Type: zapcore.StringType})
+	key := fmt.Sprintf("%s.schema", str)
+
+	schemaByte, err := coredb.GetKey(key)
+	if err != nil {
+		//errStr := fmt.Sprintf(`%s schema is not found in core db. Please try after get schema first. \n%s\n`, indexName, err.Error())
+		schemaErr := rest_errors.NewBadRequestError("%s schema is not found in core db. Please try after create schema first")
+		ctx.JSON(schemaErr.Status(), schemaErr)
+		return
+	}
+	if len(schemaByte) == 0 {
+		schemaErr := rest_errors.NewBadRequestError("%s schema is not found in core db. Please try after create schema first")
+		ctx.JSON(schemaErr.Status(), schemaErr)
+		return
+	}
+	fmt.Println("getschema", string(schemaByte))
+	ctx.String(http.StatusCreated, string(schemaByte))
+
+}
+
+// GetFields  godoc
+// @Summary get schema
+// @Description get schema possible values for type[bool|text|date|numeric|geopoint]
+// @Description golang follows date pattern like indexname{2006-01-02} indexname{2006-01-02} which is equal to {yyyy-MM-dd}
+// @Description indexname{2006-01-02}-->gets a index every day
+// @Description indexname{2006-01}-->gets a index every month
+// @Description indexname{2006}-->gets a index every year
+// @Tags bleve indexes
+// @Accept  json
+// @Produce  json
+// @Param  indexName query string true "name of the index, you can also provide index date pattern like indexname{2006-01-02}"
+// @Param  fieldDef body []ezsearch.BleveFieldDef true "field definition"
+// @Success 200 {object} []string
+// @Failure 404 {object} string
+// @Failure 500 {object} string
+// @Router /api/generateSchema [post]
+type schemaString struct {
+	Columns     string `json:"columns"`
+	IsShortName bool   `json:"isShortName"`
+}
+
+func (ctrl *searchController) GenerateIndexSchema(ctx *gin.Context) {
+
+	var m schemaString
+
+	if err := ctx.ShouldBindJSON(&m); err != nil {
+		saveErr := rest_errors.NewBadRequestError("invalid json body")
+		ctx.JSON(saveErr.Status(), saveErr)
+		return
+	}
+	list := ezcsv.GenerateIndexSchema(m.Columns, m.IsShortName)
+	if len(list) == 0 {
+		schemaErr := rest_errors.NewBadRequestError("Failed while generate schema")
+		ctx.JSON(schemaErr.Status(), schemaErr)
+		return
+	}
+	ctx.JSON(http.StatusCreated, list)
+	//generate column list
+	cols := make([]string, 0)
+	for _, v := range list {
+		cols = append(cols, v.Name)
+	}
+	ctx.String(http.StatusAccepted, strings.Join(cols, ","))
 
 }

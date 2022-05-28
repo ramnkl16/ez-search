@@ -14,6 +14,8 @@ import (
 	"github.com/ramnkl16/ez-search/api/ping"
 	"github.com/ramnkl16/ez-search/auth"
 	"github.com/ramnkl16/ez-search/datasources/catalogboltdb"
+
+	//"github.com/ramnkl16/ez-search/ezeventqueue"
 	"github.com/ramnkl16/ez-search/ezsearch"
 	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
@@ -63,7 +65,11 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	router.StaticFS("/swagger-ui", http.Dir(fullPath))
 	fullwebUi := path.Join(global.WorkingDir, "/web-ui")
 	router.StaticFS("/web-ui", http.Dir(fullwebUi))
+	//ezcsv.GetJsonFromCsv("C:\\go-prj\\ez-search\\uploads\\Userinformation.csv", 0)
 	//ezeventqueue.ProcessEventqueue()
+	// schemas := ezcsv.GenerateIndexSchema("DistNum,TID,YearNum,WeekNum,ReportNum,StartDate,EndDate,StartDisbNum,EndDisbNum,StartAcctTransNum,EndAcctTransNum,StartTransNum,EndTransNum,CountSales,CountTransactions,ApMacStartBalance,ApMacEndBalance,ApMacInvoice,ApMacMACredit,ApMacNationalAccountCredit,ApMacOther", false)
+	// fmt.Println("schema", schemas)
+	//return
 	router.Run(config.Port)
 	// // if len(language) > 0 {
 	// // 	hybris.UpdateSchedulerJobStatusAndTime(language)

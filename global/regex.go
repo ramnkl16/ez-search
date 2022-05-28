@@ -14,9 +14,9 @@ const (
 )
 
 var (
-	RegexParseDate = regexp.MustCompile(`\{([^}]+)\}`)                                      //to parse this pattern indexName{2006-01-02}
-	RegExkeyWords  = regexp.MustCompile("select |from |where |limit |since |facets |sort ") //for query parsing
-
+	RegexParseDate             = regexp.MustCompile(`\{([^}]+)\}`)                                      //to parse this pattern indexName{2006-01-02}
+	RegExkeyWords              = regexp.MustCompile("select |from |where |limit |since |facets |sort ") //for query parsing
+	RegexParseHasCapitalLetter = regexp.MustCompile("[[:upper:]]+")
 )
 
 func IsValidEmail(email string) bool {

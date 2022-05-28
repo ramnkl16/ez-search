@@ -12,8 +12,9 @@ import (
 )
 
 type BleveFieldDef struct {
-	Name string `json:"name"`
-	Type string `json:"type"` //possible values [bool|text|date|numeric|geopoint]
+	Name        string `json:"name"`
+	Type        string `json:"type"` //possible values [bool|text|date|numeric|geopoint]
+	DisplayName string `json:"dn"`
 }
 
 ///Index name date pattern should match with date value

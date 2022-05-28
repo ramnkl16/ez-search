@@ -52,8 +52,9 @@ func getIndex() (bleve.Index, rest_errors.RestErr) {
 }
 
 type BleveFieldDef struct {
-	Name string `json:"name"`
-	Type string `json:"type"` //possible values [bool|text|date|numeric|geopoint]
+	Name        string `json:"name"`
+	Type        string `json:"type"` //possible values [bool|text|date|numeric|geopoint]
+	DisplayName string `json:"dn"`
 }
 
 func BuildAppIndexSchema() rest_errors.RestErr {
@@ -67,7 +68,7 @@ func BuildAppIndexSchema() rest_errors.RestErr {
 	indexmapping.AddFieldMappingsAt("l", englishTextFieldMapping)
 	indexmapping.AddFieldMappingsAt("t", englishTextFieldMapping)
 	indexmapping.AddFieldMappingsAt("m", englishTextFieldMapping)
-	fields := []BleveFieldDef{{Name: "l", Type: "text"}, {Name: "t", Type: "date"}, {Name: "m", Type: "text"}}
+	fields := []BleveFieldDef{{Name: "l", Type: "text", DisplayName: "Level"}, {Name: "t", Type: "date", DisplayName: "Date Time"}, {Name: "m", Type: "text", DisplayName: "Message"}}
 
 	indexMapping := bleve.NewIndexMapping()
 	docMapName := "docs" //strings.ReplaceAll(indexName, ".", "")

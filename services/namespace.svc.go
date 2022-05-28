@@ -60,6 +60,7 @@ func (srv *namespaceService) New(m models.NamespaceParam) rest_errors.RestErr {
 		logger.Error("Invalid Email Provided for Namespace Creation", err)
 		return err
 	}
+
 	ug := models.UserGroup{Name: "admin", Description: "default admin", NamespaceID: na.ID}
 	ug.UpdatedAt = date_utils.GetNowSearchFormat()
 	//ug.UpdatedBy = ai.UserId
