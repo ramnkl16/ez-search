@@ -121,10 +121,9 @@ func GetKey(key string) (result []byte, err error) {
 }
 func Delete(key string) error {
 	db := GetDb()
-	//fmt.Println("getkey|dbInfo", db.Info())
+	fmt.Println("getkey|dbInfo", db.Info())
 	db.View(func(tx *bolt.Tx) error {
 		err := tx.Bucket([]byte("DB")).Bucket([]byte("catalog")).Delete([]byte(key))
-		//logger.Info(fmt.Sprintf("getkey [boltdb]:%s|%s", key, string(r)))
 		if err != nil {
 			//logger.Error("Failed while delete key ", err)
 			fmt.Println(err)

@@ -7,6 +7,7 @@ import (
 
 	"github.com/ramnkl16/ez-search/abstractimpl"
 	"github.com/ramnkl16/ez-search/ezcsv"
+	"github.com/ramnkl16/ez-search/ezmssqlconn"
 	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
 	"github.com/ramnkl16/ez-search/models"
@@ -58,9 +59,44 @@ func ProcessEventqueue() rest_errors.RestErr {
 				logger.Error("Failed while updateEventQueueHis", err)
 			}
 			break
+		case global.EVENT_TYPE_MSSQL_SYNC:
+			logger.Info(fmt.Sprintf("case EVENT_TYPE_MSSQL_SYNC %s", e.EventType))
+			e.Status = int(global.STATUS_INPROGRESS)
+			abstractimpl.CreateOrUpdate(e, abstractimpl.EventQueueTable, e.ID)
+			err := ezmssqlconn.ExecuteMsSqlScript(&e)
+
+			if err != nil {
+				logger.Error("Failed while execute", err)
+				e.Status = int(global.STATUS_ERROR)
+				e.Message = err.Error()
+				abstractimpl.CreateOrUpdate(e, abstractimpl.EventQueueTable, e.ID)
+				continue
+			}
+
+			abstractimpl.Delete(abstractimpl.EventQueueTable, e.ID)
+			fmt.Println("after deleted")
+			e.Status = int(global.STATUS_COMPLETED)
+			err = updateEventQueueHis(&e)
+			if err != nil {
+				logger.Error("Failed while updateEventQueueHis", err)
+			}
+			break
+		default:
+			logger.Info(fmt.Sprintf("event type is not implemented %s", e.EventType))
 		}
 	}
 	return nil
+}
+func handleEventQueueRetry(e models.EventQueue) {
+	e.RetryCount = e.RetryCount + 1
+	if e.RetryCount > 5 {
+		e.Status = int(global.STATUS_SUSPEND)
+		e.Message = "Reached max retry count"
+	} else {
+		e.Status = int(global.STATUS_ACTIVE)
+		e.StartAt = date_utils.GetNextScheduleDateByMins(e.StartAt, 5)
+	}
+	abstractimpl.CreateOrUpdate(e, abstractimpl.EventQueueTable, e.ID)
 }
 
 func executeCSVImport(e *models.EventQueue) rest_errors.RestErr {

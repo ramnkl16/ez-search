@@ -94,9 +94,13 @@ func GenerateIndexSchema(columnNames string, enabledShortName bool) []common.Ble
 				name = name + strings.Join(words[1:], "")
 			}
 		}
+		split := strings.Split(name, ".")
+		if len(split) > 1 {
+			name = split[1]
+		}
 		exist, _ := names[name]
 		if exist {
-			name = name + string(rune((colCount)))
+			name = fmt.Sprintf("%s%d", name, colCount)
 			colCount = colCount + 1
 		}
 
@@ -110,10 +114,13 @@ func GenerateIndexSchema(columnNames string, enabledShortName bool) []common.Ble
 func getDisplayName(name string) []string {
 	grp := global.RegexParseHasCapitalLetter.FindAllStringIndex(name, -1)
 	list := make([]string, 0)
-
+	if len(grp) == 0 {
+		list = append(list, name)
+		return list
+	}
 	curIdx := 0
 	//maxLen := len(name)
-	//fmt.Println("name", name)
+	fmt.Println("name", name, grp)
 	for grpIndex, r := range grp {
 		//fmt.Println("r", r)
 		if grpIndex != 0 {
@@ -123,7 +130,11 @@ func getDisplayName(name string) []string {
 		curIdx = r[0]
 
 	}
-	r := grp[len(grp)-1]
+	r := grp[0]
+	if len(grp) > 1 {
+		r = grp[len(grp)-1]
+	}
+
 	word := strings.Title(name[r[0]:])
 	list = append(list, strings.Split(word, "_")...)
 	//print(list)
@@ -132,3 +143,34 @@ func getDisplayName(name string) []string {
 	return list
 
 }
+
+func queueNewEventForCsvImport(fullpathFileName, indexName, startAt, dt string) string {
+	return fmt.Sprintf(` {
+	"createdAt": "%s",
+	"eventData": "{"fileName":"%s","ignoreEmpty":true,"indexName":"%s","uniqueIndexColIndex":1}",
+	"eventType": "indexfromcsv",
+	"id": "newid",
+	"isActive": "t",
+	"message": "",
+	"retryCount":0,
+	"startAt": "%s",
+	"status":1,
+	"updatedAt": "%s",
+	"RecurringInSeconds":0
+  }`, dt, fullpathFileName, indexName, startAt, dt)
+}
+
+// {
+// 	"createdAt": "2022-05-24T21:04:03Z",
+// 	"eventData": "{\"fileName\":\"C:\\\\go-prj\\\\ez-search\\\\uploads\\\\Userinformation.csv\",\"ignoreEmpty\":true,\"indexName\":\"macindex/new/customer\",\"uniqueIndexColIndex\":1}",
+// 	"eventType": "indexfromcsv",
+// 	"id": "newid",
+// 	"isActive": "t",
+// 	"message": "",
+// 	"retryCount":0,
+// 	"startAt": "2022-05-24T21:04:03Z",
+// 	"status":1,
+// 	"updatedAt": "2022-05-24T21:04:03Z",
+// 	"RecurringInSeconds":0
+
+//   }

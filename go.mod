@@ -16,6 +16,11 @@ require (
 )
 
 require (
+	github.com/golang-sql/civil v0.0.0-20190719163853-cb61b32ac6fe // indirect
+	github.com/golang-sql/sqlexp v0.1.0 // indirect
+)
+
+require (
 	github.com/KyleBanks/depth v1.2.1 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
@@ -34,6 +39,7 @@ require (
 	github.com/blevesearch/zapx/v13 v13.2.0 // indirect
 	github.com/blevesearch/zapx/v14 v14.2.0 // indirect
 	github.com/blevesearch/zapx/v15 v15.2.0 // indirect
+	github.com/denisenkom/go-mssqldb v0.12.2
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/glycerine/go-unsnap-stream v0.0.0-20181221182339-f9677308dec2 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
@@ -51,6 +57,7 @@ require (
 	github.com/kardianos/service v1.2.1
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
+	github.com/matryer/goscript v0.0.0-20170731125849-1a0cb0e0df70
 	github.com/mattn/go-isatty v0.0.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
