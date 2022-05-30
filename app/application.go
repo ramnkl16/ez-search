@@ -14,6 +14,7 @@ import (
 	"github.com/ramnkl16/ez-search/api/ping"
 	"github.com/ramnkl16/ez-search/auth"
 	"github.com/ramnkl16/ez-search/datasources/catalogboltdb"
+	"github.com/ramnkl16/ez-search/ezeventqueue"
 
 	//"github.com/ramnkl16/ez-search/ezeventqueue"
 	"github.com/ramnkl16/ez-search/ezsearch"
@@ -65,8 +66,26 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	router.StaticFS("/swagger-ui", http.Dir(fullPath))
 	fullwebUi := path.Join(global.WorkingDir, "/web-ui")
 	router.StaticFS("/web-ui", http.Dir(fullwebUi))
-	//ezcsv.GetJsonFromCsv("C:\\go-prj\\ez-search\\uploads\\Userinformation.csv", 0)
-	//ezeventqueue.ProcessEventqueue()
+	// //ezcsv.GetJsonFromCsv("C:\\go-prj\\ez-search\\uploads\\Userinformation.csv", 0)
+
+	// //cdCsv:= "{\"fileName\":\"C:\\\\go-prj\\\\ez-search\\\\uploads\\\\Userinformation.csv\",\"ignoreEmpty\":true,\"indexName\":\"macindex/new/customer\",\"uniqueIndexColIndex\":1}"
+	// //cdstr = strings.ReplaceAll(cdstr, `\"`, `"`)
+	// // bytes, err := rawIn.MarshalJSON()
+	// //fmt.Println("rawin", cdstr)
+	// // if err != nil {
+	// // 	panic(err)
+	// // }
+	// cdstr := "{\"host\":\"TOW-P-SQLHA07\\\\sqlha07\",\"dbName\":\"MBAWEB\",\"lastSyncAt\":\"2000-01-01\",\"goScriptBlock\":{\"goScriptKey\":\"mac.mba75.goscript.distnumLoop\",\"queryKey\":\"mac.mba75.customer.query\",\"distnumKey\":\"mac.mba75.distnum.list\",\"params\":[\"2000-01-01\"]},\"docIdColName\":\"\",\"indexName\":\"indexes/mac/mba75/customers\",\"userName\":\"macuser\",\"password\":\"T001sM@C\"}"
+	// var cd ezmssqlconn.MsSqlEventCustomData
+	// cd.GoScriptBlock.Params = []string{"2000-01-01"}
+	// err := json.Unmarshal([]byte(cdstr), &cd)
+	// if err != nil {
+	// 	logger.Error("Failed|ExecuteMsSqlScript|Unmarshal", err)
+	// }
+	// s, _ := json.Marshal(cd)
+	// fmt.Println(string(s))
+	// return
+	ezeventqueue.ProcessEventqueue()
 	// schemas := ezcsv.GenerateIndexSchema("DistNum,TID,YearNum,WeekNum,ReportNum,StartDate,EndDate,StartDisbNum,EndDisbNum,StartAcctTransNum,EndAcctTransNum,StartTransNum,EndTransNum,CountSales,CountTransactions,ApMacStartBalance,ApMacEndBalance,ApMacInvoice,ApMacMACredit,ApMacNationalAccountCredit,ApMacOther", false)
 	// fmt.Println("schema", schemas)
 	//return

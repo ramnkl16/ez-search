@@ -121,9 +121,9 @@ func main() {
 	//getParsedQueryByKeyword()
 	//return
 	svcConfig := &service.Config{
-		Name:        "GoServiceExampleSimple",
-		DisplayName: "Go Service Example",
-		Description: "This is an example Go service.",
+		Name:        "Ezsearch",
+		DisplayName: "Ez service",
+		Description: "Ez service",
 	}
 
 	prg := &program{}
