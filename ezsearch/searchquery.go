@@ -673,7 +673,7 @@ func parseQueryField(fieldVal string, list *[]*whereClause, schemaDefs []common.
 	var exist bool = false
 
 	if strings.Contains(fieldVal, "<") || strings.Contains(fieldVal, ">") { //construct range fields min and max
-		fmt.Println("strings.Contains(fieldVal, <)", fieldVal, len(*list))
+		//fmt.Println("strings.Contains(fieldVal, <)", fieldVal, len(*list))
 		rf, exist = findWhereField(field, list)
 
 	}

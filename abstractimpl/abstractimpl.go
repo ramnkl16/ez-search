@@ -120,7 +120,7 @@ func BatchCreateOrUpdate(indexName string, data map[string]interface{}) rest_err
 		batchCount = batchCount + 1
 		count = count + 1
 		if batchCount >= global.MaxIndexbatchSize {
-			logger.Info("batch executed", zapcore.Field{Key: "executed", Type: zapcore.Int32Type, Integer: int64(count)})
+			logger.Warn(fmt.Sprintf("batch executed %d/%d", len(data), int64(count)))
 			err := i.Batch(batch)
 			if err != nil {
 				logger.Error("Failed in the batch index", err)
@@ -168,7 +168,7 @@ func getResultObjs[T any](rows []map[string]interface{}) []T {
 			logger.Error("abstractimpl|getResultobjs|Failed while get object", err)
 			fmt.Println(err)
 		}
-		fmt.Println("getResultObjs|row", string(jsonStr))
+		//fmt.Println("getResultObjs|row", string(jsonStr))
 		// Convert json string to struct
 		if err := json.Unmarshal(jsonStr, &eq); err != nil {
 			logger.Error("abstractimpl|Failed while Unmarshal ", err, zapcore.Field{String: string(jsonStr), Key: "p1", Type: zapcore.StringType})

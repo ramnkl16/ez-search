@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jasonlvhit/gocron"
 	"github.com/ramnkl16/ez-search/abstractimpl"
 	"github.com/ramnkl16/ez-search/api/ping"
 	"github.com/ramnkl16/ez-search/auth"
@@ -49,11 +50,11 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	router.Use(AuthTokenValidation())
 	//ezsearch.TriggerIndex()
 	//fswatcher.WatchCSVFiles(config.CSVFileWatcherpath)
-	// if config.RunScheduler {
-	// 	s := gocron.NewScheduler()
-	// 	s.Every(10).Minute().Do(ezeventqueue.ProcessEventqueue)
-	// 	s.Start()
-	// }
+	if config.RunScheduler {
+		s := gocron.NewScheduler()
+		s.Every(1).Minute().Do(ezeventqueue.ProcessEventqueue)
+		s.Start()
+	}
 
 	//return
 
@@ -85,7 +86,7 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	// s, _ := json.Marshal(cd)
 	// fmt.Println(string(s))
 	// return
-	ezeventqueue.ProcessEventqueue()
+	//ezeventqueue.ProcessEventqueue()
 	// schemas := ezcsv.GenerateIndexSchema("DistNum,TID,YearNum,WeekNum,ReportNum,StartDate,EndDate,StartDisbNum,EndDisbNum,StartAcctTransNum,EndAcctTransNum,StartTransNum,EndTransNum,CountSales,CountTransactions,ApMacStartBalance,ApMacEndBalance,ApMacInvoice,ApMacMACredit,ApMacNationalAccountCredit,ApMacOther", false)
 	// fmt.Println("schema", schemas)
 	//return

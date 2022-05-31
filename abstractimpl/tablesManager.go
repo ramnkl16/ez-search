@@ -2,7 +2,6 @@ package abstractimpl
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"os"
 	"path"
@@ -213,7 +212,8 @@ func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, indexFold
 		}
 		cache_utils.AddOrUpdateCache(indexPath, index)
 	} else {
-		msg := fmt.Sprintf("Index %s is already exist, provide new index name", indexPath)
+		msg := fmt.Sprintf("Index %s is already exist, still it will update the schema defintion", indexPath)
+		logger.Warn(msg)
 		key := fmt.Sprintf("%s.schema", patternIndexName)
 		bytes, _ := coredb.GetKey(key)
 		//fmt.Println("before if not found key in core db", key, string(bytes))
@@ -222,7 +222,7 @@ func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, indexFold
 			bytes, _ := json.Marshal(fields)
 			coredb.AddKey(key, bytes)
 		}
-		return rest_errors.NewInternalServerError(msg, errors.New(msg))
+		//return rest_errors.NewInternalServerError(msg, errors.New(msg))
 	}
 	bytes, _ := json.Marshal(fields)
 	coredb.AddKey(fmt.Sprintf("%s.schema", patternIndexName), bytes)

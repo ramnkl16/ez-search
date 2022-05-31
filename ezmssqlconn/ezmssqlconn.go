@@ -52,7 +52,7 @@ type MsSqlEventCustomData struct {
 }
 
 func ExecuteMsSqlScript(eq *models.EventQueue) rest_errors.RestErr {
-	fmt.Println("ExecuteMsSqlScript", eq.EventData)
+	//fmt.Println("ExecuteMsSqlScript", eq.EventData)
 	var cd MsSqlEventCustomData
 	err := json.Unmarshal([]byte(eq.EventData), &cd)
 	if err != nil {
@@ -62,7 +62,7 @@ func ExecuteMsSqlScript(eq *models.EventQueue) rest_errors.RestErr {
 
 	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;database=%s;",
 		cd.Host, cd.UserName, cd.Password, cd.DbName)
-	fmt.Println("msssql conn string", connString)
+	//fmt.Println("msssql conn string", connString)
 	db, errdb := sql.Open("mssql", connString)
 	if errdb != nil {
 		logger.Error("Failed open db:", errdb, zap.String("ref1", cd.Host), zap.String("ref2", cd.DbName))
@@ -92,9 +92,10 @@ func ExecuteMsSqlScript(eq *models.EventQueue) rest_errors.RestErr {
 	}
 
 	script := goscript.New(string(gosciptGen))
-	fmt.Println("goscriptblock", string(distNums), string(query), cd.GoScriptBlock.Params)
+	//fmt.Println("goscriptblock", string(distNums), string(query), cd.GoScriptBlock.Params)
 	list, err := script.Execute(string(distNums), string(query), cd.GoScriptBlock.Params) //,8605,8651,8750,8780,8782,8986", "2000-01-01")
 	logger.Info(fmt.Sprintf("query list|%v", list))
+
 	if err != nil {
 		logger.Error("Failed at execuge go script, Check customdata query defintion", err)
 	}
@@ -102,7 +103,9 @@ func ExecuteMsSqlScript(eq *models.EventQueue) rest_errors.RestErr {
 		results, err := getDataset(q, cd.DocIdColName, db, ctx)
 		if err != nil {
 			logger.Error("Failed while getdataset", err)
+			continue
 		}
+		logger.Warn(fmt.Sprintf("distnum %s(%d)", q, len(results)))
 		abstractimpl.BatchCreateOrUpdate(cd.IndexName, results)
 	}
 	return nil
@@ -134,17 +137,17 @@ func getDataset(q, docIdColName string, db *sql.DB, ctx context.Context) (map[st
 
 		resultMap := make(map[string]interface{})
 		for i, val := range values {
-			fmt.Printf("Field=%s val=%v\n", columns[i], val)
+			//fmt.Printf("Field=%s val=%v\n", columns[i], val)
 			if val != nil {
 				resultMap[columns[i]] = val
 			}
 		}
-		fmt.Println(resultMap)
+		//fmt.Println(resultMap)
 		if len(docIdColName) == 0 {
 			docIdColName = columns[0]
 		}
 		val := resultMap[docIdColName]
-		fmt.Println(docIdColName, val, fmt.Sprintf("%v", val))
+		//fmt.Println(docIdColName, val, fmt.Sprintf("%v", val))
 		allMaps[fmt.Sprintf("%v", val)] = resultMap
 	}
 	return allMaps, nil

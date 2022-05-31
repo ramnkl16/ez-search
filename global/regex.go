@@ -1,7 +1,6 @@
 package global
 
 import (
-	"fmt"
 	"regexp"
 )
 
@@ -20,13 +19,13 @@ var (
 )
 
 func IsValidEmail(email string) bool {
-	fmt.Println("IsValidEmail", email)
+	//fmt.Println("IsValidEmail", email)
 	re := regexp.MustCompile(Email)
 	return re.MatchString(email)
 }
 
 func IsValidPhoneNumber(phone string) bool {
-	fmt.Println("IsValidPhoneNumber", phone)
+	//fmt.Println("IsValidPhoneNumber", phone)
 	//re := regexp.MustCompile(Mobile)
 	return true //re.MatchString(phone)
 }

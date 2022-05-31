@@ -307,7 +307,7 @@ func (ctrl *searchController) createIndexSchema(ctx *gin.Context) {
 func (ctrl *searchController) getIndexSchema(ctx *gin.Context) {
 	indexName := ctx.Query("indexName")
 	str, _ := url.QueryUnescape(indexName)
-	fmt.Println("url decode", str)
+	//fmt.Println("url decode", str)
 	logger.Debug("getIndexSchema|controller", zapcore.Field{String: indexName, Key: "p1", Type: zapcore.StringType})
 	key := fmt.Sprintf("%s.schema", str)
 
@@ -323,7 +323,7 @@ func (ctrl *searchController) getIndexSchema(ctx *gin.Context) {
 		ctx.JSON(schemaErr.Status(), schemaErr)
 		return
 	}
-	fmt.Println("getschema", string(schemaByte))
+	//fmt.Println("getschema", string(schemaByte))
 	ctx.String(http.StatusCreated, string(schemaByte))
 
 }

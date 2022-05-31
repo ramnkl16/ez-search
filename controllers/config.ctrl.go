@@ -79,7 +79,7 @@ func (ctrl *configController) Create(ctx *gin.Context) {
 // @Router /api/config/{key} [get]
 //getting a record  config
 func (ctrl *configController) Get(ctx *gin.Context) {
-	fmt.Println("config|get|controller")
+	//fmt.Println("config|get|controller")
 	id := ctx.Param("key")
 	ev, err := coredb.GetKey(id)
 	if err != nil {

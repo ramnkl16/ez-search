@@ -120,7 +120,7 @@ func getDisplayName(name string) []string {
 	}
 	curIdx := 0
 	//maxLen := len(name)
-	fmt.Println("name", name, grp)
+	//fmt.Println("name", name, grp)
 	for grpIndex, r := range grp {
 		//fmt.Println("r", r)
 		if grpIndex != 0 {
