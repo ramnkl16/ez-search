@@ -4205,6 +4205,66 @@
 					]
 				},
 				{
+					"name": "config",
+					"item": [
+						{
+							"name": "Register new configuration",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"key\":\"mac.goscript.general\",\r\n    \"value\":\"import (\\n\\t\\\"fmt\\\"\\n\\t\\\"strings\\\"\\n)\\n\\nfunc goscript(dists string, dt string) ([]string, error) {\\n\\n\\tlist := make([]string, 0)\\n\\tfor _, s := range strings.Split(dists, \\\",\\\") {\\n\\t\\tlist = append(list, fmt.Sprintf(\\\"select top 1  c.CustNum cn,c.LastName ln,c.FirstName fn,\\tc.Address a,c.City c,c.State s,c.PostalCode pc,c.HomePhone hp,c.WorkPhone wp,cast(c.DiscountPct as int) dp,c.TaxID ti,c.TaxExemptFlag tef,c.Status s1,c.StatusDate sd,c.EMail e, c.CreatedBy cb,c.CreatedDate cd,c.ModifiedBy mb,c.ModifiedDate md ,c.StopNum sn,CustomerTypeOID cto,PaymentSource ps ,CashCustomer cc,cast (ShopOID as char(36)) so,ReceiptByEmail rbe,ReceiptByPrinted rbp,CustomerNumber cn2,ShopNum sn3, d.distnum d from customer c inner join distributor d on c.[DistributorOID] = d.distributorOid where d.distnum = %s and c.createdDate>='%s'\\\", s, dt))\\n\\t}\\n\\n\\treturn list, nil\\n}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{baseUrl}}/api/config"
+							},
+							"response": []
+						},
+						{
+							"name": "get config by id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/config/mac.goscript.general",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"config",
+										"mac.goscript.general"
+									],
+									"query": [
+										{
+											"key": "key",
+											"value": "mac.goscript.general",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete config data",
+							"request": {
+								"method": "GET",
+								"header": []
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "Get all models.Menu",
 					"request": {
 						"method": "GET",
