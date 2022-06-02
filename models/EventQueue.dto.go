@@ -19,4 +19,5 @@ type EventQueue struct {
 	UpdatedAt          string `json:"updatedAt"`  // updatedAt
 	RecurringInSeconds int    `json:"RecurringInSeconds"`
 	LastSyncAt         string `json:"lastSyncAt"`
+	TimeTook           int    `json:"timeTookInms"`
 }

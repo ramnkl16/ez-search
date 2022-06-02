@@ -137,12 +137,12 @@ func getDataset(q, docIdColName string, db *sql.DB, ctx context.Context) (map[st
 
 		resultMap := make(map[string]interface{})
 		for i, val := range values {
-			//fmt.Printf("Field=%s val=%v\n", columns[i], val)
+			fmt.Printf("Field=%s val=%v\n", columns[i], val)
 			if val != nil {
 				resultMap[columns[i]] = val
 			}
 		}
-		//fmt.Println(resultMap)
+		fmt.Println(resultMap)
 		if len(docIdColName) == 0 {
 			docIdColName = columns[0]
 		}

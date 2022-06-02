@@ -273,7 +273,11 @@ var (
 		{Name: "eventData", Type: "text"},
 		{Name: "status", Type: "numeric"},
 		{Name: "retryCount", Type: "numeric"},
+		{Name: "message", Type: "text"},
 		{Name: "startAt", Type: "date"},
+		{Name: "recurringInSeconds", Type: "numeric"},
+		{Name: "timeTook", Type: "numeric"},
+		{Name: "LastSyncAt", Type: "date"},
 		{Name: "isActive", Type: "text"},
 		{Name: "createdAt", Type: "date"},
 		{Name: "updatedAt", Type: "date"},
@@ -287,10 +291,15 @@ var (
 		{Name: "eventData", Type: "text"},
 		{Name: "status", Type: "numeric"},
 		{Name: "retryCount", Type: "numeric"},
+		{Name: "message", Type: "text"},
 		{Name: "startAt", Type: "date"},
+		{Name: "recurringInSeconds", Type: "numeric"},
+		{Name: "timeTook", Type: "numeric"},
+		{Name: "LastSyncAt", Type: "date"},
 		{Name: "isActive", Type: "text"},
 		{Name: "createdAt", Type: "date"},
-		{Name: "updatedAt", Type: "date"}}
+		{Name: "updatedAt", Type: "date"},
+	}
 	eqHisData = `{"eventQueueId":"id1", "eventType":"product", "eventData":"{customjsondata}","status":1, "retryCount":0, 
 	"startAt":"2022-01-22T02:04:00z", "isActive":'t', "createdAt":"2022-01-22T02:04:00z", "updatedAt":"2022-01-22T02:04:00z"}`
 	queryMetaSchema = []common.BleveFieldDef{
