@@ -34,7 +34,8 @@ func (srv *eventQueueService) Get(id string) (*models.EventQueue, rest_errors.Re
 }
 
 func (srv *eventQueueService) Delete(id string) rest_errors.RestErr {
-	var m *models.EventQueue
+	var m *models.EventQueue = &models.EventQueue{}
+
 	m, _ = m.Get(id)
 	m.UpdatedAt = date_utils.GetNowSearchFormat()
 	m.IsActive = "f"

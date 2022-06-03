@@ -67,6 +67,7 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	router.StaticFS("/swagger-ui", http.Dir(fullPath))
 	fullwebUi := path.Join(global.WorkingDir, "/web-ui")
 	router.StaticFS("/web-ui", http.Dir(fullwebUi))
+	abstractimpl.Delete(abstractimpl.EventQueueTable, "")
 	// //ezcsv.GetJsonFromCsv("C:\\go-prj\\ez-search\\uploads\\Userinformation.csv", 0)
 
 	// //cdCsv:= "{\"fileName\":\"C:\\\\go-prj\\\\ez-search\\\\uploads\\\\Userinformation.csv\",\"ignoreEmpty\":true,\"indexName\":\"macindex/new/customer\",\"uniqueIndexColIndex\":1}"

@@ -95,13 +95,16 @@ func updateValueUsingreflection(kv map[string]string, fields reflect.Value) (boo
 // Delete a recored ( EventQueue) from the database.
 func Delete(tableName string, id string) rest_errors.RestErr {
 	t, err := GetTable(tableName)
+	fmt.Println("abstractImpl|delete started", tableName)
 	if err != nil {
+
 		return err
 	}
 	err1 := t.Delete(id)
 	if err1 != nil {
 		return rest_errors.NewInternalServerError("abstractimpl|Failed while delete eventqueue", err1)
 	}
+	fmt.Println("abstractImpl|deleted", tableName)
 	return nil
 }
 
@@ -186,7 +189,7 @@ func Get[T any](query string) (T, rest_errors.RestErr) {
 	if err != nil {
 		return m, err
 	}
-	if result == nil || len(result.ResultRow) > 0 {
+	if result == nil || len(result.ResultRow) == 0 {
 		return m, rest_errors.NewNotFoundError(fmt.Sprintf("abstractimpl|no record found %s", query))
 	}
 	res := getResultObjs[T](result.ResultRow)

@@ -45,8 +45,11 @@ func (eq EventQueue) GetAll(query string) ([]EventQueue, rest_errors.RestErr) {
 func (eq EventQueue) Get(id string) (*EventQueue, rest_errors.RestErr) {
 	query := fmt.Sprintf("select * from %s where id:%s limit 0, 1", abstractimpl.EventQueueTable, id)
 	res, err := abstractimpl.Get[EventQueue](query)
+	logger.Debug(fmt.Sprintf("delete query: %s", query))
 	if err != nil {
+		logger.Error(err.Error(), err)
 		return nil, err
 	}
+	fmt.Println("delete res", res)
 	return &res, nil
 }
