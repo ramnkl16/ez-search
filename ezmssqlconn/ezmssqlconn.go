@@ -6,14 +6,19 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
+	"path/filepath"
+	"strings"
 
 	_ "github.com/denisenkom/go-mssqldb"
 	"github.com/matryer/goscript"
 	"github.com/ramnkl16/ez-search/abstractimpl"
 	"github.com/ramnkl16/ez-search/coredb"
+	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
 	"github.com/ramnkl16/ez-search/models"
 	"github.com/ramnkl16/ez-search/rest_errors"
+	"github.com/ramnkl16/ez-search/utils/date_utils"
 	"go.uber.org/zap"
 )
 
@@ -49,6 +54,7 @@ type MsSqlEventCustomData struct {
 	FieldsMap     map[string]string `json:"fieldsMap,omitempty"`
 	UserName      string            `json:"userName"`
 	Password      string            `json:"password"`
+	SaveOnLocal   string            `json:"saveOnLocal"`
 }
 
 func ExecuteMsSqlScript(eq *models.EventQueue) rest_errors.RestErr {
@@ -107,9 +113,31 @@ func ExecuteMsSqlScript(eq *models.EventQueue) rest_errors.RestErr {
 		}
 		logger.Warn(fmt.Sprintf("distnum %s(%d)", q, len(results)))
 		abstractimpl.BatchCreateOrUpdate(cd.IndexName, results)
+		if cd.SaveOnLocal == "t" {
+
+			saveAsJsonFile(results, cd.IndexName)
+		}
 	}
 	return nil
 }
+func saveAsJsonFile(jsonData map[string]interface{}, entityName string) {
+	wd := filepath.Join(global.WorkingDir, "downloads")
+	_, err := os.Stat(wd)
+	if os.IsNotExist(err) {
+		os.MkdirAll(wd, os.ModeDir)
+	}
+	fileName := fmt.Sprintf(`%s/%s_%s.json`, wd, strings.ReplaceAll(entityName, "/", "_"), date_utils.GetNowFileLayout())
+	logger.Warn(fmt.Sprintf("saveasjsonFIle filename %s", fileName))
+	f, err := os.Create(fileName)
+	defer f.Close()
+	fileBytes, err := json.Marshal(jsonData)
+	if err != nil {
+		logger.Error("Failed whil marshal", err)
+	}
+	f.Write(fileBytes)
+
+}
+
 func getDataset(q, docIdColName string, db *sql.DB, ctx context.Context) (map[string]interface{}, error) {
 
 	rows, err := db.QueryContext(ctx, q)
@@ -137,12 +165,12 @@ func getDataset(q, docIdColName string, db *sql.DB, ctx context.Context) (map[st
 
 		resultMap := make(map[string]interface{})
 		for i, val := range values {
-			fmt.Printf("Field=%s val=%v\n", columns[i], val)
+			//fmt.Printf("Field=%s val=%v\n", columns[i], val)
 			if val != nil {
 				resultMap[columns[i]] = val
 			}
 		}
-		fmt.Println(resultMap)
+		//fmt.Println(resultMap)
 		if len(docIdColName) == 0 {
 			docIdColName = columns[0]
 		}

@@ -45,17 +45,17 @@ import (
 
 ///
 
-func GetBleveTableschema(indexName string) ([]common.BleveFieldDef, error) {
+func GetBleveIndexSchema(indexName string) ([]common.BleveFieldDef, error) {
 	key := fmt.Sprintf("%s.schema", indexName)
-	logger.Debug("schema key", zapcore.Field{Type: zapcore.StringType, Key: key})
+	logger.Debug("GetBleveIndexSchema|schema key", zapcore.Field{Type: zapcore.StringType, Key: key})
 	schemaByte, err := coredb.GetKey(key)
 	if err != nil {
-		errStr := fmt.Sprintf(`%s schema is not found in core db. Please try after create schema first. \n%s\n`, indexName, err.Error())
+		errStr := fmt.Sprintf(`GetBleveIndexSchema|%s schema is not found in core db. Please try after create schema first. \n%s\n`, indexName, err.Error())
 		logger.Error(errStr, errors.New(""))
 		return nil, errors.New(errStr)
 	}
 	if len(schemaByte) == 0 {
-		errStr := fmt.Sprintf(`%s schema is not found in core db. Please try after create schema first.`, indexName)
+		errStr := fmt.Sprintf(`GetBleveIndexSchema|%s schema is not found in core db. Please try after create schema first.`, indexName)
 		logger.Error(errStr, errors.New(""))
 		return nil, errors.New(errStr)
 	}

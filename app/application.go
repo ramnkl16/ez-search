@@ -106,7 +106,8 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 func AuthTokenValidation() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authToken := auth.GetXauthToken(c.Request)
-		println("auth token", authToken, auth.GetNamespace(c.Request))
+		v, exist := cache_utils.GetFromCredentialCache(authToken)
+		println("auth token", authToken, auth.GetNamespace(c.Request), v, exist)
 		//fmt.Println(authToken)
 		// for a := range cache_utils.Cache.GetKeys() {
 		// 	fmt.Println("Avaialbl Keys: ")

@@ -3,6 +3,7 @@ package abstractimpl
 import (
 	"encoding/json"
 	"fmt"
+	"path"
 	"reflect"
 	"strconv"
 
@@ -12,6 +13,7 @@ import (
 	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
 	"github.com/ramnkl16/ez-search/rest_errors"
+	"github.com/ramnkl16/ez-search/utils/cache_utils"
 	"github.com/ramnkl16/ez-search/utils/uid_utils"
 
 	"go.uber.org/zap/zapcore"
@@ -95,7 +97,7 @@ func updateValueUsingreflection(kv map[string]string, fields reflect.Value) (boo
 // Delete a recored ( EventQueue) from the database.
 func Delete(tableName string, id string) rest_errors.RestErr {
 	t, err := GetTable(tableName)
-	fmt.Println("abstractImpl|delete started", tableName)
+	//fmt.Println("abstractImpl|delete started", tableName)
 	if err != nil {
 
 		return err
@@ -104,7 +106,7 @@ func Delete(tableName string, id string) rest_errors.RestErr {
 	if err1 != nil {
 		return rest_errors.NewInternalServerError("abstractimpl|Failed while delete eventqueue", err1)
 	}
-	fmt.Println("abstractImpl|deleted", tableName)
+	//fmt.Println("abstractImpl|deleted", tableName)
 	return nil
 }
 
@@ -169,7 +171,7 @@ func getResultObjs[T any](rows []map[string]interface{}) []T {
 		jsonStr, err := json.Marshal(row)
 		if err != nil {
 			logger.Error("abstractimpl|getResultobjs|Failed while get object", err)
-			fmt.Println(err)
+			//fmt.Println(err)
 		}
 		//fmt.Println("getResultObjs|row", string(jsonStr))
 		// Convert json string to struct
@@ -196,20 +198,35 @@ func Get[T any](query string) (T, rest_errors.RestErr) {
 	return res[0], nil
 }
 
-func BuilddynamicSchema(pindexName string) (bleve.Index, rest_errors.RestErr) {
-	fdefs, err := ezsearch.GetBleveTableschema(pindexName)
+func BuilddynamicSchema(pindexName string, newIndexName string) (bleve.Index, rest_errors.RestErr) {
+	fdefs, err := ezsearch.GetBleveIndexSchema(pindexName)
 	if err != nil {
-		saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("index [%s] schema was not created", pindexName))
-		logger.Error(fmt.Sprintf("Failed|BuilddynamicSchema %s", pindexName), saveErr)
+		saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("BuilddynamicSchema|index [%s] schema was not created", pindexName))
+		logger.Error(fmt.Sprintf("BuilddynamicSchema|Failed|BuilddynamicSchema %s", pindexName), saveErr)
 	}
 	if fdefs == nil || len(fdefs) == 0 {
 		fdefs = append(fdefs, common.BleveFieldDef{Name: "timestamp", Type: "date"})
 	}
-	err = BuildIndexSchema(pindexName, fdefs, pindexName)
-	i, err := ezsearch.GetIndex(pindexName)
+	docMappings := common.GetMappingDoc(fdefs)
+
+	indexMapping := bleve.NewIndexMapping()
+	docMapName := "docs" //strings.ReplaceAll(indexName, ".", "")
+	//fmt.Println("buildindexschema|", indexMapping)
+	indexMapping.AddDocumentMapping(docMapName, &docMappings)
+
+	fullPath := path.Join(global.WorkingDir, newIndexName)
+	index, err := bleve.New(fullPath, indexMapping)
 	if err != nil {
-		saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("index [%s] is not created. Please try after the index first", pindexName))
-		logger.Error(fmt.Sprintf("Failed|AddOrUpdateIndex  %s", pindexName), saveErr)
+		//fmt.Println("BuildIndexSchema|Failed schemabuild mapping", err)
+		logger.Info("BuilddynamicSchema|Failed schemabuild mapping", zapcore.Field{Type: zapcore.StringType, String: err.Error(), Key: "msg"})
+		return nil, rest_errors.NewBadRequestError(err.Error())
+	}
+	cache_utils.AddOrUpdateCache(newIndexName, index)
+	//err = BuilddynamicSchema(pindexName, fdefs, pindexName)
+	i, err := ezsearch.GetIndex(newIndexName)
+	if err != nil {
+		saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("BuilddynamicSchema|index [%s] is not created. Please try after the index first", newIndexName))
+		logger.Error(fmt.Sprintf("BuilddynamicSchema|Failed  %s", newIndexName), saveErr)
 		return nil, saveErr
 
 	}

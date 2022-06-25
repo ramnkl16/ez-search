@@ -23,7 +23,7 @@ func GetJsonFromCsv(fileName string, uniqueColIndex int) (map[string]interface{}
 	h := records[0] //assuming first row will be header
 	indexes := make(map[string]interface{})
 	for rowIdex, record := range records {
-		fmt.Println(rowIdex, record)
+		//fmt.Println(rowIdex, record)
 		if rowIdex == 0 {
 			continue
 

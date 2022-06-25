@@ -50,6 +50,6 @@ func (eq EventQueue) Get(id string) (*EventQueue, rest_errors.RestErr) {
 		logger.Error(err.Error(), err)
 		return nil, err
 	}
-	fmt.Println("delete res", res)
+	//fmt.Println("delete res", res)
 	return &res, nil
 }

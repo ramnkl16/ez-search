@@ -23,11 +23,12 @@ func ProcessEventqueue() rest_errors.RestErr {
 	events, err := services.EventQueueCustomService.GetActiveEventQueues() //fetch all events queue
 	logger.Info("ProcessEventqueue")
 	if err != nil && err.Status() == http.StatusNotFound {
-		fmt.Println("No Event found")
+		//fmt.Println("No Event found")
+		logger.Error("Failed while process EventQueue", err)
 		return err
 	}
 	quevedEvents := make(map[string]interface{})
-	logger.Info("ProcessEventqueue|25")
+	logger.Info("ProcessEventqueue")
 	for _, e := range events {
 		e.Status = int(global.STATUS_QUEUED)
 		quevedEvents[e.ID] = e
@@ -70,7 +71,7 @@ func ProcessEventqueue() rest_errors.RestErr {
 		}
 		logger.Debug("Eventqueue completed section")
 		abstractimpl.Delete(abstractimpl.EventQueueTable, e.ID)
-		fmt.Println("after deleted")
+		//fmt.Println("after deleted")
 		e.Status = int(global.STATUS_COMPLETED)
 		err = updateEventQueueHis(&e)
 		if err != nil {

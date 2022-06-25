@@ -152,22 +152,7 @@ func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, indexFold
 		os.MkdirAll(fd, os.ModeDir)
 		// TODO: handle error
 	}
-	indexmapping := bleve.NewDocumentMapping()
-	for _, f := range fields {
-		switch strings.ToLower(f.Type) {
-		case "bool":
-
-			indexmapping.AddFieldMappingsAt(f.Name, bleve.NewBooleanFieldMapping())
-		case "date":
-			indexmapping.AddFieldMappingsAt(f.Name, bleve.NewDateTimeFieldMapping())
-		case "numeric":
-			indexmapping.AddFieldMappingsAt(f.Name, bleve.NewNumericFieldMapping())
-		case "geopoint":
-			indexmapping.AddFieldMappingsAt(f.Name, bleve.NewGeoPointFieldMapping())
-		default:
-			indexmapping.AddFieldMappingsAt(f.Name, bleve.NewTextFieldMapping())
-		}
-	}
+	indexmapping := common.GetMappingDoc(fields)
 	indexPath := indexName
 	if !strings.Contains(indexName, "/") {
 		//if !isTable {
@@ -178,11 +163,11 @@ func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, indexFold
 	}
 	patternIndexName := indexName
 
-	grp := global.RegexParseDate.FindAllSubmatch([]byte(indexPath), -1)
-	if grp != nil {
+	//grp := global.RegexParseDate.FindAllSubmatch([]byte(indexPath), -1)
+	dtFormat := common.ExtractDateFormatFromIndex(indexPath)
+	if len(dtFormat) > 0 {
 		dt := time.Now().UTC()
 
-		dtFormat := string(grp[0][1])
 		//dtVal := time.Now().UTC().Format(dtFormat)
 		dtVal := dt.Format(dtFormat)
 		indexPath = strings.Replace(indexPath, fmt.Sprintf("{%s}", dtFormat), dtVal, -1)
@@ -192,7 +177,7 @@ func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, indexFold
 	indexMapping := bleve.NewIndexMapping()
 	docMapName := "docs" //strings.ReplaceAll(indexName, ".", "")
 	//fmt.Println("buildindexschema|", indexMapping)
-	indexMapping.AddDocumentMapping(docMapName, indexmapping)
+	indexMapping.AddDocumentMapping(docMapName, &indexmapping)
 
 	index, err := ezsearch.GetIndex(indexPath)
 	//fmt.Println("afterGetIndex(indexName)")
@@ -228,6 +213,7 @@ func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, indexFold
 	coredb.AddKey(fmt.Sprintf("%s.schema", patternIndexName), bytes)
 	return nil
 }
+
 func getIndexNameWithTable(indexName string) string {
 	if strings.Contains(indexName, "/") {
 		return indexName

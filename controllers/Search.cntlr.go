@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap/zapcore"
@@ -15,7 +16,8 @@ import (
 	"github.com/ramnkl16/ez-search/coredb"
 	"github.com/ramnkl16/ez-search/ezcsv"
 	"github.com/ramnkl16/ez-search/ezsearch"
-	"github.com/ramnkl16/ez-search/global"
+
+	//"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
 	"github.com/ramnkl16/ez-search/rest_errors"
 	"github.com/ramnkl16/ez-search/utils/uid_utils"
@@ -106,6 +108,7 @@ func (ctrl *searchController) AddOrUpdateIndex(ctx *gin.Context) {
 
 	indexName := ctx.Query("indexName")
 	pindexName := indexName
+	//fmt.Println("controlller|addorUpdate|", pindexName)
 	//abstractimpl.IndexBasePath = ns
 	docId := ctx.Query("docId")
 	if len(docId) == 0 {
@@ -121,30 +124,35 @@ func (ctrl *searchController) AddOrUpdateIndex(ctx *gin.Context) {
 	//matches := m.FindAllString("index{2006-09-11}", -1)
 	//dtVal := time.Now().UTC().Format(dtFormat)
 	dt := ctx.Query("indexTranDate")
+	if len(dt) == 0 && strings.Contains(indexName, "{") {
+		format := common.ExtractDateFormatFromIndex(indexName)
+		dt = time.Now().Format(format)
+	}
+
 	indexName, errMsg := common.GetPatternIndexName(indexName, dt)
 	if len(errMsg) > 0 {
 		ctx.String(http.StatusBadRequest, errMsg)
 		return
 	}
-	fmt.Printf("%q\n", global.RegexParseDate.FindAllSubmatch([]byte(`index{2006-09-11}`), -1))
-
+	//fmt.Printf("%q\n", global.RegexParseDate.FindAllSubmatch([]byte(`index{2006-09-11}`), -1))
+	fmt.Println("ctrl|after pattern|indexName", indexName)
 	var err error
 	i, err := ezsearch.GetIndex(indexName)
 	if i == nil || err != nil {
 		//try to create new index
 
 		//fmt.Println("Failed while update index|AddOrUpdateIndex", indexName, docId, saveErr)
-		i, err = abstractimpl.BuilddynamicSchema(pindexName)
+		i, err = abstractimpl.BuilddynamicSchema(pindexName, indexName)
 		ctx.JSON(http.StatusInternalServerError, err)
 		return
 
 	}
 
-	if len(docId) == 0 {
-		saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("unable to AddOrUpdateIndex [%s] for id[%s]. Please provide correct doc id", indexName, docId))
-		ctx.JSON(saveErr.Status(), saveErr)
-		return
-	}
+	// if len(docId) == 0 {
+	// 	saveErr := rest_errors.NewBadRequestError(fmt.Sprintf("unable to AddOrUpdateIndex [%s] for id[%s]. Please provide correct doc id", indexName, docId))
+	// 	ctx.JSON(saveErr.Status(), saveErr)
+	// 	return
+	// }
 	var m interface{}
 
 	if err := ctx.ShouldBindJSON(&m); err != nil {
@@ -152,7 +160,7 @@ func (ctrl *searchController) AddOrUpdateIndex(ctx *gin.Context) {
 		ctx.JSON(saveErr.Status(), saveErr)
 		return
 	}
-	//fmt.Println("docId and model", docId, m)
+	//fmt.Println("docId and model", indexName, docId, m)
 	err = i.Index(docId, m)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)

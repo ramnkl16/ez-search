@@ -166,7 +166,7 @@ func (srv *userService) Login(emailOrMobile string, password string, nsCode stri
 	enToken := b64.StdEncoding.EncodeToString(buStr)
 	u.Token = enToken
 
-	fmt.Println("u", u)
+	//fmt.Println("u", u)
 	cache_utils.AddOrUpdateCredentialCache(enToken, auth.AuthUserInfo{UserId: u.ID, UserName: emailOrMobile, NamespaceId: u.NamespaceID})
 	return &u, nil
 }

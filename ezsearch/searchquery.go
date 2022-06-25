@@ -107,7 +107,7 @@ func PostSearchResult(queryStr string) (*SearchResponseModel, rest_errors.RestEr
 	}
 
 	str, _ := json.Marshal(req)
-	fmt.Println("qery")
+	//fmt.Println("qery")
 
 	logger.Debug("PostSearchResult|req model", zapcore.Field{String: string(str), Key: "p1", Type: zapcore.StringType})
 
@@ -444,7 +444,7 @@ func parseQuery(parseVal string) (*bleve.SearchRequest, []string, error) {
 	}
 	indexNames := strings.Split(fro, "|")
 	var schemaDefs []common.BleveFieldDef
-	schemaDefs, _ = GetBleveTableschema(indexNames[0])
+	schemaDefs, _ = GetBleveIndexSchema(indexNames[0])
 
 	indexes := common.GetAllIndexes()
 	//fmt.Println(indexes)

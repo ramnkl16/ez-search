@@ -33,9 +33,11 @@ func AddOrUpdateCacheWithTTL(key string, value interface{}) {
 }
 
 func AddOrUpdateCredentialCache(key string, value interface{}) {
+	fmt.Println(" AddOrUpdateCredentialCache", key)
 	CredentialCache.Set(key, value)
 }
 
 func GetFromCredentialCache(key string) (interface{}, error) {
+	fmt.Println("GetFromCredentialCache", key)
 	return CredentialCache.Get(key)
 }

@@ -70,7 +70,6 @@ func GetIndex(indexName string) (bleve.Index, rest_errors.RestErr) {
 		// if i == nil || err != nil { //not available on data folder so look up in tables folder
 		// 	i, err = bleve.Open(getIndexNameWithTable(indexName))
 		// }
-
 		if err != nil {
 			logger.Error("GetIndex|Failed while open index", err, zapcore.Field{String: indexName, Key: "p1", Type: zapcore.StringType})
 			return nil, rest_errors.NewBadRequestError(err.Error())
