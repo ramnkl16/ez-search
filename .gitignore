@@ -23,3 +23,5 @@ logs
 *.txt
 logs
 uploads
+downloads
+core.db
