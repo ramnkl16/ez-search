@@ -81,6 +81,7 @@ func GenerateIndexSchema(columnNames string, enabledShortName bool) []common.Ble
 	var colCount int = 1
 	for _, v := range strings.Split(columnNames, ",") {
 		words := getDisplayName(v)
+		fmt.Println(words)
 		var name string
 		//get the first letter of each word
 		if enabledShortName {
@@ -115,16 +116,28 @@ func getDisplayName(name string) []string {
 	grp := global.RegexParseHasCapitalLetter.FindAllStringIndex(name, -1)
 	list := make([]string, 0)
 	if len(grp) == 0 {
-		list = append(list, name)
+		if strings.Contains(name, "_") {
+			split := strings.Split(name, "_")
+			for _, v := range split {
+				list = append(list, strings.Title(v))
+			}
+
+		} else {
+			list = append(list, strings.Title(name))
+		}
 		return list
 	}
 	curIdx := 0
 	//maxLen := len(name)
-	//fmt.Println("name", name, grp)
+	fmt.Println("name", name, grp)
+	count := 0
 	for grpIndex, r := range grp {
-		//fmt.Println("r", r)
+		fmt.Println("r", r, grpIndex)
+
+		count = count + 1
 		if grpIndex != 0 {
 			word := strings.Title(name[curIdx : r[1]-1])
+			fmt.Println("word split", word)
 			list = append(list, strings.Split(word, "_")...)
 		}
 		curIdx = r[0]
@@ -133,13 +146,15 @@ func getDisplayName(name string) []string {
 	r := grp[0]
 	if len(grp) > 1 {
 		r = grp[len(grp)-1]
+	} else { //get first part of the word
+		list = append(list, strings.Title(name[0:r[0]]))
 	}
-
+	fmt.Println("count#", count, curIdx)
 	word := strings.Title(name[r[0]:])
 	list = append(list, strings.Split(word, "_")...)
-	//print(list)
+	print(list)
 
-	//fmt.Println("query parser", kw)
+	fmt.Println("query parser", list)
 	return list
 
 }

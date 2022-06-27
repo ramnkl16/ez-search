@@ -128,6 +128,7 @@ func (ctrl *searchController) AddOrUpdateIndex(ctx *gin.Context) {
 		format := common.ExtractDateFormatFromIndex(indexName)
 		dt = time.Now().Format(format)
 	}
+	fmt.Println("indextrandate", ctx.Query("indexTranDate"), dt)
 
 	indexName, errMsg := common.GetPatternIndexName(indexName, dt)
 	if len(errMsg) > 0 {
