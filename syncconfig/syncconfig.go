@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/ramnkl16/ez-search/datasources/catalogboltdb"
+	"github.com/ramnkl16/ez-search/ezsmtp"
 	"github.com/ramnkl16/ez-search/logger"
 
 	"github.com/ramnkl16/ez-search/ezsearch"
@@ -20,6 +21,7 @@ type (
 		BoltDBSettings     catalogboltdb.Config `json:"boltdbSettings"`
 		EzsearchSettings   ezsearch.Config      `json:"searchSettings"`
 		LoggerSettings     logger.Config        `json:"loggerSettings"`
+		EzsmptSettings     ezsmtp.Config        `json:"smtpSettings"`
 		CSVFileWatcherpath string               `json:"csvWatcher"`
 		CSVFileExtension   string               `json:"csvFileExt"`
 		DbName             string               `json:"dbName"`

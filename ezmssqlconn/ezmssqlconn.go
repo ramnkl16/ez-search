@@ -81,17 +81,17 @@ func ExecuteMsSqlScript(eq *models.EventQueue) rest_errors.RestErr {
 		logger.Error("Failed while ping db", err, zap.String("ref1", cd.Host), zap.String("ref2", cd.DbName))
 		return rest_errors.NewInternalServerError("Failed while ping db", err)
 	}
-	gosciptGen, err := coredb.GetKey(cd.GoScriptBlock.GoScriptKey)
+	gosciptGen, err := coredb.GetValue(coredb.Defaultbucket, cd.GoScriptBlock.GoScriptKey)
 	if err != nil {
 		restErr := rest_errors.NewInternalServerError(fmt.Sprintf("Please try register goscript,missing key %s", cd.GoScriptBlock.GoScriptKey), err)
 		return restErr
 	}
-	query, err := coredb.GetKey(cd.GoScriptBlock.QueryKey)
+	query, err := coredb.GetValue(coredb.Defaultbucket, cd.GoScriptBlock.QueryKey)
 	if err != nil {
 		restErr := rest_errors.NewInternalServerError(fmt.Sprintf("Please try register sql script,missing key %s", cd.GoScriptBlock.QueryKey), err)
 		return restErr
 	}
-	distNums, err := coredb.GetKey(cd.GoScriptBlock.DistnumKey)
+	distNums, err := coredb.GetValue(coredb.Defaultbucket, cd.GoScriptBlock.DistnumKey)
 	if err != nil {
 		restErr := rest_errors.NewInternalServerError(fmt.Sprintf("Please try register sql script,missing key %s", cd.GoScriptBlock.DistnumKey), err)
 		return restErr

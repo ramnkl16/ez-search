@@ -16,6 +16,13 @@
         "logOutput":"logs/logs.txt", 
         "logLevel":"debug"
     },
+    "smtpSettings":{
+        "from":"ram.ezsearch@gmail.com",
+        "password":"wfywwqetrjpaajix",
+        "smtpHost" :"smtp.gmail.com",
+        "smtpPort":"587"
+
+    },
     "port": ":8015",
     "hostName": "localhost",
     "workingDir":"C:\\go-prj\\src",

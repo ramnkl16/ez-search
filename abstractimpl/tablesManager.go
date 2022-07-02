@@ -41,11 +41,30 @@ const (
 	UserMenuTable      string = "tables/tables.usermenu"
 )
 
+//create default meta data for the table
+func DefaultmetaData() {
+	coredb.AddKey(coredb.Defaultbucket, "schedulejob.delete_logs.key", []byte("indexes/applogs-{2006-01-02},indexes/mac/Desktop-{2006-01-02},indexes/mac/Sync-{2006-01-02}"))
+	coredb.AddKey(coredb.Defaultbucket, "default.resetpassword.subject.key", []byte("Password Reset."))
+	coredb.AddKey(coredb.Defaultbucket, "default.resetpassword.body.key", []byte(
+		`<!DOCTYPE html>
+	<html lang="en">
+	<head>
+	  <title>Password reset</title>
+	</head>
+	<body>
+	<h3>Hi {{.Name}},</h3>
+	<p>There was a request to change your password!</p>
+	<p>If you did not make this request then please ignore this email.</p>
+	<p>Otherwise, please click this link to change your password: <a href="{{.resetUrl}}">Reset</a></p>
+	</body>
+	</html>`))
+}
+
 //create tables for eventqueue eventqueuehistory and querydef
 func CreateTables() {
 	tables := common.GetIndexes(true)
 	var isExist bool
-	//logger.Info(fmt.Sprintf("createtable %v", tables))
+	logger.Info(fmt.Sprintf("createtable %v", tables))
 	isExist = tables[EventQueueTable]
 	if !isExist {
 		BuildIndexSchema(EventQueueTable, eqSchema, "tables")
@@ -200,17 +219,17 @@ func BuildIndexSchema(indexName string, fields []common.BleveFieldDef, indexFold
 		msg := fmt.Sprintf("Index %s is already exist, still it will update the schema defintion", indexPath)
 		logger.Warn(msg)
 		key := fmt.Sprintf("%s.schema", patternIndexName)
-		bytes, _ := coredb.GetKey(key)
+		bytes, _ := coredb.GetValue(coredb.Defaultbucket, key)
 		//fmt.Println("before if not found key in core db", key, string(bytes))
 		if bytes == nil || len(bytes) == 0 {
 			logger.Debug(fmt.Sprintf("not found key in core db key:%s data:%s", key, string(bytes)))
 			bytes, _ := json.Marshal(fields)
-			coredb.AddKey(key, bytes)
+			coredb.AddKey(coredb.Defaultbucket, key, bytes)
 		}
 		//return rest_errors.NewInternalServerError(msg, errors.New(msg))
 	}
 	bytes, _ := json.Marshal(fields)
-	coredb.AddKey(fmt.Sprintf("%s.schema", patternIndexName), bytes)
+	coredb.AddKey(coredb.Defaultbucket, fmt.Sprintf("%s.schema", patternIndexName), bytes)
 	return nil
 }
 

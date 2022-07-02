@@ -95,12 +95,12 @@ func BuildAppIndexSchema() rest_errors.RestErr {
 		index.Close()
 	} else {
 		key := fmt.Sprintf("%s.schema", Conf.ApplogIndexPath)
-		bytes, _ := coredb.GetKey(key)
+		bytes, _ := coredb.GetValue(coredb.Defaultbucket, key)
 		//fmt.Println("before if not found key in core db", key, string(bytes))
 		if bytes == nil || len(bytes) == 0 {
 			fmt.Println("not found key in core db", key, string(bytes))
 			bytes, _ := json.Marshal(fields)
-			coredb.AddKey(key, bytes)
+			coredb.AddKey(coredb.Defaultbucket, key, bytes)
 		}
 		if index != nil {
 			index.Close()
@@ -109,6 +109,6 @@ func BuildAppIndexSchema() rest_errors.RestErr {
 		//return rest_errors.NewInternalServerError(errors.New(msg))
 	}
 	bytes, _ := json.Marshal(fields)
-	coredb.AddKey(fmt.Sprintf("%s.schema", Conf.ApplogIndexPath), bytes)
+	coredb.AddKey(coredb.Defaultbucket, fmt.Sprintf("%s.schema", Conf.ApplogIndexPath), bytes)
 	return nil
 }

@@ -4,11 +4,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 	"time"
 
 	"github.com/ramnkl16/ez-search/abstractimpl"
+	"github.com/ramnkl16/ez-search/common"
+	"github.com/ramnkl16/ez-search/coredb"
 	"github.com/ramnkl16/ez-search/ezcsv"
 	"github.com/ramnkl16/ez-search/ezmssqlconn"
+	"github.com/ramnkl16/ez-search/ezsearch"
 	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
 	"github.com/ramnkl16/ez-search/models"
@@ -52,6 +56,9 @@ func ProcessEventqueue() rest_errors.RestErr {
 			logger.Info(fmt.Sprintf("case EVENT_TYPE_MSSQL_SYNC %s", e.EventType))
 			err = ezmssqlconn.ExecuteMsSqlScript(&e)
 			break
+		case global.EVENT_TYPE_DETETE_LOG:
+			logger.Info(fmt.Sprintf("case EVENT_TYPE_DETETE_LOG %s", e.EventType))
+			err = executeDeleteIndexDocs(&e)
 		default:
 			logger.Info(fmt.Sprintf("event type is not implemented %s", e.EventType))
 		}
@@ -160,4 +167,62 @@ type CSVImportCustomData struct {
 	IgnoreEmpty         bool   `json:"ignoreEmpty"` //ingore field when empty
 	IndexName           string `json:"indexName"`   //with relative path
 	UniqueIndexColIndex int    `json:"uniqueIndexColIndex"`
+}
+
+type deleteIndexDocsCustomData struct {
+	NoofDaysPersist int    `json:"noDays"`       //no of days to persist
+	IndexNameKey    string `json:"indexNameKey"` //with relative path
+}
+
+func executeDeleteIndexDocs(e *models.EventQueue) rest_errors.RestErr {
+	var ed deleteIndexDocsCustomData
+	// ed1 := deleteIndexDocsCustomData{NoofDaysPersist: -1, IndexNameKey: "test.key"}
+	// ss, _ := json.Marshal(ed1)
+	// logger.Debug(fmt.Sprintf("eventqueues|%s", string(ss)))
+	logger.Debug(fmt.Sprintf("eventqueue|%s", e.EventData))
+
+	err1 := json.Unmarshal([]byte(e.EventData), &ed)
+	if err1 != nil {
+		logger.Error("Failed unmarshal", err1)
+		e.Status = int(global.STATUS_ERROR)
+		e.Message = fmt.Sprintf("Failed unmarshal %v", err1.Error())
+
+		//abstractimpl.CreateOrUpdate(e, abstractimpl.EventQueueTable, e.ID)
+		return rest_errors.NewInternalServerError("Failed unmarshal", err1)
+	}
+	indexdocNames, err := coredb.GetValue(coredb.Defaultbucket, ed.IndexNameKey)
+	if err != nil {
+		logger.Error("Failed", err)
+		return rest_errors.NewInternalServerError(fmt.Sprintf("Failed|while coredb key=%s", ed.IndexNameKey), err)
+	}
+	lastDt := time.Now().AddDate(0, 0, -ed.NoofDaysPersist).Format(date_utils.DateyyyymmddLayout)
+	listToDelete := make([]string, 0) //list of index to delete
+	indexes := common.GetAllIndexes()
+	//fmt.Println("coredbvalue", string(indexdocNames))
+	for _, indexName := range strings.Split(string(indexdocNames), ",") {
+		//fmt.Println("indexName", indexName)
+		if strings.Contains(indexName, "{") {
+			patternIndexName, _ := common.GetPatternIndexName(indexName, lastDt)
+			for k, _ := range indexes {
+				//fmt.Println("k", k, "patternIndexName", patternIndexName)
+				if k < patternIndexName {
+					listToDelete = append(listToDelete, k)
+				}
+			}
+		} else {
+			listToDelete = append(listToDelete, indexName)
+		}
+	}
+	//fmt.Println("executeDelteIndexDocs|listToDelete", listToDelete)
+	err = ezsearch.DeleteIndexDocs(listToDelete)
+	if err != nil {
+		logger.Error("Failed", err)
+		e.Status = int(global.STATUS_ERROR)
+		e.Message = fmt.Sprintf("Failed unmarshal %v", err.Error())
+		e.StartAt = date_utils.GetNextScheduleDateByMins(e.StartAt, 2)
+		e.Status = int(global.STATUS_ACTIVE)
+		updateEventQueueHis(e)
+		return rest_errors.NewInternalServerError("Failed|getJsonFrom", err1)
+	}
+	return nil
 }

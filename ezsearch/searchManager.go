@@ -76,6 +76,7 @@ func GetIndex(indexName string) (bleve.Index, rest_errors.RestErr) {
 		}
 		//fmt.Println("GetIndex|index has found under data folder", indexName, err)
 		cache_utils.AddOrUpdateCache(indexName, i)
+
 	}
 
 	index = i.(bleve.Index)

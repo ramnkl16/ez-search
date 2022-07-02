@@ -11,7 +11,8 @@ import (
 )
 
 const (
-	coreDbName string = "core.db"
+	coreDbName    string = "core.db"
+	Defaultbucket string = "platform"
 )
 
 var (
@@ -31,13 +32,13 @@ func setupDB() (*bolt.DB, error) {
 	}
 
 	err = d.Update(func(tx *bolt.Tx) error {
-		root, err := tx.CreateBucketIfNotExists([]byte("DB"))
+		// root, err := tx.CreateBucketIfNotExists([]byte("DB"))
+		// if err != nil {
+		// 	return fmt.Errorf("could not create root bucket: %v", err)
+		// }
+		_, err = tx.CreateBucketIfNotExists([]byte("platform"))
 		if err != nil {
-			return fmt.Errorf("could not create root bucket: %v", err)
-		}
-		_, err = root.CreateBucketIfNotExists([]byte("catalog"))
-		if err != nil {
-			return fmt.Errorf("could not create %v bucket: %v", "catalog", err)
+			return fmt.Errorf("could not create %v bucket: %v", "platform", err)
 		}
 		return nil
 	})
@@ -71,12 +72,12 @@ func GetDb() *bolt.DB {
 	return db
 }
 
-func AddKey(key string, value []byte) error {
+func AddKey(bucket string, key string, value []byte) error {
 	db := GetDb()
 	//fmt.Println("addkey", db.Path())
 	err := db.Update(func(tx *bolt.Tx) error {
 		//logger.Info(fmt.Sprintf("addkey:%s", key))
-		err := tx.Bucket([]byte("DB")).Bucket([]byte("catalog")).Put([]byte(key), value)
+		err := tx.Bucket([]byte(bucket)).Put([]byte(key), value)
 		if err != nil {
 			fmt.Println("Addkey|coredb|could not insert entry", err)
 			return fmt.Errorf("could not insert entry: %v", err)
@@ -93,23 +94,38 @@ func AddKey(key string, value []byte) error {
 	//fmt.Println("AddKey|dbInfo", db.Info())
 	return nil
 }
-func List() {
+func GetValues(bucket string) map[string]interface{} {
 	db := GetDb()
+	list := make(map[string]interface{})
 	db.View(func(tx *bolt.Tx) error {
-		c := tx.Bucket([]byte("DB")).Bucket([]byte("catalog")).Cursor()
+		c := tx.Bucket([]byte(bucket)).Cursor()
 		for k, v := c.First(); k != nil; k, v = c.Next() {
-			fmt.Printf("key=%s, value=%d|%s\n", k, len(string(v)), v)
+			//fmt.Printf("key=%s, value=%d|%s\n", k, len(string(v)), v)
+			list[string(k)] = string(v)
 		}
-		//b, _ := GetKey(db, "NA_B_916854_en-US")
-		//fmt.Printf("key=NA_B_916854_en-US v=%s", b)
 		return nil
 	})
+	return list
 }
-func GetKey(key string) (result []byte, err error) {
+func GetKeys(bucket string) []string {
+	db := GetDb()
+	list := make([]string, 0)
+	db.View(func(tx *bolt.Tx) error {
+		c := tx.Bucket([]byte(bucket)).Cursor()
+		for k, _ := c.First(); k != nil; k, _ = c.Next() {
+			//fmt.Printf("key=%s, value=%d|%s\n", k, len(string(v)), v)
+			list = append(list, string(k))
+		}
+		return nil
+	})
+	return list
+}
+
+func GetValue(bucket string, key string) (result []byte, err error) {
 	db := GetDb()
 	//fmt.Println("getkey|dbInfo", db.Info())
 	db.View(func(tx *bolt.Tx) error {
-		r := tx.Bucket([]byte("DB")).Bucket([]byte("catalog")).Get([]byte(key))
+		r := tx.Bucket([]byte(bucket)).Get([]byte(key))
 		//logger.Info(fmt.Sprintf("getkey [boltdb]:%s|%s", key, string(r)))
 		if r != nil {
 			result = make([]byte, len(r))
@@ -119,11 +135,11 @@ func GetKey(key string) (result []byte, err error) {
 	})
 	return
 }
-func Delete(key string) error {
+func Delete(bucket string, key string) error {
 	db := GetDb()
-	fmt.Println("getkey|dbInfo", db.Info())
+	fmt.Println("Delete|dbInfo", db.Info(), key)
 	db.View(func(tx *bolt.Tx) error {
-		err := tx.Bucket([]byte("DB")).Bucket([]byte("catalog")).Delete([]byte(key))
+		err := tx.Bucket([]byte(bucket)).Delete([]byte(key))
 		if err != nil {
 			//logger.Error("Failed while delete key ", err)
 			fmt.Println(err)

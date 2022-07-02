@@ -16,6 +16,7 @@ import (
 	"github.com/ramnkl16/ez-search/auth"
 	"github.com/ramnkl16/ez-search/datasources/catalogboltdb"
 	"github.com/ramnkl16/ez-search/ezeventqueue"
+	"github.com/ramnkl16/ez-search/ezsmtp"
 
 	//"github.com/ramnkl16/ez-search/ezeventqueue"
 	"github.com/ramnkl16/ez-search/ezsearch"
@@ -43,13 +44,21 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	catalogboltdb.SetConfig(config.BoltDBSettings)
 	config.EzsearchSettings.BoltDbBucketName = config.BoltDBSettings.BuketName
 	ezsearch.SetConfig(config.EzsearchSettings)
+	ezsmtp.SetConfig(config.EzsmptSettings)
 	abstractimpl.IndexTablesPath = config.EzsearchSettings.IndexTablesPath
 	abstractimpl.IndexBasePath = config.EzsearchSettings.IndexBasePath
 	abstractimpl.CreateTables()
+	abstractimpl.DefaultmetaData()
 	router.Use(gin.Recovery())
 	router.Use(AuthTokenValidation())
+	scheduleJobForLogCleanup()
+	// ezsmtp.SendEmail([]string{"ram.duraisamy@sbdinc.com"}, "", nil)
+	// //ezsmtp.SendEmailUsinggoogle([]string{"ram.duraisamy@sbdinc.com"})
+	// return
+
 	//ezsearch.TriggerIndex()
 	//fswatcher.WatchCSVFiles(config.CSVFileWatcherpath)
+	//fmt.Println("runScheudleJob", config.RunScheduler)
 	if config.RunScheduler {
 		s := gocron.NewScheduler()
 		s.Every(1).Minute().Do(ezeventqueue.ProcessEventqueue)
@@ -62,12 +71,13 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	router.GET("/ping", ping.Ping)
 	mapUrls(router)
 	//fmt.Printf())
+
 	fullPath := path.Join(global.WorkingDir, "/swagger-ui")
 	logger.Info(fmt.Sprintf("staticFS fullpath %s", fullPath))
 	router.StaticFS("/swagger-ui", http.Dir(fullPath))
 	fullwebUi := path.Join(global.WorkingDir, "/web-ui")
 	router.StaticFS("/web-ui", http.Dir(fullwebUi))
-	abstractimpl.Delete(abstractimpl.EventQueueTable, "")
+	//abstractimpl.Delete(abstractimpl.EventQueueTable, "")
 	// //ezcsv.GetJsonFromCsv("C:\\go-prj\\ez-search\\uploads\\Userinformation.csv", 0)
 
 	// //cdCsv:= "{\"fileName\":\"C:\\\\go-prj\\\\ez-search\\\\uploads\\\\Userinformation.csv\",\"ignoreEmpty\":true,\"indexName\":\"macindex/new/customer\",\"uniqueIndexColIndex\":1}"
@@ -103,6 +113,18 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	// }
 }
 
+func scheduleJobForLogCleanup() {
+	logger.Debug("ScheduleJobForLogCleanup")
+	ed := fmt.Sprintf(`{"noDays": 30, "indexNameKey":"schedulejob.delete_logs.key"}`)
+	edStr, _ := json.Marshal(ed)
+	e := models.EventQueue{EventType: global.EVENT_TYPE_DETETE_LOG, EventData: string(edStr),
+		StartAt: date_utils.GetNowSearchFormat(), IsActive: "t", Status: int(global.STATUS_ACTIVE), RetryCount: 0, RetryMax: 5, RecurringInSeconds: 24 * 60 * 60}
+	e.ID = "dellogs"
+	err := abstractimpl.CreateOrUpdate(e, abstractimpl.EventQueueTable, "dellogs")
+	if err != nil {
+		logger.Error("Failed to add event queue", err)
+	}
+}
 func AuthTokenValidation() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authToken := auth.GetXauthToken(c.Request)

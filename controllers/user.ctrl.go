@@ -102,7 +102,7 @@ type loginResult struct {
 // @Failure 500 {object} string
 //@Router /api/auth/login [post]
 func (ctrl *userController) Login(ctx *gin.Context) {
-	fmt.Println("login start")
+	//fmt.Println("login start")
 	var lp LoginParam
 
 	if err := ctx.ShouldBindJSON(&lp); err != nil {

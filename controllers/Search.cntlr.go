@@ -43,6 +43,7 @@ func (ctrl *searchController) RegisterRouter(rout *gin.Engine) {
 	rout.POST("/api/createschema", ctrl.createIndexSchema)
 	rout.GET("/api/getschema", ctrl.getIndexSchema)
 	rout.POST("/api/generateSchema", ctrl.GenerateIndexSchema)
+	rout.POST("/api/deleteindexdocs", ctrl.DeleteIndexDocs)
 
 }
 
@@ -136,7 +137,7 @@ func (ctrl *searchController) AddOrUpdateIndex(ctx *gin.Context) {
 		return
 	}
 	//fmt.Printf("%q\n", global.RegexParseDate.FindAllSubmatch([]byte(`index{2006-09-11}`), -1))
-	fmt.Println("ctrl|after pattern|indexName", indexName)
+	//fmt.Println("ctrl|after pattern|indexName", indexName)
 	var err error
 	i, err := ezsearch.GetIndex(indexName)
 	if i == nil || err != nil {
@@ -320,7 +321,7 @@ func (ctrl *searchController) getIndexSchema(ctx *gin.Context) {
 	logger.Debug("getIndexSchema|controller", zapcore.Field{String: indexName, Key: "p1", Type: zapcore.StringType})
 	key := fmt.Sprintf("%s.schema", str)
 
-	schemaByte, err := coredb.GetKey(key)
+	schemaByte, err := coredb.GetValue(coredb.Defaultbucket, key)
 	if err != nil {
 		//errStr := fmt.Sprintf(`%s schema is not found in core db. Please try after get schema first. \n%s\n`, indexName, err.Error())
 		schemaErr := rest_errors.NewBadRequestError("%s schema is not found in core db. Please try after create schema first")
@@ -380,5 +381,38 @@ func (ctrl *searchController) GenerateIndexSchema(ctx *gin.Context) {
 		cols = append(cols, v.Name)
 	}
 	ctx.String(http.StatusAccepted, strings.Join(cols, ","))
+
+}
+
+// deleteIndex docu  godoc
+// @Summary get schema
+// @Description delete index document
+// @Description golang follows date pattern like indexname{2006-01-02} indexname{2006-01-02} which is equal to {yyyy-MM-dd}
+// @Tags bleve indexes
+// @Accept  json
+// @Produce  json
+// @Param  indexName query string true "name of the index, you can also provide index date pattern like indexname{2006-01-02}"
+// @Param  fieldDef body []ezsearch.BleveFieldDef true "field definition"
+// @Success 200 {object} []string
+// @Failure 404 {object} string
+// @Failure 500 {object} string
+// @Router /api/deleteindexdocs [post]
+
+func (ctrl *searchController) DeleteIndexDocs(ctx *gin.Context) {
+
+	var m []string
+
+	if err := ctx.ShouldBindJSON(&m); err != nil {
+		saveErr := rest_errors.NewBadRequestError("invalid json body")
+		ctx.JSON(saveErr.Status(), saveErr)
+		return
+	}
+	err1 := ezsearch.DeleteIndexDocs(m)
+	if err1 != nil {
+		saveErr := rest_errors.NewBadRequestError(fmt.Sprintln("%s might be deleted already.", err1.Error()))
+		ctx.JSON(saveErr.Status(), saveErr)
+		return
+	}
+	ctx.String(http.StatusAccepted, "deleted index docs")
 
 }

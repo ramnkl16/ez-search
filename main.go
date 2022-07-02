@@ -88,7 +88,7 @@ func main() {
 
 	// sEnc, _ := b64.StdEncoding.DecodeString("eyJ1IjoicmFtQHNiZGluYy5jb20iLCAicCI6IndlbGNvbWUxMjMifQ==")
 	// fmt.Println(string(sEnc))
-	// return
+
 	flag.StringVar(&configFile, `c`, ``, `Location of configuration file`)
 	flag.StringVar(&productSku, `s`, ``, `product sku`)
 	flag.StringVar(&language, "l", "", "language code")

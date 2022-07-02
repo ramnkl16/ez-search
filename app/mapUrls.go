@@ -17,6 +17,7 @@ func mapUrls(rout *gin.Engine) {
 	controllers.UserGroupController.RegisterRouter(rout)
 	controllers.MenuController.RegisterRouter(rout)
 	controllers.WidgetMetaController.RegisterRouter(rout)
-	controllers.ConfigController.RegisterRouter(rout)
+	controllers.CoredbController.RegisterRouter(rout)
+	controllers.FileController.RegisterRouter(rout)
 
 }
