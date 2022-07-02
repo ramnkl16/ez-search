@@ -19,7 +19,7 @@ type EventQueue struct {
 	IsActive                string `json:"isActive"`  // isActive
 	CreatedAt               string `json:"createdAt"` // createdAt
 	UpdatedAt               string `json:"updatedAt"` // updatedAt
-	RecurringInSeconds      int    `json:"RecurringInSeconds"`
+	RecurringInSeconds      int    `json:"recurringInSeconds"`
 	LastSyncAt              string `json:"lastSyncAt"`
 	TimeTaken               int    `json:"timeTaken"`
 }

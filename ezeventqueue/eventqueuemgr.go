@@ -77,12 +77,22 @@ func ProcessEventqueue() rest_errors.RestErr {
 			continue
 		}
 		logger.Debug("Eventqueue completed section")
-		abstractimpl.Delete(abstractimpl.EventQueueTable, e.ID)
-		//fmt.Println("after deleted")
+		//fmt.Println(e.RecurringInSeconds)
 		e.Status = int(global.STATUS_COMPLETED)
 		err = updateEventQueueHis(&e)
 		if err != nil {
 			logger.Error("Failed while updateEventQueueHis", err)
+		}
+		if e.RecurringInSeconds == 0 {
+			abstractimpl.Delete(abstractimpl.EventQueueTable, e.ID)
+		} else {
+			logger.Debug("Eventqueue completed retry enabled")
+			e.Status = int(global.STATUS_ACTIVE)
+			e.StartAt = date_utils.GetNextScheduleDateBySeconds(e.StartAt, time.Duration(e.RecurringInSeconds))
+			err = updateEventQueue(&e)
+			if err != nil {
+				logger.Error("Failed while updateEventQueue", err)
+			}
 		}
 
 	}
@@ -101,12 +111,12 @@ func handleEventQueueRetry(e *models.EventQueue) {
 		e.Status = int(global.STATUS_ACTIVE)
 		dur := e.RecurringInSeconds
 		if dur <= 0 {
-			dur = 5
+			dur = 5 * 60
 		} else {
-			dur = e.RecurringInSeconds / 60
+			dur = e.RecurringInSeconds
 		}
 		e.Status = int(global.STATUS_ACTIVE)
-		e.StartAt = date_utils.GetNextScheduleDateByMins(e.StartAt, time.Duration(dur))
+		e.StartAt = date_utils.GetNextScheduleDateBySeconds(e.StartAt, time.Duration(dur))
 	}
 	//abstractimpl.CreateOrUpdate(e, abstractimpl.EventQueueTable, e.ID)
 	updateEventQueue(e)
@@ -140,7 +150,7 @@ func executeCSVImport(e *models.EventQueue) rest_errors.RestErr {
 		logger.Error("Failed", err2)
 		e.Status = int(global.STATUS_ERROR)
 		e.Message = fmt.Sprintf("Failed unmarshal %v", err1.Error())
-		e.StartAt = date_utils.GetNextScheduleDateByMins(e.StartAt, 2)
+		e.StartAt = date_utils.GetNextScheduleDateBySeconds(e.StartAt, 2*60)
 		e.Status = int(global.STATUS_ACTIVE)
 		//abstractimpl.CreateOrUpdate(e, abstractimpl.EventQueueTable, e.ID)
 		updateEventQueueHis(e)
@@ -219,7 +229,7 @@ func executeDeleteIndexDocs(e *models.EventQueue) rest_errors.RestErr {
 		logger.Error("Failed", err)
 		e.Status = int(global.STATUS_ERROR)
 		e.Message = fmt.Sprintf("Failed unmarshal %v", err.Error())
-		e.StartAt = date_utils.GetNextScheduleDateByMins(e.StartAt, 2)
+		e.StartAt = date_utils.GetNextScheduleDateBySeconds(e.StartAt, 2*60)
 		e.Status = int(global.STATUS_ACTIVE)
 		updateEventQueueHis(e)
 		return rest_errors.NewInternalServerError("Failed|getJsonFrom", err1)

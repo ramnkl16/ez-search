@@ -69,21 +69,23 @@ func GetCurrentDateWithSameTime(dt string) string {
 
 //get next schedule date, if hour is passed as 0 then no change, -1 would substract 1 hour from given date
 func GetNextScheduleDate(dt string, hours time.Duration) string {
-	t, _ := time.Parse(ApiDbLayout, dt)
+	t, _ := time.Parse(SearchDateLayout, dt)
 	if hours != 0 {
 		t = t.Add(time.Hour * hours)
 	}
-	fmt.Sprintln("GetNextScheduleDate", t.Format(ApiDbLayout))
-	return t.Format(ApiDbLayout)
+	fmt.Sprintln("GetNextScheduleDate", t.Format(SearchDateLayout))
+	return t.Format(SearchDateLayout)
 }
 
 //get next schedule date, if hour is passed as 0 then no change, -1 would substract 1 hour from given date
-func GetNextScheduleDateByMins(d string, minutes time.Duration) string {
-	t, _ := time.Parse(ApiDbLayout, d)
-	if minutes != 0 {
-		t = t.Add(time.Minute * minutes)
+func GetNextScheduleDateBySeconds(d string, seconds time.Duration) string {
+	t, _ := time.Parse(SearchDateLayout, d)
+
+	if seconds != 0 {
+		t = t.Add(time.Second * seconds)
 	}
-	return t.Format(ApiDbLayout)
+
+	return t.Format(SearchDateLayout)
 }
 
 // func GeApiDBLayoutDateFormat(t time.Time) string {

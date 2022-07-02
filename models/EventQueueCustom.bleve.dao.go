@@ -71,8 +71,8 @@ func (eq *EventQueue) HardDeleteFromIndex() rest_errors.RestErr {
 func (eq *EventQueue) GetActiveEventQueuesFromIndex() (EventQueues, rest_errors.RestErr) {
 
 	currDt := date_utils.GetNowSearchFormat()
-	query := fmt.Sprintf("select * from %s where status:%d, startAt:>=%s limit 0, 10000", abstractimpl.EventQueueTable, global.STATUS_ACTIVE, currDt)
+	query := fmt.Sprintf("select * from %s where +status:%d, +startAt:<=%s limit 0, 10000", abstractimpl.EventQueueTable, global.STATUS_ACTIVE, currDt)
+	fmt.Println("query", query, currDt)
 	return eq.GetAll(query)
-	//fmt.Println("GetActiveEventQueues currDt", currDt)
 
 }

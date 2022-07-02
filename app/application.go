@@ -115,9 +115,9 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 
 func scheduleJobForLogCleanup() {
 	logger.Debug("ScheduleJobForLogCleanup")
-	ed := fmt.Sprintf(`{"noDays": 30, "indexNameKey":"schedulejob.delete_logs.key"}`)
-	edStr, _ := json.Marshal(ed)
-	e := models.EventQueue{EventType: global.EVENT_TYPE_DETETE_LOG, EventData: string(edStr),
+	ed := fmt.Sprintf("{\"noDays\": 30, \"indexNameKey\":\"schedulejob.delete_logs.key\"}")
+	//edStr, _ := json.Marshal(ed)
+	e := models.EventQueue{EventType: global.EVENT_TYPE_DETETE_LOG, EventData: ed,
 		StartAt: date_utils.GetNowSearchFormat(), IsActive: "t", Status: int(global.STATUS_ACTIVE), RetryCount: 0, RetryMax: 5, RecurringInSeconds: 24 * 60 * 60}
 	e.ID = "dellogs"
 	err := abstractimpl.CreateOrUpdate(e, abstractimpl.EventQueueTable, "dellogs")
