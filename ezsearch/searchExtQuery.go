@@ -6,10 +6,10 @@ import (
 	"time"
 
 	"github.com/blevesearch/bleve/v2"
-	"github.com/boltdb/bolt"
 	"github.com/ramnkl16/ez-search/global"
 	"github.com/ramnkl16/ez-search/logger"
 	"github.com/ramnkl16/ez-search/rest_errors"
+	"go.etcd.io/bbolt"
 	"go.uber.org/zap/zapcore"
 )
 
@@ -138,14 +138,27 @@ func exeSearch(indexNames []string, duration int32, req *bleve.SearchRequest) []
 			logger.Error("Failed while get index", err, zapcore.Field{String: indexName, Type: zapcore.StringType})
 			continue
 		}
-		logger.Debug("exeSearch|index names", zapcore.Field{String: index.Name(), Key: "p1", Type: zapcore.StringType})
+		//logger.Debug("exeSearch|index names", zapcore.Field{String: index.Name(), Key: "p1", Type: zapcore.StringType})
 
 		res, err1 := index.Search(req)
 		if err1 != nil {
 			logger.Error("Failed while execute the query", err1)
 			continue
 		}
-		results = append(results, res)
+		if res.Hits != nil && len(res.Hits) > 0 {
+			//	fmt.Println("exeSearch|index names", indexName, res.Hits.Len())
+			// if res.Facets != nil && len(res.Facets) > 0 {
+			// 	fmt.Println("merge facets", len(res.Facets), res.Facets)
+			// 	for _, f := range res.Facets {
+			// 		for _, v := range f.Terms {
+			// 			fmt.Println("merge facets Term", v.Term, v.Count)
+			// 		}
+			// 	}
+			// }
+
+			results = append(results, res)
+		}
+
 	}
 	return results
 }
@@ -154,8 +167,8 @@ func CheckExpirationCallback(key string, value interface{}) bool {
 	switch value.(type) {
 	case bleve.Index:
 		value.(bleve.Index).Close()
-	case *bolt.DB:
-		value.(*bolt.DB).Close()
+	case *bbolt.DB:
+		value.(*bbolt.DB).Close()
 	default:
 		logger.Info("CheckExpirationCallback type not found!", zapcore.Field{String: key, Key: "p1", Type: zapcore.StringType})
 	}

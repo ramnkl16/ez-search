@@ -118,14 +118,13 @@ func PostSearchResult(queryStr string) (*SearchResponseModel, rest_errors.RestEr
 		return nil, rest_errors.NewNotFoundError(msg)
 	}
 	res := resColl[0]
-	//merge multiple response into first response from the collection
+	// fmt.Println("rescoll count", len(resColl))
+	// fmt.Println("res res.Hits.Len() ", res.Hits.Len())
 
 	if len(resColl) > 1 {
 		for i := 1; i < len(resColl); i++ {
+			//fmt.Println("merge response", resColl[i])
 			res.Merge(resColl[i])
-			if resColl[i].Facets != nil && len(resColl[i].Facets) > 0 {
-				res.Facets.Merge(resColl[i].Facets)
-			}
 
 		}
 	}

@@ -77,10 +77,10 @@ swagger document generation new path `swag.exe init .`
 and copy the json file into swagger-ui folder copy `.\docs\swagger.json .\swagger-ui\`
 - code generation from xml document table schema and including dto,dao,service and controllers along with swagger tags
     [`.\codege.exe`] make sure that folders require xml defintion files are available under codedef folder. code generator always looking for codedef folder 
---Build release mode ` go build -ldflags "-s -w"`
+--Build release mode `go build -ldflags "-s -w"`
 
 --event queue for delete old index documents
-  {
+ {
         "id": "dellogs",
         "eventType": "dellogs",
         "eventData": "{\"noDays\":15,\"indexNameKey\":\"schedulejob.delete_logs.key\"}",
@@ -93,7 +93,7 @@ and copy the json file into swagger-ui folder copy `.\docs\swagger.json .\swagge
         "isActive": "t",
         "createdAt": "",
         "updatedAt": "",
-        "RecurringInSeconds": 86400,
+        "recurringInSeconds": 86400,
         "lastSyncAt": "",
         "timeTaken": 0
     }
