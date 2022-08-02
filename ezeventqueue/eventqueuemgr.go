@@ -193,7 +193,7 @@ func executeDeleteIndexDocs(e *models.EventQueue) rest_errors.RestErr {
 
 	err1 := json.Unmarshal([]byte(e.EventData), &ed)
 	if err1 != nil {
-		logger.Error("Failed unmarshal", err1)
+		logger.Error("Failed unmarshal|e.EventData", err1)
 		e.Status = int(global.STATUS_ERROR)
 		e.Message = fmt.Sprintf("Failed unmarshal %v", err1.Error())
 
@@ -202,25 +202,32 @@ func executeDeleteIndexDocs(e *models.EventQueue) rest_errors.RestErr {
 	}
 	indexdocNames, err := coredb.GetValue(coredb.Defaultbucket, ed.IndexNameKey)
 	if err != nil {
-		logger.Error("Failed", err)
+		logger.Error("Failed coredb.GetValue(", err)
 		return rest_errors.NewInternalServerError(fmt.Sprintf("Failed|while coredb key=%s", ed.IndexNameKey), err)
 	}
-	lastDt := time.Now().AddDate(0, 0, -ed.NoofDaysPersist).Format(date_utils.DateyyyymmddLayout)
+	lastDt := time.Now().AddDate(0, 0, -ed.NoofDaysPersist-1).Format(date_utils.DateyyyymmddLayout)
+	logger.Debug(fmt.Sprintf("lastDt=%s", lastDt))
 	listToDelete := make([]string, 0) //list of index to delete
 	indexes := common.GetAllIndexes()
 	//fmt.Println("coredbvalue", string(indexdocNames))
 	for _, indexName := range strings.Split(string(indexdocNames), ",") {
-		//fmt.Println("indexName", indexName)
-		if strings.Contains(indexName, "{") {
+
+		indexPart := strings.Split(indexName, "{")
+		//fmt.Println("patternIndexName", lastDt, indexPart[0], strings.Contains(indexName, indexPart[0]))
+		if len(indexPart) > 1 {
 			patternIndexName, _ := common.GetPatternIndexName(indexName, lastDt)
+
 			for k, _ := range indexes {
-				//fmt.Println("k", k, "patternIndexName", patternIndexName)
-				if k < patternIndexName {
+				//fmt.Println("indexes[k]", k)
+				if strings.Contains(indexName, indexPart[0]) && k <= patternIndexName {
 					listToDelete = append(listToDelete, k)
+					//	fmt.Println("deleted list", listToDelete)
 				}
+
 			}
-		} else {
-			listToDelete = append(listToDelete, indexName)
+			// } else {
+			// 	fmt.Println("else delete ", indexName, listToDelete, lastDt)
+			// 	listToDelete = append(listToDelete, indexName)
 		}
 	}
 	//fmt.Println("executeDelteIndexDocs|listToDelete", listToDelete)
