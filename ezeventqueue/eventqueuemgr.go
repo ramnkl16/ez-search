@@ -206,7 +206,7 @@ func executeDeleteIndexDocs(e *models.EventQueue) rest_errors.RestErr {
 		return rest_errors.NewInternalServerError(fmt.Sprintf("Failed|while coredb key=%s", ed.IndexNameKey), err)
 	}
 	lastDt := time.Now().AddDate(0, 0, -ed.NoofDaysPersist-1).Format(date_utils.DateyyyymmddLayout)
-	logger.Debug(fmt.Sprintf("lastDt=%s", lastDt))
+	//logger.Debug(fmt.Sprintf("lastDt=%s", lastDt))
 	listToDelete := make([]string, 0) //list of index to delete
 	indexes := common.GetAllIndexes()
 	//fmt.Println("coredbvalue", string(indexdocNames))
@@ -219,9 +219,9 @@ func executeDeleteIndexDocs(e *models.EventQueue) rest_errors.RestErr {
 
 			for k, _ := range indexes {
 				//fmt.Println("indexes[k]", k)
-				if strings.Contains(indexName, indexPart[0]) && k <= patternIndexName {
+				if strings.Contains(k, indexPart[0]) && k <= patternIndexName {
 					listToDelete = append(listToDelete, k)
-					//	fmt.Println("deleted list", listToDelete)
+					//fmt.Println("deleted list", listToDelete)
 				}
 
 			}
