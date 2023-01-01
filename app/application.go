@@ -96,6 +96,7 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	// }
 	// s, _ := json.Marshal(cd)
 	// fmt.Println(string(s))
+	// //ed:=models.EventQueue{EventData: string( s),EventType:       CustomData:cd, EventName:"mssqlscript",   }
 	// return
 	//ezeventqueue.ProcessEventqueue()
 	// schemas := ezcsv.GenerateIndexSchema("DistNum,TID,YearNum,WeekNum,ReportNum,StartDate,EndDate,StartDisbNum,EndDisbNum,StartAcctTransNum,EndAcctTransNum,StartTransNum,EndTransNum,CountSales,CountTransactions,ApMacStartBalance,ApMacEndBalance,ApMacInvoice,ApMacMACredit,ApMacNationalAccountCredit,ApMacOther", false)

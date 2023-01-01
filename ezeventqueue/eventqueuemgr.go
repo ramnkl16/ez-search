@@ -85,10 +85,14 @@ func ProcessEventqueue() rest_errors.RestErr {
 		}
 		if e.RecurringInSeconds == 0 {
 			abstractimpl.Delete(abstractimpl.EventQueueTable, e.ID)
+			logger.Debug(fmt.Sprintf("no recurring event hence deleted %s", e.ID))
 		} else {
-			logger.Debug("Eventqueue completed retry enabled")
 			e.Status = int(global.STATUS_ACTIVE)
 			e.StartAt = date_utils.GetNextScheduleDateBySeconds(e.StartAt, time.Duration(e.RecurringInSeconds))
+			if e.StartAt < date_utils.GetNowSearchFormat() {
+				e.StartAt = date_utils.GetNextScheduleDateBySeconds(date_utils.GetNowSearchFormat(), time.Duration(e.RecurringInSeconds))
+			}
+			logger.Debug(fmt.Sprintf("Eventqueue completed retry enabled at %v", e.StartAt))
 			err = updateEventQueue(&e)
 			if err != nil {
 				logger.Error("Failed while updateEventQueue", err)

@@ -68,7 +68,7 @@ func ExecuteMsSqlScript(eq *models.EventQueue) rest_errors.RestErr {
 
 	connString := fmt.Sprintf("server=%s;user id=%s;password=%s;database=%s;",
 		cd.Host, cd.UserName, cd.Password, cd.DbName)
-	//fmt.Println("msssql conn string", connString)
+	fmt.Println("msssql conn string", connString)
 	db, errdb := sql.Open("mssql", connString)
 	if errdb != nil {
 		logger.Error("Failed open db:", errdb, zap.String("ref1", cd.Host), zap.String("ref2", cd.DbName))
@@ -96,14 +96,21 @@ func ExecuteMsSqlScript(eq *models.EventQueue) rest_errors.RestErr {
 		restErr := rest_errors.NewInternalServerError(fmt.Sprintf("Please try register sql script,missing key %s", cd.GoScriptBlock.DistnumKey), err)
 		return restErr
 	}
+	var list interface{}
+	//if goscript not require then ignore goscript execution
+	if len(gosciptGen) > 0 && len(cd.GoScriptBlock.QueryKey) > 0 {
+		script := goscript.New(string(gosciptGen))
+		//fmt.Println("goscriptblock", string(distNums), string(query), cd.GoScriptBlock.Params)
+		list, err = script.Execute(string(distNums), string(query), cd.GoScriptBlock.Params) //,8605,8651,8750,8780,8782,8986", "2000-01-01")
+		logger.Info(fmt.Sprintf("query list|%v", list))
 
-	script := goscript.New(string(gosciptGen))
-	//fmt.Println("goscriptblock", string(distNums), string(query), cd.GoScriptBlock.Params)
-	list, err := script.Execute(string(distNums), string(query), cd.GoScriptBlock.Params) //,8605,8651,8750,8780,8782,8986", "2000-01-01")
-	logger.Info(fmt.Sprintf("query list|%v", list))
-
-	if err != nil {
-		logger.Error("Failed at execuge go script, Check customdata query defintion", err)
+		if err != nil {
+			logger.Error("Failed at execuge go script, Check customdata query defintion", err)
+		}
+	} else {
+		l := make([]string, 0)
+		l = append(l, string(query))
+		list = l
 	}
 	for _, q := range list.([]string) {
 		results, err := getDataset(q, cd.DocIdColName, db, ctx)
@@ -112,15 +119,51 @@ func ExecuteMsSqlScript(eq *models.EventQueue) rest_errors.RestErr {
 			continue
 		}
 		logger.Warn(fmt.Sprintf("distnum %s(%d)", q, len(results)))
-		abstractimpl.BatchCreateOrUpdate(cd.IndexName, results)
+		//skip index creation if index name is empty
+		if cd.IndexName != "" {
+			abstractimpl.BatchCreateOrUpdate(cd.IndexName, results)
+		}
+		restList := make([]interface{}, 0)
+		for _, r := range results {
+			fmt.Println("column data", r)
+			cols := r.(map[string]interface{})
+			relCols := make(map[string]interface{})
+			relList := make([]interface{}, 0)
+			relCols["type"] = ""
+			relCols["relatedNum"] = ""
+			relList = append(relList, relCols)
+			cols["categories"] = []string{"cat"}
+			cols["groupId"] = []string{"group"}
+			cols["related"] = relList
+			cols["repairParts"] = []string{"part"}
+			cols["set"] = []string{"set"}
+			cols["acceParts"] = []string{"acc"}
+			attrs := make(map[string]interface{})
+			attrs["k"] = "attr1"
+			attrs["v"] = "values"
+			attrList := make([]interface{}, 0)
+			attrList = append(attrList, attrs)
+			cols["attrs"] = attrList
+			cols["battrs"] = attrList
+			img := make(map[string]interface{})
+			img["url"] = "/NA/PRODUCT/IMAGES/780x780zoom/HKL/HKL12DB.jpg"
+			img["type"] = "jpeg"
+			img["tnurl"] = ""
+			img["name"] = "app shot"
+			imgList := make([]interface{}, 0)
+			imgList = append(imgList, img)
+			cols["images"] = imgList
+			restList = append(restList, r)
+		}
+		fmt.Println("cd.SaveOnLocal ==", cd.SaveOnLocal)
 		if cd.SaveOnLocal == "t" {
 
-			saveAsJsonFile(results, cd.IndexName)
+			saveAsJsonFile(restList, cd.IndexName)
 		}
 	}
 	return nil
 }
-func saveAsJsonFile(jsonData map[string]interface{}, entityName string) {
+func saveAsJsonFile(jsonData []interface{}, entityName string) {
 	wd := filepath.Join(global.WorkingDir, "downloads")
 	_, err := os.Stat(wd)
 	if os.IsNotExist(err) {
@@ -179,6 +222,20 @@ func getDataset(q, docIdColName string, db *sql.DB, ctx context.Context) (map[st
 		allMaps[fmt.Sprintf("%v", val)] = resultMap
 	}
 	return allMaps, nil
+}
+
+// multiple row  convert into key value  array, later uses a goscript block
+func goscript2(rows []interface{}) (map[string]interface{}, error) {
+	kvs := make(map[string]interface{}, 0)
+	for _, r := range rows {
+		cols := r.([]interface{})
+		val := kvs[cols[0].(string)].([]interface{})
+		if val == nil {
+			val = make([]interface{}, 0)
+		}
+		val = append(val, cols[1])
+	}
+	return kvs, nil
 }
 
 func QueueNewEventForMsSqlSync(cd *MsSqlEventCustomData, eq *models.EventQueue) string {

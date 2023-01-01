@@ -97,3 +97,26 @@ and copy the json file into swagger-ui folder copy `.\docs\swagger.json .\swagge
         "lastSyncAt": "",
         "timeTaken": 0
     }
+
+--event queue fetch data from mssql ezmssqlconn\readme.txt script to register the events
+ref
+eventdata json {"host":"TOW-P-SQLHA07\\sqlha07","dbName":"MBAWEB","lastSyncAt":"2000-01-01","goScriptBlock":{"goScriptKey":"mac.mba75.goscript.distnumLoop","queryKey":"mac.mba75.customer.query","distnumKey":"mac.mba75.distnum.list","params":["2000-01-01"]},"docIdColName":"","indexName":"indexes/mac/mba75/customers","userName":"macuser","password":"T001sM@C","saveOnLocal":""}
+{
+        "id": "mac.mba75.customer",
+        "eventType": "mssql",
+        "eventData": "{\"host\":\"TOW-P-SQLHA07\\\\sqlha07\",\"dbName\":\"MBAWEB\",\"lastSyncAt\":\"2000-01-01\",\"goScriptBlock\":{\"goScriptKey\":\"mac.mba75.goscript.distnumLoop\",\"queryKey\":\"mac.mba75.customer.query\",\"distnumKey\":\"mac.mba75.distnum.list\",\"params\":[\"2000-01-01\"]},\"docIdColName\":\"\",\"indexName\":\"indexes/mac/mba75/customers\",\"userName\":\"macuser\",\"password\":\"T001sM@C\",\"saveOnLocal\":\"\"}",
+        "status": 1,
+        "startAt": "2022-07-02T11:04:29Z",
+        "retryCount": 0,
+        "retryMax": 5,
+        "retryDuraition": 0,
+        "message": "",
+        "isActive": "t",
+        "createdAt": "",
+        "updatedAt": "",
+        "recurringInSeconds": 86400,
+        "lastSyncAt": "",
+        "timeTaken": 0
+    }
+ 
+    
