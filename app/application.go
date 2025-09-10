@@ -87,7 +87,7 @@ func StartApplication(config *syncconfig.Config, router *gin.Engine, productSku 
 	// // if err != nil {
 	// // 	panic(err)
 	// // }
-	// cdstr := "{\"host\":\"TOW-P-SQLHA07\\\\sqlha07\",\"dbName\":\"MBAWEB\",\"lastSyncAt\":\"2000-01-01\",\"goScriptBlock\":{\"goScriptKey\":\"mac.mba75.goscript.distnumLoop\",\"queryKey\":\"mac.mba75.customer.query\",\"distnumKey\":\"mac.mba75.distnum.list\",\"params\":[\"2000-01-01\"]},\"docIdColName\":\"\",\"indexName\":\"indexes/mac/mba75/customers\",\"userName\":\"macuser\",\"password\":\"T001sM@C\"}"
+	
 	// var cd ezmssqlconn.MsSqlEventCustomData
 	// cd.GoScriptBlock.Params = []string{"2000-01-01"}
 	// err := json.Unmarshal([]byte(cdstr), &cd)
