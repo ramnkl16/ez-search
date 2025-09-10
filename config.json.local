@@ -1,13 +1,13 @@
 {
     "mySqlSettings":{
         "userName":"admin",
-        "password":"Kish123",
+        "password":"",
         "host":"localhost",
         "dbName":"product-int-logs"
     },
     "msSqlSettings":{
         "userName":"sitecoreadmin",
-        "password":"$1t3c0r3",
+        "password":"",
         "port":1433,
         "query":"select convert(varchar,  min(vf.created), 20) CreatedAt, convert(varchar,  max(vf.updated), 20) UpdatedAt,convert(nvarchar(36), p.ID) Id, vf.Language, p.Name   from Items p left join VersionedFields vf on p.ID =  vf.ItemId where TemplateID = '{79A0323D-87FD-4008-8823-4D4C044DEC6B}' and vf.updated >='%s' group by p.ID, p.Name, vf.language ",
         "solrQery":"https://%s/solr/%s/select?fl=_group,_name,_language,_fullpath,__smallcreateddate_tdt,__smallupdateddate_tdt&q=_template:79a0323d87fd400888234d4c044dec6b&rows=100000"
@@ -15,7 +15,7 @@
     "hybrisSettings":{
         "baseUri": "https://sbd.toolcommerce.com/sbdws410/rest",
         "userName" :"siteintegration",
-        "password":"4D*F&%#!r@z",
+        "password":"",
         "catalogName":"sbdProductNADeWALTCatalog",
         "brandsEndPoint": "/brands",
         "deltaProductEndPoint":"/{sbdeanzproducts}?{sbdeanzproducts}_size=-1&{sbdeanzproducts}_query=(%7Bcatalogversion%7D%20=%20%27{BTSCatalogVersionValue}%27%20AND%20%7Bbrand%7D%20=%20%27{BTSBrandValue}%27%20AND%20%7Bmodifiedtime%7D%20%3E=%20%27{BTSStartDateTime}%27%20AND%20%7Bmodifiedtime%7D%20%3C=%20%27{BTSEndDateTime}%27)",
