@@ -94,7 +94,7 @@ func CreateTables() {
 			"userRoleId": "role1",
 			"isActive": "t",
 			"emailVerified": "2022-03-28T01:24:27Z",
-			"passwordUpdatedAt": "2022-03-28T01:24:27Z"
+			"passwordUpdatedAt": ""
 		}`, id, crypto_utils.GetMd5("welcome@123"))), &m)
 		CreateOrUpdate(m, UserTable, id)
 	}
