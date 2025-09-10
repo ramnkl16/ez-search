@@ -35,7 +35,7 @@
     },
     "occSettings":{
         "baseUri":"https://ocscm.stghi.%s.sbd.orckestra.cloud:443",
-        "apiToken":"tUHLOa63c5aUw13Zu021bVMukBSaznUXqDTVmgl7elKyFJz6SwrvU7pmWakTqOEK4EqP8lgFvrDXBD+DzkI5nQ==",
+        "apiToken":"",
         "entityTypeEndPoint":"/api/sbd/productEntityTypes/%s" ,
         "importEndPoint":"/api/integration/products/%s/import",
         "importTaskStatus":"/api/tasks/%s",
