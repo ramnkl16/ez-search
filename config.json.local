@@ -43,7 +43,7 @@
         "ImportBlobUri":"https://sbdstghiocc3xrg6dh3xk7ka.blob.core.windows.net",
         "timeout":0,
         "azAccountName":"sbdstghiocc3xrg6dh3xk7ka",
-        "azAccountKey":"NxYDTuAQQM+243Ep4Eg9/qXfdGtP3wO+UZ+DFUBgWnoMihd1vI18/73fxo/HdAKclIHWWfSwjoxKjVYpQzNjlg=="
+        "azAccountKey":""
 	   
     },
     "boltdbSettings":{
